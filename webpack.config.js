@@ -29,7 +29,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Todo App",
+      title: "Task Manager",
       filename: "index.html",
       template: "src/template.html",
     }),
