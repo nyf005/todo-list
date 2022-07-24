@@ -1,0 +1,57 @@
+:root {
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 2rem;
+}
+
+#content {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  grid-template-rows: 4rem 1fr;
+  grid-template-areas:
+    "header header"
+    "aside main";
+}
+
+header {
+  grid-area: header;
+}
+
+aside {
+  grid-area: aside;
+}
+
+main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 20rem 1fr;
+  grid-template-areas: "tasks task-details";
+}
+
+#tasks {
+  grid-area: tasks;
+}
+
+#task-details {
+  grid-area: task-details;
+}
+
+.project-title,
+.task,
+#task-actions {
+  height: 4rem;
+}
+
+.task {
+  display: flex;
+  gap: 1rem;
+}
