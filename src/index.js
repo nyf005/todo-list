@@ -3,26 +3,49 @@ import createTaskCard from "./components/task-card";
 import creatProjectButton from "./components/project-button";
 import taskDetailsHeader from "./components/task-details-header";
 
-const projects = document.getElementById("projects");
 const newProject = {
   name: "AdWord",
 };
 
-projects.append(creatProjectButton(newProject));
+const tasks = [
+  {
+    title: "Create AdWords new campain",
+    dueDate: "10/09/2022",
+    priority: "high",
+    completed: true,
+  },
+  {
+    title: "Create Facebook Ads",
+    dueDate: "12/10/2022",
+    priority: "moderate",
+    completed: false,
+  },
+  {
+    title: "Create Instagram Ads",
+    dueDate: "11/11/2022",
+    priority: "normal",
+    completed: false,
+  },
+  {
+    title: "Create Tiktok Ads",
+    dueDate: "12/01/2023",
+    priority: "low",
+    completed: false,
+  },
+];
+
+const projectsDiv = document.getElementById("projects");
+projectsDiv.append(creatProjectButton(newProject));
 
 const projectName = document.querySelector("#project-title h3");
 projectName.textContent = newProject.name;
 
-const tasks = document.getElementById("tasks");
-const newTask = {
-  title: "Create AdWords new campain",
-  dueDate: "12/01/2023",
-  priority: "high",
-  completed: true,
-};
+const tasksDiv = document.getElementById("tasks");
 
-tasks.appendChild(createTaskCard(newTask));
+tasks.forEach((newTask) => {
+  tasksDiv.appendChild(createTaskCard(newTask));
+});
 
-const taskDetails = document.getElementById("task-details");
-const { checkmark, taskTitle } = taskDetailsHeader(newTask);
-taskDetails.append(checkmark, taskTitle);
+const taskDetailsDiv = document.getElementById("task-details");
+const { checkmark, taskTitle } = taskDetailsHeader(tasks[1]);
+taskDetailsDiv.append(checkmark, taskTitle);
