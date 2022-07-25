@@ -12,88 +12,148 @@
         <h3>Task Manager</h3>
       </header>
       <aside>
-        <div>
-          <img src="" alt="" />
-          <span>Inbox</span>
+        <div id="top-section">
+          <button class="project-name">
+            <img src="../src/assets/icons/inbox.svg" alt="" />
+            <p>Inbox</p>
+          </button>
+          <button class="project-name">
+            <img src="../src/assets/icons/calendar-day.svg" alt="" />
+            <p>Today</p>
+          </button>
+          <button class="project-name">
+            <img src="../src/assets/icons/calendar-month.svg" alt="" />
+            <p>Upcoming</p>
+          </button>
         </div>
-        <div>
-          <img src="" alt="" />
-          <span>Today</span>
-        </div>
-        <div>
-          <img src="" alt="" />
-          <span>Upcoming</span>
-        </div>
-        <h3>Projects</h3>
-        <div id="projects">
-          <div class="project-name">
-            <img src="" alt="" />
-            <span>Project 1</span>
-          </div>
-          <div class="project-name">
-            <img src="" alt="" />
-            <span>Project 2</span>
-          </div>
-          <div class="project-name">
-            <img src="" alt="" />
-            <span>Project 3</span>
-          </div>
-          <div class="project-name">
-            <img src="" alt="" />
-            <span>Project 4</span>
+        <div id="bottom-section">
+          <h3>Projects</h3>
+          <div id="projects">
+            <button class="project-name">
+              <div class="dot"></div>
+              <span>Project 1</span>
+            </button>
+            <button class="project-name">
+              <div class="dot"></div>
+              <span>Project 2</span>
+            </button>
+            <button class="project-name">
+              <div class="dot"></div>
+              <span>Project 3</span>
+            </button>
+            <button class="project-name">
+              <div class="dot"></div>
+              <span>Project 4</span>
+            </button>
           </div>
         </div>
+        <button class="addBtn" id="addProject">New Project</button>
       </aside>
       <main>
-        <div id="tasks">
-          <div class="project-title">
-            <h3>Title</h3>
-            <img src="" alt="" />
+        <div id="project-title">
+          <h3>Project 1</h3>
+          <img src="../src/assets/icons/chevron-down.svg" alt="chevron-down" />
+        </div>
+        <div id="task-actions">
+          <button class="actionBtn">
+            <img src="../src/assets/icons/trash.svg" alt="trash" />
+          </button>
+
+          <div class="actionBtn">
+            <img src="../src/assets/icons/create.svg" alt="create" />
           </div>
-          <div class="task">
-            <img src="./assets/icons/check-circle.svg" alt="check-circle" />
-            <div class="task-infos">
-              <p class="task-title">Todo Title</p>
-              <p class="task-due-date">Due date</p>
-              <p class="priority">Important</p>
-            </div>
+
+          <div class="actionBtn">
+            <img src="../src/assets/icons/pen.svg" alt="pen" />
           </div>
-          <div class="task">
-            <img src="./assets/icons/check-circle.svg" alt="check-circle" />
-            <div class="task-infos">
-              <p class="task-title">Todo Title</p>
-              <p class="task-due-date">Due date</p>
-              <p class="priority">Important</p>
-            </div>
-          </div>
-          <div class="task">
-            <img src="./assets/icons/check-circle.svg" alt="check-circle" />
-            <div class="task-infos">
-              <p class="task-title">Todo Title</p>
-              <p class="task-due-date">Due date</p>
-              <p class="priority">Important</p>
-            </div>
-          </div>
-          <div class="task">
-            <img src="./assets/icons/check-circle.svg" alt="check-circle" />
-            <div class="task-infos">
-              <p class="task-title">Todo Title</p>
-              <p class="task-due-date">Due date</p>
-              <p class="priority">Important</p>
-            </div>
+          <div class="actionBtn">
+            <img
+              src="../src/assets/icons/checkbox-checked.svg"
+              alt="checkbox-checked"
+            />
           </div>
         </div>
-        <div id="task-details">
-          <div id="task-actions">actions</div>
-          <div class="note">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptatibus nihil reiciendis ipsam hic! Voluptate, corrupti vitae
-              minus libero totam fugit ea quis laboriosam esse beatae provident
-              magni? Quia, natus harum!
-            </p>
+        <div id="tasks">
+          <div class="task">
+            <div class="checkbox">
+              <input type="checkbox" id="checkbox" />
+              <label for="checkbox"> </label>
+            </div>
+            <div class="task-infos">
+              <h4>Create AdWords campain</h4>
+              <div class="additional">
+                <p class="task-due-date">Due date</p>
+                <p class="priority">Important</p>
+              </div>
+            </div>
           </div>
-          <div class="task-list"></div>
+          <div class="task">
+            <div class="checkbox">
+              <input type="checkbox" id="checkbox1" />
+              <label for="checkbox1"> </label>
+            </div>
+            <div class="task-infos">
+              <h4>Create AdWords campain</h4>
+              <div class="additional">
+                <p class="task-due-date">Due date</p>
+                <p class="priority">Important</p>
+              </div>
+            </div>
+          </div>
+          <div class="task">
+            <div class="checkbox">
+              <input type="checkbox" id="checkbox2" />
+              <label for="checkbox2"> </label>
+            </div>
+            <div class="task-infos">
+              <h4>Create AdWords campain</h4>
+              <div class="additional">
+                <p class="task-due-date">Due date</p>
+                <p class="priority">Important</p>
+              </div>
+            </div>
+          </div>
+          <div class="task">
+            <div class="checkbox">
+              <input type="checkbox" id="checkbox3" />
+              <label for="checkbox3"> </label>
+            </div>
+            <div class="task-infos">
+              <h4>Create AdWords campain</h4>
+              <div class="additional">
+                <p class="task-due-date">Due date</p>
+                <p class="priority">Important</p>
+              </div>
+            </div>
+          </div>
+          <button class="addBtn" id="addTask">New Task</button>
+        </div>
+        <div id="task-details">
+          <div id="checkmark">
+            <input type="checkbox" id="checkbox4" />
+            <label for="checkbox4"> </label>
+          </div>
+          <div id="task-title">
+            <h2>Create AdWords campain Create</h2>
+            <div id="subtitle">
+              <div id="task-due-date">
+                <img src="../src/assets/icons/clock.svg" alt="clock" />
+                <p>Due date</p>
+              </div>
+              <p class="priority">Important</p>
+            </div>
+          </div>
+          <div id="task-items">
+            <div class="note">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptatibus nihil reiciendis ipsam hic! Voluptate, corrupti
+                vitae minus libero totam fugit ea quis laboriosam esse beatae
+                provident magni? Quia, natus harum!
+              </p>
+            </div>
+            <div class="task-list"></div>
+          </div>
         </div>
       </main>
     </div>

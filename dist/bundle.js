@@ -16,7 +16,7 @@
   \*****************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n// Imports\n\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \":root {\\n}\\n\\n* {\\n  box-sizing: border-box;\\n  margin: 0;\\n  padding: 0;\\n}\\n\\nbody {\\n  margin: 2rem;\\n}\\n\\n#content {\\n  height: 100vh;\\n  width: 100vw;\\n  display: grid;\\n  grid-template-columns: 15rem 1fr;\\n  grid-template-rows: 4rem 1fr;\\n  grid-template-areas:\\n    \\\"header header\\\"\\n    \\\"aside main\\\";\\n}\\n\\nheader {\\n  grid-area: header;\\n}\\n\\naside {\\n  grid-area: aside;\\n}\\n\\nmain {\\n  grid-area: main;\\n  display: grid;\\n  grid-template-columns: 20rem 1fr;\\n  grid-template-areas: \\\"tasks task-details\\\";\\n}\\n\\n#tasks {\\n  grid-area: tasks;\\n}\\n\\n#task-details {\\n  grid-area: task-details;\\n}\\n\\n.project-title,\\n.task,\\n#task-actions {\\n  height: 4rem;\\n}\\n\\n.task {\\n  display: flex;\\n  gap: 1rem;\\n}\\n\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://todo-list/./src/css/style.css?./node_modules/css-loader/dist/cjs.js");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"./node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/getUrl.js */ \"./node_modules/css-loader/dist/runtime/getUrl.js\");\n/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);\n// Imports\n\n\n\nvar ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../assets/fonts/The Brooklyn Smooth Bold.ttf */ \"./src/assets/fonts/The Brooklyn Smooth Bold.ttf\"), __webpack_require__.b);\nvar ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../assets/fonts/The Brooklyn Smooth.otf */ \"./src/assets/fonts/The Brooklyn Smooth.otf\"), __webpack_require__.b);\nvar ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\nvar ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);\nvar ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, \":root {\\n}\\n\\n@font-face {\\n  font-family: \\\"The Brooklyn Smooth Bold\\\";\\n  src: url(\" + ___CSS_LOADER_URL_REPLACEMENT_0___ + \");\\n}\\n\\n@font-face {\\n  font-family: \\\"The Brooklyn Smooth Regular\\\";\\n  src: url(\" + ___CSS_LOADER_URL_REPLACEMENT_1___ + \");\\n}\\n\\n* {\\n  box-sizing: border-box;\\n  margin: 0;\\n  padding: 0;\\n}\\n\\nbody {\\n  margin: 2rem;\\n  font-family: \\\"The Brooklyn Smooth Regular\\\";\\n  font-size: 16px;\\n}\\n\\n#content {\\n  height: 90vh;\\n  width: 90vw;\\n  margin: auto;\\n  display: grid;\\n  grid-template-columns: 1.5fr 2fr 3fr;\\n  grid-template-rows: 1fr 10fr;\\n  grid-template-areas:\\n    \\\"header header header\\\"\\n    \\\"aside main main\\\";\\n}\\n\\nheader {\\n  grid-area: header;\\n  display: grid;\\n  place-content: center;\\n  text-transform: uppercase;\\n}\\n\\naside {\\n  grid-area: aside;\\n  display: flex;\\n  flex-direction: column;\\n  position: relative;\\n}\\n\\n#top-section,\\n#bottom-section {\\n  margin: 1rem 0;\\n}\\n\\n.project-name {\\n  display: flex;\\n  align-items: center;\\n  gap: 0.5rem;\\n  width: 100%;\\n  height: 3rem;\\n  padding: 0 1rem;\\n  background-color: #fff;\\n  border: none;\\n}\\n\\n#bottom-section h3 {\\n  margin: 0.5rem 1rem;\\n}\\n\\n.dot {\\n  width: 1rem;\\n  height: 1rem;\\n  border: 5px solid #e00c52;\\n  border-radius: 50%;\\n}\\n\\nmain {\\n  grid-area: main;\\n  display: grid;\\n  grid-template-columns: 2fr 3fr;\\n  grid-template-rows: 1fr 9fr;\\n  grid-template-areas:\\n    \\\"project-title task-actions\\\"\\n    \\\"tasks task-details\\\";\\n}\\n\\n#project-title,\\n.task,\\n#task-actions {\\n  padding: 0.5rem 1rem;\\n}\\n\\n#project-title {\\n  grid-area: project-title;\\n  border-left: 0.5rem solid #e00c52;\\n  border-bottom: 1px solid #ccc;\\n  display: flex;\\n  justify-content: space-between;\\n  align-items: center;\\n}\\n\\n#task-actions {\\n  grid-area: task-actions;\\n  display: flex;\\n  align-items: center;\\n  justify-content: end;\\n  gap: 1rem;\\n}\\n\\n.actionBtn {\\n  width: 2.5rem;\\n  height: 2.5rem;\\n  border: none;\\n  border-radius: 50%;\\n  background-color: #eee;\\n\\n  display: grid;\\n  place-content: center;\\n}\\n\\n#tasks {\\n  grid-area: tasks;\\n  display: flex;\\n  flex-direction: column;\\n  background-color: #fff;\\n\\n  position: relative;\\n}\\n\\n.task {\\n  display: flex;\\n  align-items: center;\\n  align-items: space-between;\\n  gap: 1rem;\\n  height: 4rem;\\n  box-shadow: 0 0.1rem 0.1rem 0 rgba(233, 233, 233, 0.3);\\n  background-color: #e9e9e9;\\n  border: 1px solid #ccc;\\n}\\n\\n.task-infos {\\n  width: 100%;\\n  display: flex;\\n  flex-direction: column;\\n  gap: 0.3rem;\\n}\\n\\n.additional {\\n  display: flex;\\n  align-items: center;\\n  justify-content: space-between;\\n}\\n\\n.addBtn {\\n  position: absolute;\\n  bottom: 0.5rem;\\n  align-self: center;\\n  width: 6rem;\\n  height: 2rem;\\n  border: 3px solid #e00c52;\\n  border-radius: 25px;\\n  background-color: #fff;\\n}\\n\\n#task-details {\\n  grid-area: task-details;\\n  display: grid;\\n  grid-template-columns: 3rem 1fr;\\n  grid-template-rows: auto 1fr;\\n  grid-template-areas:\\n    \\\"checkmark title\\\"\\n    \\\". items\\\";\\n}\\n\\n#checkmark {\\n  grid-area: checkmark;\\n  display: grid;\\n  place-content: center;\\n}\\n\\n#task-title {\\n  grid-area: title;\\n  display: flex;\\n  flex-direction: column;\\n}\\n\\n#subtitle {\\n  display: flex;\\n  justify-content: space-between;\\n  align-items: flex-end;\\n}\\n\\n#task-due-date {\\n  display: flex;\\n  align-items: flex-end;\\n\\n  gap: 0.3rem;\\n}\\n\\n#task-items {\\n  grid-area: items;\\n}\\n\\n#task-details,\\n#task-items {\\n  padding: 2rem 1rem;\\n}\\n\\nheader,\\naside,\\n#tasks,\\n#task-details,\\n#task-actions {\\n  border: 1px solid #ccc;\\n}\\n\", \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack://todo-list/./src/css/style.css?./node_modules/css-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -27,6 +27,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((module) => {
 
 eval("\n\n/*\n  MIT License http://www.opensource.org/licenses/mit-license.php\n  Author Tobias Koppers @sokra\n*/\nmodule.exports = function (cssWithMappingToString) {\n  var list = []; // return the list of modules as css string\n\n  list.toString = function toString() {\n    return this.map(function (item) {\n      var content = \"\";\n      var needLayer = typeof item[5] !== \"undefined\";\n\n      if (item[4]) {\n        content += \"@supports (\".concat(item[4], \") {\");\n      }\n\n      if (item[2]) {\n        content += \"@media \".concat(item[2], \" {\");\n      }\n\n      if (needLayer) {\n        content += \"@layer\".concat(item[5].length > 0 ? \" \".concat(item[5]) : \"\", \" {\");\n      }\n\n      content += cssWithMappingToString(item);\n\n      if (needLayer) {\n        content += \"}\";\n      }\n\n      if (item[2]) {\n        content += \"}\";\n      }\n\n      if (item[4]) {\n        content += \"}\";\n      }\n\n      return content;\n    }).join(\"\");\n  }; // import a list of modules into the list\n\n\n  list.i = function i(modules, media, dedupe, supports, layer) {\n    if (typeof modules === \"string\") {\n      modules = [[null, modules, undefined]];\n    }\n\n    var alreadyImportedModules = {};\n\n    if (dedupe) {\n      for (var k = 0; k < this.length; k++) {\n        var id = this[k][0];\n\n        if (id != null) {\n          alreadyImportedModules[id] = true;\n        }\n      }\n    }\n\n    for (var _k = 0; _k < modules.length; _k++) {\n      var item = [].concat(modules[_k]);\n\n      if (dedupe && alreadyImportedModules[item[0]]) {\n        continue;\n      }\n\n      if (typeof layer !== \"undefined\") {\n        if (typeof item[5] === \"undefined\") {\n          item[5] = layer;\n        } else {\n          item[1] = \"@layer\".concat(item[5].length > 0 ? \" \".concat(item[5]) : \"\", \" {\").concat(item[1], \"}\");\n          item[5] = layer;\n        }\n      }\n\n      if (media) {\n        if (!item[2]) {\n          item[2] = media;\n        } else {\n          item[1] = \"@media \".concat(item[2], \" {\").concat(item[1], \"}\");\n          item[2] = media;\n        }\n      }\n\n      if (supports) {\n        if (!item[4]) {\n          item[4] = \"\".concat(supports);\n        } else {\n          item[1] = \"@supports (\".concat(item[4], \") {\").concat(item[1], \"}\");\n          item[4] = supports;\n        }\n      }\n\n      list.push(item);\n    }\n  };\n\n  return list;\n};\n\n//# sourceURL=webpack://todo-list/./node_modules/css-loader/dist/runtime/api.js?");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
+/*!********************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
+  \********************************************************/
+/***/ ((module) => {
+
+eval("\n\nmodule.exports = function (url, options) {\n  if (!options) {\n    options = {};\n  }\n\n  if (!url) {\n    return url;\n  }\n\n  url = String(url.__esModule ? url.default : url); // If url is already wrapped in quotes, remove them\n\n  if (/^['\"].*['\"]$/.test(url)) {\n    url = url.slice(1, -1);\n  }\n\n  if (options.hash) {\n    url += options.hash;\n  } // Should url be wrapped?\n  // See https://drafts.csswg.org/css-values-3/#urls\n\n\n  if (/[\"'() \\t\\n]|(%20)/.test(url) || options.needQuotes) {\n    return \"\\\"\".concat(url.replace(/\"/g, '\\\\\"').replace(/\\n/g, \"\\\\n\"), \"\\\"\");\n  }\n\n  return url;\n};\n\n//# sourceURL=webpack://todo-list/./node_modules/css-loader/dist/runtime/getUrl.js?");
 
 /***/ }),
 
@@ -118,6 +128,26 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/style.css */ \"./src/css/style.css\");\n\n\nconsole.log(\"Webpack is set\");\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
+/***/ }),
+
+/***/ "./src/assets/fonts/The Brooklyn Smooth Bold.ttf":
+/*!*******************************************************!*\
+  !*** ./src/assets/fonts/The Brooklyn Smooth Bold.ttf ***!
+  \*******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"92e22018d2638f164dc3.ttf\";\n\n//# sourceURL=webpack://todo-list/./src/assets/fonts/The_Brooklyn_Smooth_Bold.ttf?");
+
+/***/ }),
+
+/***/ "./src/assets/fonts/The Brooklyn Smooth.otf":
+/*!**************************************************!*\
+  !*** ./src/assets/fonts/The Brooklyn Smooth.otf ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"21a47448a89dc92ba3bd.otf\";\n\n//# sourceURL=webpack://todo-list/./src/assets/fonts/The_Brooklyn_Smooth.otf?");
+
 /***/ })
 
 /******/ 	});
@@ -146,6 +176,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -171,6 +204,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -185,6 +230,52 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		__webpack_require__.b = document.baseURI || self.location.href;
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"bundle": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		// no on chunks loaded
+/******/ 		
+/******/ 		// no jsonp function
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/nonce */

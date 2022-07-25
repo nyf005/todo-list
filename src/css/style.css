@@ -1,6 +1,16 @@
 :root {
 }
 
+@font-face {
+  font-family: "The Brooklyn Smooth Bold";
+  src: url(../assets/fonts/The\ Brooklyn\ Smooth\ Bold.ttf);
+}
+
+@font-face {
+  font-family: "The Brooklyn Smooth Regular";
+  src: url(../assets/fonts/The\ Brooklyn\ Smooth.otf);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,49 +19,199 @@
 
 body {
   margin: 2rem;
+  font-family: "The Brooklyn Smooth Regular";
+  font-size: 16px;
 }
 
 #content {
-  height: 100vh;
-  width: 100vw;
+  height: 90vh;
+  width: 90vw;
+  margin: auto;
   display: grid;
-  grid-template-columns: 15rem 1fr;
-  grid-template-rows: 4rem 1fr;
+  grid-template-columns: 1.5fr 2fr 3fr;
+  grid-template-rows: 1fr 10fr;
   grid-template-areas:
-    "header header"
-    "aside main";
+    "header header header"
+    "aside main main";
 }
 
 header {
   grid-area: header;
+  display: grid;
+  place-content: center;
+  text-transform: uppercase;
 }
 
 aside {
   grid-area: aside;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+#top-section,
+#bottom-section {
+  margin: 1rem 0;
+}
+
+.project-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 3rem;
+  padding: 0 1rem;
+  background-color: #fff;
+  border: none;
+}
+
+#bottom-section h3 {
+  margin: 0.5rem 1rem;
+}
+
+.dot {
+  width: 1rem;
+  height: 1rem;
+  border: 5px solid #e00c52;
+  border-radius: 50%;
 }
 
 main {
   grid-area: main;
   display: grid;
-  grid-template-columns: 20rem 1fr;
-  grid-template-areas: "tasks task-details";
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: 1fr 9fr;
+  grid-template-areas:
+    "project-title task-actions"
+    "tasks task-details";
+}
+
+#project-title,
+.task,
+#task-actions {
+  padding: 0.5rem 1rem;
+}
+
+#project-title {
+  grid-area: project-title;
+  border-left: 0.5rem solid #e00c52;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#task-actions {
+  grid-area: task-actions;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 1rem;
+}
+
+.actionBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 50%;
+  background-color: #eee;
+
+  display: grid;
+  place-content: center;
 }
 
 #tasks {
   grid-area: tasks;
-}
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
 
-#task-details {
-  grid-area: task-details;
-}
-
-.project-title,
-.task,
-#task-actions {
-  height: 4rem;
+  position: relative;
 }
 
 .task {
   display: flex;
+  align-items: center;
+  align-items: space-between;
   gap: 1rem;
+  height: 4rem;
+  box-shadow: 0 0.1rem 0.1rem 0 rgba(233, 233, 233, 0.3);
+  background-color: #e9e9e9;
+  border: 1px solid #ccc;
+}
+
+.task-infos {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.additional {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addBtn {
+  position: absolute;
+  bottom: 0.5rem;
+  align-self: center;
+  width: 6rem;
+  height: 2rem;
+  border: 3px solid #e00c52;
+  border-radius: 25px;
+  background-color: #fff;
+}
+
+#task-details {
+  grid-area: task-details;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "checkmark title"
+    ". items";
+}
+
+#checkmark {
+  grid-area: checkmark;
+  display: grid;
+  place-content: center;
+}
+
+#task-title {
+  grid-area: title;
+  display: flex;
+  flex-direction: column;
+}
+
+#subtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#task-due-date {
+  display: flex;
+  align-items: flex-end;
+
+  gap: 0.3rem;
+}
+
+#task-items {
+  grid-area: items;
+}
+
+#task-details,
+#task-items {
+  padding: 2rem 1rem;
+}
+
+header,
+aside,
+#tasks,
+#task-details,
+#task-actions {
+  border: 1px solid #ccc;
 }
