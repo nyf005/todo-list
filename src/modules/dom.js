@@ -2,8 +2,9 @@ import clock from "../assets/icons/clock.svg";
 import create from "../assets/icons/create.svg";
 import trash from "../assets/icons/trash.svg";
 
+import createProjectButton from "../components/project_button";
+
 const DOMTools = () => {
-  const projectsDiv = document.getElementById("projects");
   const projectName = document.querySelector("#project-title h3");
   const tasksDiv = document.getElementById("tasks");
   const taskDetailsDiv = document.getElementById("task-details");
@@ -13,19 +14,8 @@ const DOMTools = () => {
   const addNoteBtn = document.getElementById("addNoteBtn");
   const addChecklistItemBtn = document.getElementById("addChecklistItemBtn");
 
-  const createProjectButton = (project) => {
-    const button = document.createElement("button");
-    button.className = "project-name";
-
-    const dot = document.createElement("div");
-    dot.className = "dot";
-
-    const span = document.createElement("span");
-    span.textContent = project.name;
-
-    button.append(dot, span);
-
-    projectsDiv.append(button);
+  const addProjectButton = (project) => {
+    createProjectButton(project);
   };
 
   const createTaskCard = (task) => {
