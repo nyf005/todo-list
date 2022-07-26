@@ -3,6 +3,7 @@ import create from "../assets/icons/create.svg";
 import trash from "../assets/icons/trash.svg";
 
 import createProjectButton from "../components/project_button";
+import createTaskCard from "../components/task_card";
 
 const DOMTools = () => {
   const projectName = document.querySelector("#project-title h3");
@@ -18,46 +19,8 @@ const DOMTools = () => {
     createProjectButton(project);
   };
 
-  const createTaskCard = (task) => {
-    const card = document.createElement("div");
-    card.className = "task";
-
-    const checkbox = document.createElement("div");
-    checkbox.className = "checkbox";
-
-    const checkboxInput = document.createElement("input");
-    checkboxInput.setAttribute("type", "checkbox");
-    checkboxInput.setAttribute("id", task.title);
-    checkboxInput.checked = task.completed;
-
-    const checkboxLabel = document.createElement("label");
-    checkboxLabel.setAttribute("for", task.title);
-
-    checkbox.append(checkboxInput, checkboxLabel);
-
-    const taskInfos = document.createElement("div");
-    taskInfos.className = "task-infos";
-
-    const h4 = document.createElement("h4");
-    h4.textContent = task.title;
-
-    const additionalInfos = document.createElement("div");
-    additionalInfos.className = "additional";
-
-    const dueDate = document.createElement("p");
-    dueDate.className = "task-due-date";
-    dueDate.textContent = task.dueDate;
-
-    const priority = document.createElement("p");
-    priority.className = "priority";
-    priority.textContent = task.priority;
-
-    additionalInfos.append(dueDate, priority);
-    taskInfos.append(h4, additionalInfos);
-
-    card.append(checkbox, taskInfos);
-
-    tasksDiv.appendChild(card);
+  const addTaskCard = (task) => {
+    createTaskCard(task);
   };
 
   const createTaskDetailsHeader = (task) => {
