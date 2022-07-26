@@ -1,7 +1,5 @@
 import "./css/style.css";
-import createTaskCard from "./components/task-card";
-import creatProjectButton from "./components/project-button";
-import taskDetailsHeader from "./components/task-details-header";
+import DOMTools from "./modules/dom";
 
 const newProject = {
   name: "AdWord",
@@ -34,30 +32,34 @@ const tasks = [
   },
 ];
 
-const projectsDiv = document.getElementById("projects");
-projectsDiv.append(creatProjectButton(newProject));
+const DOM = DOMTools();
+DOM.createProjectButton(newProject);
 
-const projectName = document.querySelector("#project-title h3");
-projectName.textContent = `${newProject.name} Tasks`;
-
-const tasksDiv = document.getElementById("tasks");
+DOM.setTasksTitle(newProject);
 
 tasks.forEach((newTask) => {
-  tasksDiv.appendChild(createTaskCard(newTask));
+  DOM.createTaskCard(newTask);
 });
 
-const taskCards = [...document.querySelectorAll(".task")];
-taskCards[1].classList.add("active");
+DOM.setActiveCard(DOM.getTaskCards()[0]);
+DOM.createTaskDetailsHeader(tasks[0]);
+DOM.setTaskActionBtn(0);
 
-let currentActive = taskCards[1];
-taskCards.forEach((taskCard) => {
+DOM.getTaskCards().forEach((taskCard, index) => {
   taskCard.addEventListener("click", () => {
-    currentActive.classList.remove("active");
-    taskCard.classList.add("active");
-    currentActive = taskCard;
+    DOM.setActiveCard(taskCard);
+    DOM.createTaskDetailsHeader(tasks[index]);
+    DOM.setTaskActionBtn(index);
   });
 });
 
-const taskDetailsDiv = document.getElementById("task-details");
-const { checkmark, taskTitle } = taskDetailsHeader(tasks[1]);
-taskDetailsDiv.append(checkmark, taskTitle);
+const addNoteBtn = document.getElementById("addNoteBtn");
+
+addNoteBtn.addEventListener("click", () => {
+  DOM.createTaskNoteItem({
+    value: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Voluptatibus nihil reiciendis ipsam hic! Voluptate, corrupti
+    vitae minus libero totam fugit ea quis laboriosam esse beatae
+    provident magni? Quia, natus harum!`,
+  });
+});
