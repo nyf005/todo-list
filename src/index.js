@@ -38,12 +38,24 @@ const projectsDiv = document.getElementById("projects");
 projectsDiv.append(creatProjectButton(newProject));
 
 const projectName = document.querySelector("#project-title h3");
-projectName.textContent = newProject.name;
+projectName.textContent = `${newProject.name} Tasks`;
 
 const tasksDiv = document.getElementById("tasks");
 
 tasks.forEach((newTask) => {
   tasksDiv.appendChild(createTaskCard(newTask));
+});
+
+const taskCards = [...document.querySelectorAll(".task")];
+taskCards[1].classList.add("active");
+
+let currentActive = taskCards[1];
+taskCards.forEach((taskCard) => {
+  taskCard.addEventListener("click", () => {
+    currentActive.classList.remove("active");
+    taskCard.classList.add("active");
+    currentActive = taskCard;
+  });
 });
 
 const taskDetailsDiv = document.getElementById("task-details");

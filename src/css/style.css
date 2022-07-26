@@ -122,21 +122,6 @@ main {
   place-content: center;
 }
 
-.item {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.item-actions {
-  display: flex;
-  gap: 0.25rem;
-}
-
-#task-items .actionBtn {
-  width: 1.5rem;
-  background-color: transparent;
-}
-
 #tasks {
   grid-area: tasks;
   display: flex;
@@ -150,15 +135,29 @@ main {
   position: absolute;
   bottom: 0.5rem;
   align-self: center;
-  width: 6rem;
-  height: 2rem;
-  border: 3px solid #e00c52;
+
+  width: 8rem;
+  height: 2.5rem;
+
+  border: none;
   border-radius: 25px;
   background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+  font-weight: bold;
+
+  cursor: pointer;
+  outline: none;
+}
+.addBtn:hover {
+  background-color: #0a8df9;
+  box-shadow: 0 0.1rem 1.5rem #0a8df966;
+  color: #fff;
 }
 
 #task-details {
   grid-area: task-details;
+  padding: 2rem 1rem;
   display: grid;
   grid-template-columns: 3rem 1fr;
   grid-template-rows: auto 1fr;
@@ -199,8 +198,19 @@ main {
   padding: 2rem 0;
 }
 
-#task-details {
-  padding: 2rem 1rem;
+.item {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.item-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+#task-items .actionBtn {
+  width: 1.5rem;
+  background-color: transparent;
 }
 
 header,

@@ -23,3 +23,8 @@
   justify-content: space-between;
   font-family: "The Brooklyn Smooth Regular";
 }
+
+.active {
+  background-color: #0a8df9;
+  color: #fff;
+}
