@@ -24,7 +24,7 @@ export default function createTaskCard(task) {
   h4.textContent = task.title;
 
   const additionalInfos = document.createElement("div");
-  additionalInfos.className = "additional";
+  additionalInfos.className = "subtitle";
 
   const dueDate = document.createElement("p");
   dueDate.className = "task-due-date";

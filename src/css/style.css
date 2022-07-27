@@ -150,10 +150,10 @@ main {
   font-family: "The Brooklyn Smooth Bold";
 }
 
-.additional {
+.subtitle {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: flex-end;
   font-family: "The Brooklyn Smooth Regular";
 }
 
@@ -202,10 +202,12 @@ main {
   padding: 2rem 1rem;
   display: grid;
   grid-template-columns: 3rem 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto 1fr;
   grid-template-areas:
     "checkmark title"
+    ". description"
     ". items";
+  gap: 1rem 0;
 }
 
 #checkmark {
@@ -221,18 +223,20 @@ main {
   font-family: "The Brooklyn Smooth Bold";
 }
 
-#subtitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  font-family: "The Brooklyn Smooth Regular";
-}
-
-#task-due-date {
+#details-due-date {
   display: flex;
   align-items: flex-end;
 
   gap: 0.3rem;
+}
+
+#task-description {
+  grid-area: description;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem 0;
+  text-align: justify;
+  line-height: 1.3rem;
 }
 
 #task-items {

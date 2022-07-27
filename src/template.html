@@ -45,10 +45,10 @@
             <img src="../src/assets/icons/trash.svg" alt="trash" />
           </button>
 
-          <button class="actionBtn" id="addNoteBtn">
+          <button class="actionBtn" id="editTaskBtn">
             <img src="../src/assets/icons/pen.svg" alt="pen" />
           </button>
-          <button class="actionBtn" id="addChecklistItemBtn">
+          <button class="actionBtn" id="addItemBtn">
             <img
               src="../src/assets/icons/checkbox-checked.svg"
               alt="checkbox-checked"
@@ -57,6 +57,21 @@
         </div>
 
         <div id="task-details">
+          <div id="checkmark">
+            <input type="checkbox" id="task-status" disabled />
+            <label for="task-status"></label>
+          </div>
+          <div id="task-title">
+            <h2></h2>
+            <div class="subtitle">
+              <div id="details-due-date">
+                <img src="" alt="clock" />
+                <p></p>
+              </div>
+              <p class="priority"></p>
+            </div>
+          </div>
+          <div id="task-description"></div>
           <div id="task-items"></div>
         </div>
       </main>
