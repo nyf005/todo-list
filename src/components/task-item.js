@@ -5,8 +5,18 @@ export default function (taskItem) {
   const item = document.createElement("div");
   item.className = "item";
 
-  const content = document.createElement("p");
-  content.textContent = taskItem.value;
+  const itemContent = document.createElement("div");
+  itemContent.className = "item-content";
+
+  const checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+  // checkbox.setAttribute("id", taskItem);
+
+  const label = document.createElement("label");
+  // label.setAttribute("for", taskItem);
+  label.textContent = taskItem.value;
+
+  itemContent.append(checkbox, label);
 
   const itemActions = document.createElement("div");
   itemActions.className = "item-actions";
@@ -25,7 +35,7 @@ export default function (taskItem) {
 
   itemActions.append(editBtn, deleteBtn);
 
-  item.append(content, itemActions);
+  item.append(itemContent, itemActions);
 
   return item;
 }

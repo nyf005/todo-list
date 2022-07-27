@@ -77,9 +77,6 @@ const addItemBtn = document.getElementById("addItemBtn");
 
 addItemBtn.addEventListener("click", () => {
   DOM.addTaskItem({
-    value: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    Voluptatibus nihil reiciendis ipsam hic! Voluptate, corrupti
-    vitae minus libero totam fugit ea quis laboriosam esse beatae
-    provident magni? Quia, natus harum!`,
+    value: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
   });
 });

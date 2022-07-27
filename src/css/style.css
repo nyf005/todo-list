@@ -21,6 +21,7 @@ body {
   margin: 2rem;
   font-family: "The Brooklyn Smooth Regular";
   font-size: 16px;
+  line-height: 1.3rem;
 }
 
 #content {
@@ -236,18 +237,23 @@ main {
   border-bottom: 1px solid #ccc;
   padding: 0.5rem 0;
   text-align: justify;
-  line-height: 1.3rem;
 }
 
 #task-items {
   grid-area: items;
-  padding: 2rem 0;
 }
 
 .item {
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: 0.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.item-content {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
 }
 
 .item-actions {

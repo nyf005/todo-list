@@ -44,8 +44,6 @@ const DOMTools = () => {
     taskDetailsDiv.appendChild(taskItemsDiv);
   };
 
-  // const createTaskCheckItem = (content) => {};
-
   const setTaskActionBtn = (index) => {
     deleteTaskBtn.setAttribute("data-index", index);
     editTaskBtn.setAttribute("data-index", index);
