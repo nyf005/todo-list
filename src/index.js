@@ -60,15 +60,48 @@ tasks.forEach((newTask) => {
   DOM.addTaskCard(newTask);
 });
 
-DOM.setActiveCard(DOM.getTaskCards()[0]);
+const addTaskBtn = document.getElementById("addTaskBtn");
+addTaskBtn.addEventListener("click", () => {
+  let newTask = {
+    title: "Create Tiktok Ads",
+    description: `In, esse eum
+    corporis ipsam veniam amet magnam sapiente. Iste sequi voluptas in beatae fugiat
+    distinctio vero! Illum expedita voluptatum fugiat labore quidem saepe odio
+    molestiae nisi. Velit dolorum iusto nulla rem corporis aperiam saepe architecto
+    blanditiis debitis fuga? Magni.`,
+    dueDate: "12/01/2023",
+    priority: "low",
+    completed: false,
+  };
+  tasks.push(newTask);
+  DOM.addTaskCard(newTask);
+
+  DOM.getTaskCards().forEach((taskCard, index) => {
+    taskCard.addEventListener("click", () => {
+      DOM.setActiveTask(taskCard);
+      DOM.showTaskDetails(tasks[index]);
+      DOM.setTaskActionBtn(index);
+    });
+  });
+});
+
+DOM.setActiveProject(DOM.getProjectsBtns()[0]);
+
+DOM.setActiveTask(DOM.getTaskCards()[0]);
 DOM.showTaskDetails(tasks[0]);
-DOM.setTaskActionBtn(0);
+DOM.setTaskActionBtnIndex(0);
 
 DOM.getTaskCards().forEach((taskCard, index) => {
   taskCard.addEventListener("click", () => {
-    DOM.setActiveCard(taskCard);
+    DOM.setActiveTask(taskCard);
     DOM.showTaskDetails(tasks[index]);
-    DOM.setTaskActionBtn(index);
+    DOM.setTaskActionBtnIndex(index);
+  });
+});
+
+DOM.getProjectsBtns().forEach((projectBtn, index) => {
+  projectBtn.addEventListener("click", () => {
+    DOM.setActiveProject(projectBtn);
   });
 });
 

@@ -1,6 +1,4 @@
 export default function createProjectButton(project) {
-  const projectsDiv = document.getElementById("projects");
-
   const button = document.createElement("button");
   button.className = "project-name";
 
@@ -12,7 +10,5 @@ export default function createProjectButton(project) {
 
   button.append(dot, span);
 
-  projectsDiv.append(button);
-
-  return projectsDiv;
+  return button;
 }

@@ -50,7 +50,6 @@ aside {
   position: relative;
 }
 
-#top-section,
 #bottom-section {
   margin: 1rem 0;
 }
@@ -137,7 +136,7 @@ main {
   align-items: center;
   align-items: space-between;
   gap: 1rem;
-  height: 4rem;
+  min-height: 4rem;
   box-shadow: 0 0.1rem 0.1rem 0 rgba(233, 233, 233, 0.3);
   background-color: #e9e9e9;
   border: 1px solid #ccc;
@@ -209,6 +208,8 @@ main {
     ". description"
     ". items";
   gap: 1rem 0;
+
+  position: relative;
 }
 
 #checkmark {
@@ -233,14 +234,18 @@ main {
 
 #task-description {
   grid-area: description;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
   padding: 0.5rem 0;
   text-align: justify;
 }
 
 #task-items {
   grid-area: items;
+}
+
+#addItemBtn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .item {

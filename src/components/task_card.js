@@ -1,6 +1,4 @@
 export default function createTaskCard(task) {
-  const tasksDiv = document.getElementById("tasks");
-
   const card = document.createElement("div");
   card.className = "task";
 
@@ -39,7 +37,5 @@ export default function createTaskCard(task) {
 
   card.append(checkbox, taskInfos);
 
-  tasksDiv.appendChild(card);
-
-  return tasksDiv;
+  return card;
 }

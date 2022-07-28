@@ -1,7 +1,7 @@
 import create from "../assets/icons/create.svg";
 import trash from "../assets/icons/trash.svg";
 
-export default function (taskItem) {
+export default function createTaskItem(taskItem) {
   const item = document.createElement("div");
   item.className = "item";
 

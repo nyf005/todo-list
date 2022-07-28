@@ -3,12 +3,16 @@ import clock from "../assets/icons/clock.svg";
 import createProjectButton from "../components/project_button";
 import createTaskCard from "../components/task_card";
 import createTaskItem from "../components/task-item";
+import createTaskDetailsStatus from "../components/task_status";
 
 const DOMTools = () => {
+  const projectsDiv = document.getElementById("projects");
   const projectName = document.querySelector("#project-title h3");
-  const taskDetailsDiv = document.getElementById("task-details");
 
-  const taskDetailsStatus = document.getElementById("task-status");
+  const tasksDiv = document.getElementById("tasks");
+
+  const taskDetailsDiv = document.getElementById("task-details");
+  const checkmark = document.getElementById("checkmark");
   const taskDetailsTitle = document.querySelector("#task-title h2");
   const clockIcon = document.querySelector(".subtitle img");
   const taskDetailsDueDate = document.querySelector("#details-due-date p");
@@ -22,15 +26,21 @@ const DOMTools = () => {
   const addItemBtn = document.getElementById("addItemBtn");
 
   const addProjectButton = (project) => {
-    createProjectButton(project);
+    let newProject = createProjectButton(project);
+    projectsDiv.append(newProject);
   };
 
   const addTaskCard = (task) => {
-    createTaskCard(task);
+    let taskCard = createTaskCard(task);
+    tasksDiv.appendChild(taskCard);
+    return taskCard;
   };
 
   const showTaskDetails = (task) => {
-    taskDetailsStatus.checked = task.completed;
+    checkmark.innerHTML = "";
+    const { detailsStatusCheckbox, detailsStatusLabel } =
+      createTaskDetailsStatus(task.completed);
+    checkmark.append(detailsStatusCheckbox, detailsStatusLabel);
     taskDetailsTitle.textContent = task.title;
     clockIcon.setAttribute("src", clock);
     taskDetailsDueDate.textContent = task.dueDate;
@@ -44,7 +54,7 @@ const DOMTools = () => {
     taskDetailsDiv.appendChild(taskItemsDiv);
   };
 
-  const setTaskActionBtn = (index) => {
+  const setTaskActionBtnIndex = (index) => {
     deleteTaskBtn.setAttribute("data-index", index);
     editTaskBtn.setAttribute("data-index", index);
     addItemBtn.setAttribute("data-index", index);
@@ -54,18 +64,30 @@ const DOMTools = () => {
     projectName.textContent = `${project.name} Tasks`;
   };
 
-  let selectedTaskCard = null;
-  const setActiveCard = (selectedCard) => {
+  const setActiveProject = (selected) => {
+    getProjectsBtns().forEach((projectBtn) => {
+      if (projectBtn.classList.contains("active")) {
+        projectBtn.classList.remove("active");
+      }
+      selected.classList.add("active");
+    });
+
+    // taskItemsDiv.innerHTML = "";
+  };
+
+  const setActiveTask = (selectedTask) => {
     getTaskCards().forEach((taskCard) => {
       if (taskCard.classList.contains("active")) {
         taskCard.classList.remove("active");
       }
-      selectedCard.classList.add("active");
-
-      selectedTaskCard = selectedCard;
+      selectedTask.classList.add("active");
     });
 
     taskItemsDiv.innerHTML = "";
+  };
+
+  const getProjectsBtns = () => {
+    return document.querySelectorAll(".project-name");
   };
 
   const getTaskCards = () => {
@@ -74,13 +96,15 @@ const DOMTools = () => {
 
   return {
     addProjectButton,
-    setTasksHeader,
     addTaskCard,
-    showTaskDetails,
     addTaskItem,
-    setActiveCard,
+    getProjectsBtns,
     getTaskCards,
-    setTaskActionBtn,
+    setTasksHeader,
+    setActiveProject,
+    setActiveTask,
+    setTaskActionBtnIndex,
+    showTaskDetails,
   };
 };
 
