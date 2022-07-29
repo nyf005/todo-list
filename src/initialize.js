@@ -11,7 +11,6 @@ const initializeTodo = (DOM, projects, tasks) => {
       let taskCard = DOM.createTaskCard(task);
 
       taskCard.addEventListener("click", () => {
-        console.log(taskCard.getAttribute("data"));
         DOM.setActiveTask(taskCard);
         DOM.showTaskDetails(task);
       });

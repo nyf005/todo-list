@@ -85,6 +85,8 @@ main {
   grid-template-areas:
     "project-title task-actions"
     "tasks task-details";
+
+  position: relative;
 }
 
 #project-title,
@@ -208,8 +210,6 @@ main {
     ". description"
     ". items";
   gap: 1rem 0;
-
-  position: relative;
 }
 
 #checkmark {
