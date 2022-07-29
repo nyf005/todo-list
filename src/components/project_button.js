@@ -1,6 +1,7 @@
-export default function createProjectButton(project) {
+export default function ProjectButton(project) {
   const button = document.createElement("button");
   button.className = "project-name";
+  button.setAttribute("data", project.name);
 
   const dot = document.createElement("div");
   dot.className = "dot";

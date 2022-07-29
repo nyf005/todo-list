@@ -1,9 +1,14 @@
 import "./css/style.css";
 import DOMTools from "./modules/dom";
+import initializeTodo from "./initialize";
 
-const newProject = {
-  name: "AdWord",
-};
+const DOM = DOMTools();
+
+const projects = [
+  {
+    name: "AdWord",
+  },
+];
 
 const tasks = [
   {
@@ -15,6 +20,7 @@ const tasks = [
     dueDate: "10/09/2022",
     priority: "high",
     completed: true,
+    projectName: "AdWord",
   },
   {
     title: "Create Facebook Ads",
@@ -26,6 +32,7 @@ const tasks = [
     dueDate: "12/10/2022",
     priority: "moderate",
     completed: false,
+    projectName: "AdWord",
   },
   {
     title: "Create Instagram Ads",
@@ -37,6 +44,7 @@ const tasks = [
     dueDate: "11/11/2022",
     priority: "normal",
     completed: false,
+    projectName: "Index",
   },
   {
     title: "Create Tiktok Ads",
@@ -48,68 +56,132 @@ const tasks = [
     dueDate: "12/01/2023",
     priority: "low",
     completed: false,
+    projectName: "Index",
   },
 ];
 
-const DOM = DOMTools();
-DOM.addProjectButton(newProject);
+initializeTodo(DOM, projects, tasks);
 
-DOM.setTasksHeader(newProject);
+// Add click event to projectBtns
+DOM.getProjectsBtns().forEach((projectBtn) => {
+  projectBtn.addEventListener("click", () => {
+    DOM.setActiveProject(projectBtn);
 
-tasks.forEach((newTask) => {
-  DOM.addTaskCard(newTask);
-});
+    // Load all tasks related to default project
+    tasks.forEach((task) => {
+      if (task.projectName == projectBtn.getAttribute("data")) {
+        let taskCard = DOM.createTaskCard(task);
 
-const addTaskBtn = document.getElementById("addTaskBtn");
-addTaskBtn.addEventListener("click", () => {
-  let newTask = {
-    title: "Create Tiktok Ads",
-    description: `In, esse eum
-    corporis ipsam veniam amet magnam sapiente. Iste sequi voluptas in beatae fugiat
-    distinctio vero! Illum expedita voluptatum fugiat labore quidem saepe odio
-    molestiae nisi. Velit dolorum iusto nulla rem corporis aperiam saepe architecto
-    blanditiis debitis fuga? Magni.`,
-    dueDate: "12/01/2023",
-    priority: "low",
-    completed: false,
-  };
-  tasks.push(newTask);
-  DOM.addTaskCard(newTask);
-
-  DOM.getTaskCards().forEach((taskCard, index) => {
-    taskCard.addEventListener("click", () => {
-      DOM.setActiveTask(taskCard);
-      DOM.showTaskDetails(tasks[index]);
-      DOM.setTaskActionBtn(index);
+        // Add click event to individual tasks
+        taskCard.addEventListener("click", () => {
+          DOM.setActiveTask(taskCard);
+          DOM.showTaskDetails(task);
+        });
+      }
     });
   });
 });
 
-DOM.setActiveProject(DOM.getProjectsBtns()[0]);
+// .addEventListener("click", (taskCard) => {
+//   DOM.setActiveTask(taskCard);
+//   DOM.showTaskDetails(taskCard.getAttribute("data"));
+//   // DOM.setTaskActionBtnIndex(e.target["data"]);
+// });
 
-DOM.setActiveTask(DOM.getTaskCards()[0]);
-DOM.showTaskDetails(tasks[0]);
-DOM.setTaskActionBtnIndex(0);
+// Add selected project tasks to DOM
+// DOM.getProjectsBtns().forEach((projectBtn, index) => {
+//   projectBtn.addEventListener("click", () => {
+//     DOM.setActiveProject(projectBtn);
 
-DOM.getTaskCards().forEach((taskCard, index) => {
-  taskCard.addEventListener("click", () => {
-    DOM.setActiveTask(taskCard);
-    DOM.showTaskDetails(tasks[index]);
-    DOM.setTaskActionBtnIndex(index);
-  });
-});
+//     tasks.forEach((newTask) => {
+//       if (newTask.projectName == projectBtn.outerText) {
+//         DOM.createTaskCard(newTask);
+//       }
+//     });
 
-DOM.getProjectsBtns().forEach((projectBtn, index) => {
-  projectBtn.addEventListener("click", () => {
-    DOM.setActiveProject(projectBtn);
-  });
-});
+//     DOM.getTaskCards().forEach((taskCard, index) => {
+//       taskCard.addEventListener("click", () => {
+//         DOM.setActiveTask(taskCard);
+//         DOM.showTaskDetails(tasks[index]);
+//         DOM.setTaskActionBtnIndex(index);
+//       });
+//     });
+//   });
+// });
 
-const editTaskBtn = document.getElementById("editTaskBtn");
-const addItemBtn = document.getElementById("addItemBtn");
+// const addProjectBtn = document.getElementById("addProject");
+// addProjectBtn.addEventListener("click", () => {
+//   let newProject = {
+//     name: "New Project",
+//   };
+//   projects.push(newProject);
 
-addItemBtn.addEventListener("click", () => {
-  DOM.addTaskItem({
-    value: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
-  });
-});
+//   // Add new project to DOM
+//   DOM.createProjectButton(newProject);
+
+//   DOM.getProjectsBtns().forEach((projectBtn, index) => {
+//     projectBtn.addEventListener("click", () => {
+//       DOM.setActiveProject(projectBtn);
+//       tasks.forEach((newTask) => {
+//         if (newTask.projectName == projectBtn.outerText) {
+//           DOM.createTaskCard(newTask);
+//         }
+//       });
+//     });
+//   });
+
+//   DOM.getTaskCards().forEach((taskCard, index) => {
+//     taskCard.addEventListener("click", () => {
+//       DOM.setActiveTask(taskCard);
+//       DOM.showTaskDetails(tasks[index]);
+//       DOM.setTaskActionBtnIndex(index);
+//     });
+//   });
+// });
+
+// const addTaskBtn = document.getElementById("addTaskBtn");
+// addTaskBtn.addEventListener("click", () => {
+//   let newTask = {
+//     title: "Create Tiktok Ads",
+//     description: `In, esse eum
+//     corporis ipsam veniam amet magnam sapiente. Iste sequi voluptas in beatae fugiat
+//     distinctio vero! Illum expedita voluptatum fugiat labore quidem saepe odio
+//     molestiae nisi. Velit dolorum iusto nulla rem corporis aperiam saepe architecto
+//     blanditiis debitis fuga? Magni.`,
+//     dueDate: "12/01/2023",
+//     priority: "low",
+//     completed: false,
+//   };
+//   tasks.push(newTask);
+//   DOM.createTaskCard(newTask);
+
+//   DOM.getTaskCards().forEach((taskCard, index) => {
+//     taskCard.addEventListener("click", () => {
+//       DOM.setActiveTask(taskCard);
+//       DOM.showTaskDetails(tasks[index]);
+//       DOM.setTaskActionBtn(index);
+//     });
+//   });
+// });
+
+// DOM.getTaskCards().forEach((taskCard, index) => {
+//   taskCard.addEventListener("click", () => {
+//     DOM.setActiveTask(taskCard);
+//     DOM.showTaskDetails(tasks[index]);
+//     DOM.setTaskActionBtnIndex(index);
+//   });
+// });
+
+// // Should be done when selecting a task
+// // DOM.setActiveTask(DOM.getTaskCards()[0]);
+// // DOM.showTaskDetails(tasks[0]);
+// // DOM.setTaskActionBtnIndex(0);
+
+// const editTaskBtn = document.getElementById("editTaskBtn");
+// const addItemBtn = document.getElementById("addItemBtn");
+
+// addItemBtn.addEventListener("click", () => {
+//   DOM.createTaskItem({
+//     value: `Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
+//   });
+// });
