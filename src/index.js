@@ -82,62 +82,36 @@ DOM.getProjectsBtns().forEach((projectBtn) => {
   });
 });
 
-// .addEventListener("click", (taskCard) => {
-//   DOM.setActiveTask(taskCard);
-//   DOM.showTaskDetails(taskCard.getAttribute("data"));
-//   // DOM.setTaskActionBtnIndex(e.target["data"]);
-// });
+const addProjectBtn = document.getElementById("addProject");
+addProjectBtn.addEventListener("click", () => {
+  DOM.displayProjectForm();
+  // let newProject = {
+  //   name: "New Project",
+  // };
+  // projects.push(newProject);
 
-// Add selected project tasks to DOM
-// DOM.getProjectsBtns().forEach((projectBtn, index) => {
-//   projectBtn.addEventListener("click", () => {
-//     DOM.setActiveProject(projectBtn);
+  // // Add new project to DOM
+  // DOM.createProjectButton(newProject);
 
-//     tasks.forEach((newTask) => {
-//       if (newTask.projectName == projectBtn.outerText) {
-//         DOM.createTaskCard(newTask);
-//       }
-//     });
+  // DOM.getProjectsBtns().forEach((projectBtn) => {
+  //   projectBtn.addEventListener("click", () => {
+  //     DOM.setActiveProject(projectBtn);
 
-//     DOM.getTaskCards().forEach((taskCard, index) => {
-//       taskCard.addEventListener("click", () => {
-//         DOM.setActiveTask(taskCard);
-//         DOM.showTaskDetails(tasks[index]);
-//         DOM.setTaskActionBtnIndex(index);
-//       });
-//     });
-//   });
-// });
+  //     // Load all tasks related to project
+  //     tasks.forEach((task) => {
+  //       if (task.projectName == projectBtn.getAttribute("data")) {
+  //         let taskCard = DOM.createTaskCard(task);
 
-// const addProjectBtn = document.getElementById("addProject");
-// addProjectBtn.addEventListener("click", () => {
-//   let newProject = {
-//     name: "New Project",
-//   };
-//   projects.push(newProject);
-
-//   // Add new project to DOM
-//   DOM.createProjectButton(newProject);
-
-//   DOM.getProjectsBtns().forEach((projectBtn, index) => {
-//     projectBtn.addEventListener("click", () => {
-//       DOM.setActiveProject(projectBtn);
-//       tasks.forEach((newTask) => {
-//         if (newTask.projectName == projectBtn.outerText) {
-//           DOM.createTaskCard(newTask);
-//         }
-//       });
-//     });
-//   });
-
-//   DOM.getTaskCards().forEach((taskCard, index) => {
-//     taskCard.addEventListener("click", () => {
-//       DOM.setActiveTask(taskCard);
-//       DOM.showTaskDetails(tasks[index]);
-//       DOM.setTaskActionBtnIndex(index);
-//     });
-//   });
-// });
+  //         // Add click event to individual tasks
+  //         taskCard.addEventListener("click", () => {
+  //           DOM.setActiveTask(taskCard);
+  //           DOM.showTaskDetails(task);
+  //         });
+  //       }
+  //     });
+  //   });
+  // });
+});
 
 // const addTaskBtn = document.getElementById("addTaskBtn");
 // addTaskBtn.addEventListener("click", () => {

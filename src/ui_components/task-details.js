@@ -1,4 +1,7 @@
 import clock from "../assets/icons/clock.svg";
+import trash from "../assets/icons/trash.svg";
+import pen from "../assets/icons/pen.svg";
+import checkboxChecked from "../assets/icons/checkbox-checked.svg";
 
 export default function createTaskDetails(task) {
   const checkmark = document.createElement("div");
@@ -51,5 +54,46 @@ export default function createTaskDetails(task) {
   const taskItems = document.createElement("div");
   taskItems.setAttribute("id", "task-items");
 
-  return { checkmark, taskTitle, taskDescription, taskItems };
+  const deleteTaskBtn = document.createElement("button");
+  deleteTaskBtn.setAttribute("id", "deleteTaskBtn");
+  deleteTaskBtn.setAttribute("data-id", task.title);
+  deleteTaskBtn.classList.add("actionBtn");
+
+  const deleteIcon = document.createElement("img");
+  deleteIcon.src = trash;
+  deleteIcon.setAttribute("alt", "trash");
+
+  deleteTaskBtn.appendChild(deleteIcon);
+
+  const editTaskBtn = document.createElement("button");
+  editTaskBtn.setAttribute("id", "editTaskBtn");
+  editTaskBtn.setAttribute("data-id", task.title);
+  editTaskBtn.classList.add("actionBtn");
+
+  const editIcon = document.createElement("img");
+  editIcon.src = pen;
+  editIcon.setAttribute("alt", "pen");
+
+  editTaskBtn.appendChild(editIcon);
+
+  const addItemBtn = document.createElement("button");
+  addItemBtn.setAttribute("id", "addItemBtn");
+  addItemBtn.setAttribute("data-id", task.title);
+  addItemBtn.classList.add("actionBtn");
+
+  const addItemIcon = document.createElement("img");
+  addItemIcon.src = checkboxChecked;
+  addItemIcon.setAttribute("alt", "checkbox-checked");
+
+  addItemBtn.appendChild(addItemIcon);
+
+  return {
+    checkmark,
+    taskTitle,
+    taskDescription,
+    taskItems,
+    deleteTaskBtn,
+    editTaskBtn,
+    addItemBtn,
+  };
 }

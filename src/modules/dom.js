@@ -1,18 +1,18 @@
-import ProjectButton from "../components/project_button";
-import TaskCard from "../components/task_card";
-import TaskItem from "../components/task-item";
-import createTaskDetails from "../components/task-details";
+import ProjectButton from "../ui_components/project_button";
+import TaskCard from "../ui_components/task_card";
+import TaskItem from "../ui_components/task-item";
+import createTaskDetails from "../ui_components/task-details";
+import createProjectForm from "../ui_components/project_form";
 
 const DOMTools = () => {
   const projectsDiv = document.getElementById("projects");
   const projectName = document.querySelector("#project-title h3");
+  const addProjectBtn = document.getElementById("addProject");
 
   const taskCardsDiv = document.getElementById("task-cards");
 
+  const taskActionsDiv = document.getElementById("task-actions");
   const taskDetailsDiv = document.getElementById("task-details");
-  const checkmark = document.getElementById("checkmark");
-  const taskTitleDiv = document.getElementById("task-title");
-  const taskDescriptionDiv = document.getElementById("task-description");
   const taskItemsDiv = document.getElementById("task-items");
 
   const deleteTaskBtn = document.getElementById("deleteTaskBtn");
@@ -25,6 +25,12 @@ const DOMTools = () => {
     return projectBtn;
   };
 
+  const displayProjectForm = () => {
+    addProjectBtn.parentNode.replaceChild(createProjectForm(), addProjectBtn);
+  };
+
+  const hideProjectForm = () => {};
+
   const createTaskCard = (task) => {
     let taskCard = TaskCard(task);
     taskCardsDiv.appendChild(taskCard);
@@ -32,9 +38,17 @@ const DOMTools = () => {
   };
 
   const showTaskDetails = (task) => {
-    const { checkmark, taskTitle, taskDescription, taskItems } =
-      createTaskDetails(task);
+    const {
+      checkmark,
+      taskTitle,
+      taskDescription,
+      taskItems,
+      deleteTaskBtn,
+      editTaskBtn,
+      addItemBtn,
+    } = createTaskDetails(task);
 
+    taskActionsDiv.append(editTaskBtn, deleteTaskBtn, addItemBtn);
     taskDetailsDiv.append(checkmark, taskTitle, taskDescription, taskItems);
   };
 
@@ -65,6 +79,7 @@ const DOMTools = () => {
     );
 
     taskCardsDiv.innerHTML = "";
+    taskActionsDiv.innerHTML = "";
     taskDetailsDiv.innerHTML = "";
   };
 
@@ -74,6 +89,7 @@ const DOMTools = () => {
     });
 
     selectedTask.classList.add("active");
+    taskActionsDiv.innerHTML = "";
     taskDetailsDiv.innerHTML = "";
   };
 
@@ -83,10 +99,6 @@ const DOMTools = () => {
 
   const getTaskCards = () => {
     return document.querySelectorAll(".task");
-  };
-
-  const _emptyTaskDetails = () => {
-    taskDetailsDiv.remove(checkmark);
   };
 
   return {
@@ -100,6 +112,7 @@ const DOMTools = () => {
     setActiveTask,
     setTaskActionBtnIndex,
     showTaskDetails,
+    displayProjectForm,
   };
 };
 
