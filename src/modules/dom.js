@@ -102,6 +102,7 @@ const DOMTools = () => {
   };
 
   return {
+    addProjectBtn,
     createProjectButton,
     createTaskCard,
     createTaskItem,

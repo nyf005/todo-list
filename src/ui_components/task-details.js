@@ -10,6 +10,7 @@ export default function createTaskDetails(task) {
   const detailsStatusCheckbox = document.createElement("input");
   detailsStatusCheckbox.setAttribute("type", "checkbox");
   detailsStatusCheckbox.setAttribute("id", "task-status");
+  detailsStatusCheckbox.setAttribute("disabled", "disabled");
 
   const detailsStatusLabel = document.createElement("label");
   detailsStatusLabel.setAttribute("for", "task-status");

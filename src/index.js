@@ -1,5 +1,6 @@
 import "./css/style.css";
 import DOMTools from "./modules/dom";
+import createProject from "./modules/project";
 import initializeTodo from "./initialize";
 
 const DOM = DOMTools();
@@ -82,8 +83,7 @@ DOM.getProjectsBtns().forEach((projectBtn) => {
   });
 });
 
-const addProjectBtn = document.getElementById("addProject");
-addProjectBtn.addEventListener("click", () => {
+DOM.addProjectBtn.addEventListener("click", () => {
   DOM.displayProjectForm();
   // let newProject = {
   //   name: "New Project",
