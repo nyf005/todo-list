@@ -87,7 +87,23 @@ const DomUI = () => {
       const taskForm = createtaskForm(projectsList);
       formModal.appendChild(taskForm);
       formModal.style.display = "block";
+
+      const cancelBtn = document.querySelector(
+        "#task-form-actions button:last-child"
+      );
+
+      cancelBtn.addEventListener("click", hideTaskForm);
+      formModal.addEventListener("click", (e) => {
+        if (e.target.id == "form-modal") {
+          hideTaskForm();
+        }
+      });
     });
+  };
+
+  const hideTaskForm = () => {
+    formModal.style.display = "none";
+    formModal.innerHTML = "";
   };
 
   const createTaskCard = (task) => {
@@ -168,7 +184,7 @@ const DomUI = () => {
     return document.querySelectorAll(".project-name");
   };
 
-  const displayDefaultProjectsBtns = (projectsList) => {
+  const setProjectsBtns = (projectsList) => {
     // Add click event to default projectBtns
     getProjectsBtns().forEach((projectBtn) => {
       projectBtn.addEventListener("click", () => {
@@ -195,7 +211,7 @@ const DomUI = () => {
   return {
     displayTaskForm,
     getCurrentProject,
-    displayDefaultProjectsBtns,
+    setProjectsBtns,
     createAddProjectButton,
     createProjectButton,
     createTaskCard,

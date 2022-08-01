@@ -19,7 +19,7 @@ const initializeTodo = (projectList) => {
   }
 
   DOM.createAddProjectButton();
-  DOM.displayDefaultProjectsBtns(projectList);
+  DOM.setProjectsBtns(projectList);
   DOM.displayTaskForm(projectList.getAll());
 
   // Load all projects
