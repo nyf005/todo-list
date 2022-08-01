@@ -1,9 +1,9 @@
-const createProject = () => {
-  let name = "";
+const Project = (pName) => {
+  let name = pName;
   let tasks = [];
 
-  const setProjectName = (name) => {
-    name = name;
+  const setProjectName = (newName) => {
+    name = newName;
   };
 
   const getProjectName = () => {
@@ -31,4 +31,4 @@ const createProject = () => {
   };
 };
 
-export default createProject;
+export default Project;

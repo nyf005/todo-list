@@ -1,25 +1,31 @@
-const initializeTodo = (DOM, projects, tasks) => {
-  const projectBtns = DOM.getProjectsBtns();
+import DomUI from "./modules/dom_ui";
 
+const initializeTodo = (projectList) => {
+  const DOM = DomUI();
+  const projectBtns = DOM.getProjectsBtns();
   // Set default Selected Project
   DOM.setActiveProject(projectBtns[0]);
 
-  // Load all tasks related to default project
-  tasks.forEach((task) => {
-    if (task.projectName == "Index") {
-      // Add click event to individual tasks
-      let taskCard = DOM.createTaskCard(task);
+  const defaultProjects = projectList
+    .getAll()
+    .find((project) => project.name == "Inbox");
 
-      taskCard.addEventListener("click", () => {
-        DOM.setActiveTask(taskCard);
-        DOM.showTaskDetails(task);
-      });
-    }
-  });
+  if (defaultProjects) {
+    // Load all tasks related to default project
+    defaultProjects.tasks.forEach((task) => {
+      // Add click event to individual tasks
+      DOM.createTaskCard(task);
+    });
+  }
+
+  DOM.createAddProjectButton();
+  DOM.displayProjectsBtns(projectList);
 
   // Load all projects
-  projects.forEach((project) => {
-    DOM.createProjectButton(project);
+  projectList.getAll().forEach((project) => {
+    if (project.name != "Inbox") {
+      DOM.createProjectButton(project);
+    }
   });
 };
 

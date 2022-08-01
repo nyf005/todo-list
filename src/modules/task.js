@@ -1,5 +1,4 @@
 const createTask = (title, description, dueDate, priority) => {
-  let uuid = 1;
   let title = title;
   let description = description;
   let dueDate = dueDate;

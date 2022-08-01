@@ -11,6 +11,7 @@ export default function createProjectForm() {
   nameInput.setAttribute("id", "projectName");
   nameInput.setAttribute("type", "text");
   nameInput.setAttribute("placeholder", "Project name");
+  nameInput.setAttribute("required", "required");
 
   const formActions = document.createElement("div");
   formActions.setAttribute("id", "project-form-actions");
@@ -18,6 +19,7 @@ export default function createProjectForm() {
   const validateBtn = document.createElement("button");
   validateBtn.setAttribute("type", "submit");
   validateBtn.classList.add("actionBtn");
+  validateBtn.setAttribute("id", "validateBtn");
 
   const checkIcon = document.createElement("img");
   checkIcon.src = check;
@@ -26,6 +28,7 @@ export default function createProjectForm() {
 
   const cancelBtn = document.createElement("button");
   cancelBtn.classList.add("actionBtn");
+  cancelBtn.setAttribute("id", "cancelBtn");
 
   const crossIcon = document.createElement("img");
   crossIcon.src = cross;

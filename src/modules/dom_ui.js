@@ -1,13 +1,14 @@
-import ProjectButton from "../ui_components/project_button";
+import Controller from "../index";
+import ProjectButton from "../ui_components/project_name_button";
 import TaskCard from "../ui_components/task_card";
 import TaskItem from "../ui_components/task-item";
 import createTaskDetails from "../ui_components/task-details";
 import createProjectForm from "../ui_components/project_form";
+import addNewProjectBtn from "../ui_components/new_project_button";
 
-const DOMTools = () => {
+const DomUI = () => {
   const projectsDiv = document.getElementById("projects");
   const projectName = document.querySelector("#project-title h3");
-  const addProjectBtn = document.getElementById("addProject");
 
   const taskCardsDiv = document.getElementById("task-cards");
 
@@ -19,20 +20,73 @@ const DOMTools = () => {
   const editTaskBtn = document.getElementById("editTaskBtn");
   const addItemBtn = document.getElementById("addItemBtn");
 
+  const createAddProjectButton = () => {
+    projectsDiv.parentNode.insertBefore(addNewProjectBtn(), projectsDiv);
+    const addProjectBtn = document.getElementById("addProject");
+
+    addProjectBtn.addEventListener("click", () => {
+      const projectForm = createProjectForm();
+      displayProjectForm();
+
+      projectForm.addEventListener("submit", (e) =>
+        Controller.submitProjectForm(e)
+      );
+    });
+  };
+
   const createProjectButton = (project) => {
-    let projectBtn = ProjectButton(project);
+    let projectBtn = ProjectButton(project.getProjectName());
+
+    // Add click event to individual projects
+    projectBtn.addEventListener("click", () => {
+      setActiveProject(projectBtn);
+      showProjectTaskCards(project);
+    });
+
     projectsDiv.append(projectBtn);
     return projectBtn;
   };
 
-  const displayProjectForm = () => {
-    addProjectBtn.parentNode.replaceChild(createProjectForm(), addProjectBtn);
+  const showProjectTaskCards = (project) => {
+    const tasks = project.getTasks();
+    if (tasks) {
+      tasks.forEach((task) => {
+        const taskCard = createTaskCard(task);
+        taskCardsDiv.append(taskCard);
+      });
+    }
   };
 
-  const hideProjectForm = () => {};
+  const displayProjectForm = () => {
+    const addProjectBtn = document.getElementById("addProject");
+    const projectForm = createProjectForm();
+    addProjectBtn.parentNode.replaceChild(projectForm, addProjectBtn);
+
+    projectForm.addEventListener("submit", (e) =>
+      Controller.submitProjectForm(e)
+    );
+
+    const cancelBtn = document.getElementById("cancelBtn");
+    cancelBtn.addEventListener("click", hideProjectForm);
+  };
+
+  const hideProjectForm = () => {
+    const projectForm = document.getElementById("project-form");
+    projectForm.parentNode.replaceChild(addNewProjectBtn(), projectForm);
+
+    const addProjectBtn = document.getElementById("addProject");
+    addProjectBtn.addEventListener("click", displayProjectForm);
+  };
 
   const createTaskCard = (task) => {
     let taskCard = TaskCard(task);
+
+    // Add click event to individual tasks
+    taskCard.addEventListener("click", () => {
+      setActiveTask(taskCard);
+      showTaskDetails(task);
+    });
+
     taskCardsDiv.appendChild(taskCard);
     return taskCard;
   };
@@ -97,24 +151,42 @@ const DOMTools = () => {
     return document.querySelectorAll(".project-name");
   };
 
-  const getTaskCards = () => {
-    return document.querySelectorAll(".task");
+  const displayProjectsBtns = (projectsList) => {
+    // Add click event to projectBtns
+    getProjectsBtns().forEach((projectBtn) => {
+      projectBtn.addEventListener("click", () => {
+        setActiveProject(projectBtn);
+
+        const project = projectsList.getProject(
+          projectBtn.getAttribute("data-name")
+        );
+
+        if (project) {
+          // Load all tasks related to default project
+          project.tasks.forEach((task) => {
+            createTaskCard(task);
+          });
+        }
+      });
+    });
   };
 
   return {
-    addProjectBtn,
+    displayProjectsBtns,
+    createAddProjectButton,
     createProjectButton,
     createTaskCard,
     createTaskItem,
     getProjectsBtns,
-    getTaskCards,
+    showProjectTaskCards,
     setTasksHeader,
     setActiveProject,
     setActiveTask,
     setTaskActionBtnIndex,
     showTaskDetails,
     displayProjectForm,
+    hideProjectForm,
   };
 };
 
-export default DOMTools;
+export default DomUI;
