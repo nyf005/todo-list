@@ -8,6 +8,7 @@ import addNewProjectBtn from "../ui_components/new_project_button";
 
 const DomUI = () => {
   const projectsDiv = document.getElementById("projects");
+  const projectTitle = document.getElementById("project-title");
   const projectName = document.querySelector("#project-title h3");
 
   const taskCardsDiv = document.getElementById("task-cards");
@@ -118,8 +119,15 @@ const DomUI = () => {
     addItemBtn.setAttribute("data-index", index);
   };
 
-  const setTasksHeader = (name) => {
+  const _setTasksHeader = (projectBtn) => {
+    const name = projectBtn.getAttribute("data-name");
     projectName.textContent = `${name} Tasks`;
+    if (projectBtn.firstChild.style) {
+      projectTitle.style.borderLeftColor =
+        projectBtn.firstChild.style.borderColor;
+    } else {
+      projectTitle.style.borderLeftColor = "#fff";
+    }
   };
 
   const setActiveProject = (selectedProject) => {
@@ -128,9 +136,7 @@ const DomUI = () => {
     });
 
     selectedProject.classList.add("active");
-    setTasksHeader(
-      selectedProject.getAttribute("data") ?? selectedProject.outerText
-    );
+    _setTasksHeader(selectedProject);
 
     taskCardsDiv.innerHTML = "";
     taskActionsDiv.innerHTML = "";
@@ -179,7 +185,6 @@ const DomUI = () => {
     createTaskItem,
     getProjectsBtns,
     showProjectTaskCards,
-    setTasksHeader,
     setActiveProject,
     setActiveTask,
     setTaskActionBtnIndex,

@@ -92,9 +92,10 @@ aside {
 }
 
 .dot {
-  width: 1rem;
+  width: 0.75rem;
   aspect-ratio: 1/1;
-  border: 5px solid #e00c52;
+  border: 4px solid;
+  /* border-color: #e00c52; */
   border-radius: 50%;
 }
 
@@ -118,7 +119,7 @@ main {
 
 #project-title {
   grid-area: project-title;
-  border-left: 0.5rem solid #e00c52;
+  border-left: 0.5rem solid;
   border-bottom: 1px solid #ccc;
   display: flex;
   justify-content: space-between;
