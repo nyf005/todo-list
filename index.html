@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo App</title>
-  </head>
+  <script defer src="bundle.js"></script></head>
   <body>
     <div id="content">
       <header>
@@ -13,25 +13,21 @@
       </header>
       <aside>
         <div id="top-section">
-          <button class="project-name" data="Index">
+          <button class="project-name" data-name="Inbox">
             <img src="../src/assets/icons/inbox.svg" alt="" />
             <p>Inbox</p>
           </button>
-          <button class="project-name">
+          <button class="project-name" data-name="Today">
             <img src="../src/assets/icons/calendar-day.svg" alt="" />
             <p>Today</p>
           </button>
-          <button class="project-name">
+          <button class="project-name" data-name="Upcoming">
             <img src="../src/assets/icons/calendar-month.svg" alt="" />
             <p>Upcoming</p>
           </button>
         </div>
         <div id="bottom-section">
           <h3>Projects</h3>
-          <button id="addProject">
-            <img src="../src/assets/icons/plus.svg" alt="" />
-            New Project
-          </button>
           <div id="projects"></div>
         </div>
       </aside>
