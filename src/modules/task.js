@@ -5,6 +5,4 @@ const createTask = (title, description, dueDate, priority) => {
   let priority = priority;
   let completed = false;
   let items = [];
-
-  const editTask = () => {};
 };

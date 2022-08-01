@@ -5,6 +5,7 @@ import TaskItem from "../ui_components/task-item";
 import createTaskDetails from "../ui_components/task-details";
 import createProjectForm from "../ui_components/project_form";
 import addNewProjectBtn from "../ui_components/new_project_button";
+import createtaskForm from "../ui_components/task_form";
 
 const DomUI = () => {
   const projectsDiv = document.getElementById("projects");
@@ -12,6 +13,8 @@ const DomUI = () => {
   const projectName = document.querySelector("#project-title h3");
 
   const taskCardsDiv = document.getElementById("task-cards");
+  const addTaskBtn = document.getElementById("addTaskBtn");
+  const formModal = document.getElementById("form-modal");
 
   const taskActionsDiv = document.getElementById("task-actions");
   const taskDetailsDiv = document.getElementById("task-details");
@@ -77,6 +80,14 @@ const DomUI = () => {
 
     const addProjectBtn = document.getElementById("addProject");
     addProjectBtn.addEventListener("click", displayProjectForm);
+  };
+
+  const displayTaskForm = (projectsList) => {
+    addTaskBtn.addEventListener("click", () => {
+      const taskForm = createtaskForm(projectsList);
+      formModal.appendChild(taskForm);
+      formModal.style.display = "block";
+    });
   };
 
   const createTaskCard = (task) => {
@@ -157,8 +168,8 @@ const DomUI = () => {
     return document.querySelectorAll(".project-name");
   };
 
-  const displayProjectsBtns = (projectsList) => {
-    // Add click event to projectBtns
+  const displayDefaultProjectsBtns = (projectsList) => {
+    // Add click event to default projectBtns
     getProjectsBtns().forEach((projectBtn) => {
       projectBtn.addEventListener("click", () => {
         setActiveProject(projectBtn);
@@ -168,7 +179,7 @@ const DomUI = () => {
         );
 
         if (project) {
-          // Load all tasks related to default project
+          // Load tasks related to clicked project
           project.tasks.forEach((task) => {
             createTaskCard(task);
           });
@@ -177,8 +188,14 @@ const DomUI = () => {
     });
   };
 
+  const getCurrentProject = () => {
+    return document.getElementsByClassName("project-name active")[0];
+  };
+
   return {
-    displayProjectsBtns,
+    displayTaskForm,
+    getCurrentProject,
+    displayDefaultProjectsBtns,
     createAddProjectButton,
     createProjectButton,
     createTaskCard,

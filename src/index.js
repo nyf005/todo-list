@@ -6,6 +6,8 @@ import initializeTodo from "./initialize";
 
 const Controller = (() => {
   const projectsList = ProjectList();
+  const testProject = Project("Adwords");
+  projectsList.add(testProject);
 
   initializeTodo(projectsList);
   const DOM = DomUI();

@@ -19,11 +19,16 @@ const initializeTodo = (projectList) => {
   }
 
   DOM.createAddProjectButton();
-  DOM.displayProjectsBtns(projectList);
+  DOM.displayDefaultProjectsBtns(projectList);
+  DOM.displayTaskForm(projectList.getAll());
 
   // Load all projects
   projectList.getAll().forEach((project) => {
-    if (project.name != "Inbox") {
+    if (
+      project.name != "Inbox" ||
+      project.name != "Today" ||
+      project.name != "Upcoming"
+    ) {
       DOM.createProjectButton(project);
     }
   });
