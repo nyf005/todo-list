@@ -22,12 +22,17 @@ const Project = (pName) => {
     return tasks;
   };
 
+  const removeTask = (title) => {
+    const taskIndex = tasks.findIndex((task) => task.getTask().title == title);
+    tasks.splice(taskIndex, 1);
+  };
   return {
     setProjectName,
     getProjectName,
     addTask,
     getTask,
     getTasks,
+    removeTask,
   };
 };
 

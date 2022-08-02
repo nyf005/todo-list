@@ -206,6 +206,16 @@ const DomUI = () => {
       addItemBtn,
     } = createTaskDetails(task);
 
+    // Add event listener to delete task btn
+    deleteTaskBtn.addEventListener("click", (e) => {
+      // We use the attribute of the deletetaskBtn in the Controller deleteTask function
+      Controller.deleteTask(e.currentTarget.getAttribute("data-name"));
+
+      // Clear the details section as the task no longer exists
+      taskActionsDiv.innerHTML = "";
+      taskDetailsDiv.innerHTML = "";
+    });
+
     taskActionsDiv.append(editTaskBtn, deleteTaskBtn, addItemBtn);
     taskDetailsDiv.append(checkmark, taskTitle, taskDescription, taskItems);
   };

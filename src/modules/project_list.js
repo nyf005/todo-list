@@ -14,7 +14,9 @@ const ProjectList = () => {
   };
 
   const remove = (name) => {
-    const index = projects.findIndex(name);
+    const index = projects.findIndex(
+      (project) => project.getProjectName() == name
+    );
     projects.splice(index, 1);
   };
 

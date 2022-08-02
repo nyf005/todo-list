@@ -41,7 +41,16 @@ const Controller = (() => {
     DOM.hideTaskForm();
   };
 
-  return { submitProjectForm, submitTaskForm };
+  const deleteTask = (taskTitle) => {
+    const project = projectsList.getProject(
+      DOM.getCurrentProject().getAttribute("data-name")
+    );
+
+    project.removeTask(taskTitle);
+    DOM.showTaskCards(project);
+  };
+
+  return { submitProjectForm, submitTaskForm, deleteTask };
 })();
 
 export default Controller;
