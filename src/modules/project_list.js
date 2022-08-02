@@ -10,7 +10,7 @@ const ProjectList = () => {
   };
 
   const getProject = (name) => {
-    return projects.find((project) => project.name == name);
+    return projects.find((project) => project.getProjectName() == name);
   };
 
   const remove = (name) => {

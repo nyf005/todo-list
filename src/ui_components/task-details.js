@@ -57,7 +57,7 @@ export default function createTaskDetails(task) {
 
   const deleteTaskBtn = document.createElement("button");
   deleteTaskBtn.setAttribute("id", "deleteTaskBtn");
-  deleteTaskBtn.setAttribute("data-id", task.title);
+  deleteTaskBtn.setAttribute("data-name", task.title);
   deleteTaskBtn.classList.add("actionBtn");
 
   const deleteIcon = document.createElement("img");
@@ -68,7 +68,7 @@ export default function createTaskDetails(task) {
 
   const editTaskBtn = document.createElement("button");
   editTaskBtn.setAttribute("id", "editTaskBtn");
-  editTaskBtn.setAttribute("data-id", task.title);
+  editTaskBtn.setAttribute("data-name", task.title);
   editTaskBtn.classList.add("actionBtn");
 
   const editIcon = document.createElement("img");
@@ -79,7 +79,7 @@ export default function createTaskDetails(task) {
 
   const addItemBtn = document.createElement("button");
   addItemBtn.setAttribute("id", "addItemBtn");
-  addItemBtn.setAttribute("data-id", task.title);
+  addItemBtn.setAttribute("data-name", task.title);
   addItemBtn.classList.add("actionBtn");
 
   const addItemIcon = document.createElement("img");

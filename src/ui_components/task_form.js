@@ -1,4 +1,4 @@
-export default function createtaskForm(projectsList) {
+export default function createtaskForm(projectsList, currentProject) {
   const form = document.createElement("form");
   form.setAttribute("id", "task-form");
   form.setAttribute("action", "");
@@ -17,13 +17,13 @@ export default function createtaskForm(projectsList) {
   const projectSelect = document.createElement("select");
   projectSelect.setAttribute("id", "project");
   const indexOption = document.createElement("option");
-  indexOption.value = "Index";
-  indexOption.textContent = "Index";
-  projectSelect.appendChild(indexOption);
 
   projectsList.forEach((project) => {
     let option = document.createElement("option");
     option.value = project.getProjectName();
+    if (option.value == currentProject) {
+      option.selected = true;
+    }
     option.textContent = project.getProjectName();
     projectSelect.appendChild(option);
   });

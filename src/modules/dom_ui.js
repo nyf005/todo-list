@@ -24,6 +24,7 @@ const DomUI = () => {
   const editTaskBtn = document.getElementById("editTaskBtn");
   const addItemBtn = document.getElementById("addItemBtn");
 
+  // PROJECT
   const createAddProjectButton = () => {
     projectsDiv.parentNode.insertBefore(addNewProjectBtn(), projectsDiv);
     const addProjectBtn = document.getElementById("addProject");
@@ -39,26 +40,32 @@ const DomUI = () => {
   };
 
   const createProjectButton = (project) => {
+    // We create a project button
     let projectBtn = ProjectButton(project.getProjectName());
+
+    // Append the project button to projects div
+    projectsDiv.append(projectBtn);
 
     // Add click event to individual projects
     projectBtn.addEventListener("click", () => {
       setActiveProject(projectBtn);
-      showProjectTaskCards(project);
+      showTaskCards(project);
     });
 
-    projectsDiv.append(projectBtn);
     return projectBtn;
   };
 
-  const showProjectTaskCards = (project) => {
-    const tasks = project.getTasks();
-    if (tasks) {
-      tasks.forEach((task) => {
-        const taskCard = createTaskCard(task);
-        taskCardsDiv.append(taskCard);
-      });
-    }
+  const setActiveProject = (selectedProject) => {
+    getProjectsBtns().forEach((projectBtn) => {
+      projectBtn.classList.remove("active");
+    });
+
+    selectedProject.classList.add("active");
+    _setTasksHeader(selectedProject);
+
+    taskCardsDiv.innerHTML = "";
+    taskActionsDiv.innerHTML = "";
+    taskDetailsDiv.innerHTML = "";
   };
 
   const displayProjectForm = () => {
@@ -82,11 +89,91 @@ const DomUI = () => {
     addProjectBtn.addEventListener("click", displayProjectForm);
   };
 
+  const setProjectsBtns = (projectsList) => {
+    // Add click event to default projectBtns
+    getProjectsBtns().forEach((projectBtn) => {
+      projectBtn.addEventListener("click", () => {
+        setActiveProject(projectBtn);
+
+        const project = projectsList.getProject(
+          projectBtn.getAttribute("data-name")
+        );
+
+        if (project) {
+          // Load tasks related to clicked project
+          showTaskCards(project);
+        }
+      });
+    });
+  };
+
+  const showTaskCards = (project) => {
+    // Get all the task related to project
+
+    const tasks = project.getTasks();
+    // Empty div only if we are current in the same project
+    if (
+      project.getProjectName() == getCurrentProject().getAttribute("data-name")
+    ) {
+      taskCardsDiv.innerHTML = "";
+    }
+    if (tasks) {
+      tasks.forEach((task) => {
+        const taskCard = TaskCard(task.getTask());
+        // Add click event to individual tasks
+        taskCard.addEventListener("click", () => {
+          setActiveTask(taskCard);
+          showTaskDetails(task.getTask());
+        });
+
+        // Append only if we are current in the same project
+        if (
+          project.getProjectName() ==
+          getCurrentProject().getAttribute("data-name")
+        ) {
+          taskCardsDiv.appendChild(taskCard);
+        }
+      });
+    }
+  };
+
+  const getCurrentProject = () => {
+    return document.getElementsByClassName("project-name active")[0];
+  };
+
+  // TASKS
+
+  const _setTasksHeader = (projectBtn) => {
+    const name = projectBtn.getAttribute("data-name");
+    projectName.textContent = `${name} Tasks`;
+    if (projectBtn.firstChild.style) {
+      projectTitle.style.borderLeftColor =
+        projectBtn.firstChild.style.borderColor;
+    } else {
+      projectTitle.style.borderLeftColor = "#fff";
+    }
+  };
+
+  const setActiveTask = (selectedTask) => {
+    _getTaskCards().forEach((taskCard) => {
+      taskCard.classList.remove("active");
+    });
+
+    selectedTask.classList.add("active");
+    taskActionsDiv.innerHTML = "";
+    taskDetailsDiv.innerHTML = "";
+  };
+
   const displayTaskForm = (projectsList) => {
     addTaskBtn.addEventListener("click", () => {
-      const taskForm = createtaskForm(projectsList);
+      const currentProject = getCurrentProject().getAttribute("data-name");
+      const taskForm = createtaskForm(projectsList, currentProject);
       formModal.appendChild(taskForm);
       formModal.style.display = "block";
+
+      taskForm.addEventListener("submit", (e) => {
+        Controller.submitTaskForm(e);
+      });
 
       const cancelBtn = document.querySelector(
         "#task-form-actions button:last-child"
@@ -106,18 +193,7 @@ const DomUI = () => {
     formModal.innerHTML = "";
   };
 
-  const createTaskCard = (task) => {
-    let taskCard = TaskCard(task);
-
-    // Add click event to individual tasks
-    taskCard.addEventListener("click", () => {
-      setActiveTask(taskCard);
-      showTaskDetails(task);
-    });
-
-    taskCardsDiv.appendChild(taskCard);
-    return taskCard;
-  };
+  // TASK DETAILS
 
   const showTaskDetails = (task) => {
     const {
@@ -140,72 +216,12 @@ const DomUI = () => {
     taskDetailsDiv.appendChild(taskItemsDiv);
   };
 
-  const setTaskActionBtnIndex = (index) => {
-    deleteTaskBtn.setAttribute("data-index", index);
-    editTaskBtn.setAttribute("data-index", index);
-    addItemBtn.setAttribute("data-index", index);
-  };
-
-  const _setTasksHeader = (projectBtn) => {
-    const name = projectBtn.getAttribute("data-name");
-    projectName.textContent = `${name} Tasks`;
-    if (projectBtn.firstChild.style) {
-      projectTitle.style.borderLeftColor =
-        projectBtn.firstChild.style.borderColor;
-    } else {
-      projectTitle.style.borderLeftColor = "#fff";
-    }
-  };
-
-  const setActiveProject = (selectedProject) => {
-    getProjectsBtns().forEach((projectBtn) => {
-      projectBtn.classList.remove("active");
-    });
-
-    selectedProject.classList.add("active");
-    _setTasksHeader(selectedProject);
-
-    taskCardsDiv.innerHTML = "";
-    taskActionsDiv.innerHTML = "";
-    taskDetailsDiv.innerHTML = "";
-  };
-
-  const setActiveTask = (selectedTask) => {
-    getTaskCards().forEach((taskCard) => {
-      taskCard.classList.remove("active");
-    });
-
-    selectedTask.classList.add("active");
-    taskActionsDiv.innerHTML = "";
-    taskDetailsDiv.innerHTML = "";
+  const _getTaskCards = () => {
+    return document.querySelectorAll(".task");
   };
 
   const getProjectsBtns = () => {
     return document.querySelectorAll(".project-name");
-  };
-
-  const setProjectsBtns = (projectsList) => {
-    // Add click event to default projectBtns
-    getProjectsBtns().forEach((projectBtn) => {
-      projectBtn.addEventListener("click", () => {
-        setActiveProject(projectBtn);
-
-        const project = projectsList.getProject(
-          projectBtn.getAttribute("data-name")
-        );
-
-        if (project) {
-          // Load tasks related to clicked project
-          project.tasks.forEach((task) => {
-            createTaskCard(task);
-          });
-        }
-      });
-    });
-  };
-
-  const getCurrentProject = () => {
-    return document.getElementsByClassName("project-name active")[0];
   };
 
   return {
@@ -214,16 +230,15 @@ const DomUI = () => {
     setProjectsBtns,
     createAddProjectButton,
     createProjectButton,
-    createTaskCard,
     createTaskItem,
     getProjectsBtns,
-    showProjectTaskCards,
+    showTaskCards,
     setActiveProject,
     setActiveTask,
-    setTaskActionBtnIndex,
     showTaskDetails,
     displayProjectForm,
     hideProjectForm,
+    hideTaskForm,
   };
 };
 

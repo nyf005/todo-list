@@ -6,16 +6,13 @@ const initializeTodo = (projectList) => {
   // Set default Selected Project
   DOM.setActiveProject(projectBtns[0]);
 
-  const defaultProjects = projectList
+  const defaultProject = projectList
     .getAll()
-    .find((project) => project.name == "Inbox");
+    .find((project) => project.getProjectName() == "Inbox");
 
-  if (defaultProjects) {
+  if (defaultProject) {
     // Load all tasks related to default project
-    defaultProjects.tasks.forEach((task) => {
-      // Add click event to individual tasks
-      DOM.createTaskCard(task);
-    });
+    DOM.showTaskCards(defaultProject);
   }
 
   DOM.createAddProjectButton();
@@ -24,11 +21,7 @@ const initializeTodo = (projectList) => {
 
   // Load all projects
   projectList.getAll().forEach((project) => {
-    if (
-      project.name != "Inbox" ||
-      project.name != "Today" ||
-      project.name != "Upcoming"
-    ) {
+    if (project.getProjectName() != "Inbox") {
       DOM.createProjectButton(project);
     }
   });
