@@ -71,9 +71,10 @@ const DomUI = () => {
     const projectForm = createProjectForm();
     addProjectBtn.parentNode.replaceChild(projectForm, addProjectBtn);
 
-    projectForm.addEventListener("submit", (e) =>
-      Controller.submitProjectForm(e)
-    );
+    projectForm.addEventListener("submit", (e) => {
+      Controller.submitProjectForm(e);
+      hideProjectForm();
+    });
 
     const cancelBtn = document.getElementById("cancelBtn");
     cancelBtn.addEventListener("click", hideProjectForm);
@@ -162,6 +163,10 @@ const DomUI = () => {
     selectedTask.classList.add("active");
   };
 
+  const getCurrentTask = () => {
+    return document.getElementsByClassName("task active")[0];
+  };
+
   const displayTaskForm = (projectsList) => {
     addTaskBtn.addEventListener("click", () => {
       // Get the current project
@@ -174,6 +179,7 @@ const DomUI = () => {
 
       taskForm.addEventListener("submit", (e) => {
         Controller.submitTaskForm(e);
+        hideTaskForm();
       });
 
       const cancelBtn = document.querySelector(
@@ -225,9 +231,11 @@ const DomUI = () => {
       taskForm.addEventListener("submit", (e) => {
         taskActionsDiv.innerHTML = "";
         taskDetailsDiv.innerHTML = "";
-        Controller.submitTaskForm(e, mode, currentProject);
+        Controller.submitTaskForm(e, mode);
         const taskCard = getTaskCard(task);
         taskCard.classList.add("active");
+
+        hideTaskForm();
       });
 
       const cancelBtn = document.querySelector(
@@ -244,15 +252,36 @@ const DomUI = () => {
 
     moveTaskBtn.addEventListener("click", () => {
       // Get the current project
-      const currentProject = getCurrentProject().getAttribute("data-name");
+      const currentProjectName = getCurrentProject().getAttribute("data-name");
+      const taskName = getCurrentTask().getAttribute("data-title");
 
-      // Create the task form
+      // Create the move form
       const moveForm = createMoveTaskForm(
         Controller.getProjectsList(),
-        currentProject
+        currentProjectName
       );
       formModal.appendChild(moveForm);
       formModal.style.display = "block";
+
+      moveForm.addEventListener("submit", (e) => {
+        // TODO: Actual move of the object
+
+        Controller.submitMoveTaskForm(e, currentProjectName, taskName);
+        hideTaskForm();
+        taskActionsDiv.innerHTML = "";
+        taskDetailsDiv.innerHTML = "";
+      });
+
+      const cancelBtn = document.querySelector(
+        "#task-form-actions button:last-child"
+      );
+
+      cancelBtn.addEventListener("click", hideTaskForm);
+      formModal.addEventListener("click", (e) => {
+        if (e.target.id == "form-modal") {
+          hideTaskForm();
+        }
+      });
     });
 
     // Add event listener to delete task btn

@@ -1,4 +1,4 @@
-export default function createMoveTaskForm(projectsList, currentProject) {
+export default function createMoveTaskForm(projectsList, currentProjectName) {
   const form = document.createElement("form");
   form.setAttribute("id", "move_task-form");
   form.setAttribute("action", "");
@@ -18,7 +18,7 @@ export default function createMoveTaskForm(projectsList, currentProject) {
   projectSelect.setAttribute("id", "project");
 
   projectsList.forEach((project) => {
-    if (project.getProjectName() != currentProject) {
+    if (project.getProjectName() != currentProjectName) {
       let option = document.createElement("option");
       option.value = project.getProjectName();
       option.textContent = project.getProjectName();

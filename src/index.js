@@ -21,10 +21,9 @@ const Controller = (() => {
     const newProject = Project(e.target.elements[0].value);
     projectsList.add(newProject);
     DOM.createProjectButton(newProject);
-    DOM.hideProjectForm();
   };
 
-  const submitTaskForm = (e, mode, lastProject) => {
+  const submitTaskForm = (e, mode) => {
     e.preventDefault();
     const projectName = e.target.elements[0].value;
     const title = e.target.elements[1].value;
@@ -46,7 +45,19 @@ const Controller = (() => {
     }
 
     DOM.showTaskCards(project);
-    DOM.hideTaskForm();
+  };
+
+  const submitMoveTaskForm = (e, currentProjectName, taskName) => {
+    e.preventDefault();
+    const newProjectName = e.target.elements[0].value;
+
+    const currentProject = projectsList.getProject(currentProjectName);
+    const task = currentProject.getTask(taskName);
+    const newProject = projectsList.getProject(newProjectName);
+
+    newProject.addTask(task);
+    currentProject.removeTask(taskName);
+    DOM.showTaskCards(currentProject);
   };
 
   const deleteTask = (taskTitle) => {
@@ -60,7 +71,13 @@ const Controller = (() => {
 
   const getProjectsList = () => projectsList.getAll();
 
-  return { getProjectsList, submitProjectForm, submitTaskForm, deleteTask };
+  return {
+    getProjectsList,
+    submitProjectForm,
+    submitTaskForm,
+    submitMoveTaskForm,
+    deleteTask,
+  };
 })();
 
 export default Controller;
