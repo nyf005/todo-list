@@ -1,4 +1,4 @@
-export default function createtaskForm(projectsList, currentProject, task) {
+export default function createTaskForm(projectsList, currentProject, task) {
   const form = document.createElement("form");
   form.setAttribute("id", "task-form");
   form.setAttribute("action", "");

@@ -208,7 +208,11 @@ main {
     contrast(103%);
 }
 
-.actionBtn:nth-child(2):hover {
+.actionBtn:nth-child(2) {
+  margin-right: auto;
+}
+
+.actionBtn:nth-child(3):hover {
   background-color: red;
 }
 
@@ -280,7 +284,7 @@ input[type="date"] {
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-#task-form {
+#form-modal form {
   width: 25rem;
   margin: auto;
   background-color: #fff;
@@ -291,7 +295,7 @@ input[type="date"] {
   gap: 0.5rem;
 }
 
-#task-form h3 {
+form h3 {
   text-align: center;
   font-family: "The Brooklyn Smooth Bold";
   margin-bottom: 1rem;
@@ -345,6 +349,10 @@ input[type="date"] {
   border-radius: 0.3rem;
 }
 
+#task-form-actions button:hover {
+  color: #fff;
+}
+
 #task-form-actions button:first-child {
   border-color: green;
 }
@@ -353,16 +361,18 @@ input[type="date"] {
   border-color: red;
 }
 
-#task-form-actions button:hover {
-  color: #fff;
-}
-
 #task-form-actions button:first-child:hover {
   background-color: green;
 }
 
 #task-form-actions button:last-child:hover {
   background-color: red;
+}
+
+#task-form-actions button[disabled="disabled"] {
+  border-color: #ccc;
+  color: #ccc;
+  pointer-events: none; /* disable all effects */
 }
 
 #task-details {

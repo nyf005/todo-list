@@ -1,7 +1,7 @@
 export default function TaskCard(task) {
   const card = document.createElement("div");
   card.className = "task";
-  card.setAttribute("data", task.title);
+  card.setAttribute("data-title", task.title);
 
   const checkbox = document.createElement("div");
   checkbox.className = "checkbox";

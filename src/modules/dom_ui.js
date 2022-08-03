@@ -5,7 +5,8 @@ import TaskItem from "../ui_components/task-item";
 import createTaskDetails from "../ui_components/task-details";
 import createProjectForm from "../ui_components/project_form";
 import addNewProjectBtn from "../ui_components/new_project_button";
-import createtaskForm from "../ui_components/task_form";
+import createTaskForm from "../ui_components/task_form";
+import createMoveTaskForm from "../ui_components/move_task_form";
 
 const DomUI = () => {
   const projectsDiv = document.getElementById("projects");
@@ -119,6 +120,8 @@ const DomUI = () => {
         const taskCard = TaskCard(task.getTaskInfos());
         // Add click event to individual tasks
         taskCard.addEventListener("click", () => {
+          taskActionsDiv.innerHTML = "";
+          taskDetailsDiv.innerHTML = "";
           setActiveTask(taskCard);
           showTaskDetails(task.getTaskInfos());
         });
@@ -157,8 +160,6 @@ const DomUI = () => {
     });
 
     selectedTask.classList.add("active");
-    taskActionsDiv.innerHTML = "";
-    taskDetailsDiv.innerHTML = "";
   };
 
   const displayTaskForm = (projectsList) => {
@@ -167,7 +168,7 @@ const DomUI = () => {
       const currentProject = getCurrentProject().getAttribute("data-name");
 
       // Create the task form
-      const taskForm = createtaskForm(projectsList, currentProject);
+      const taskForm = createTaskForm(projectsList, currentProject);
       formModal.appendChild(taskForm);
       formModal.style.display = "block";
 
@@ -202,6 +203,7 @@ const DomUI = () => {
       taskDescription,
       taskItems,
       deleteTaskBtn,
+      moveTaskBtn,
       editTaskBtn,
       addItemBtn,
     } = createTaskDetails(task);
@@ -212,7 +214,7 @@ const DomUI = () => {
       const currentProject = getCurrentProject().getAttribute("data-name");
 
       // Create the task form
-      const taskForm = createtaskForm(
+      const taskForm = createTaskForm(
         Controller.getProjectsList(),
         currentProject,
         task
@@ -221,7 +223,11 @@ const DomUI = () => {
       formModal.style.display = "block";
 
       taskForm.addEventListener("submit", (e) => {
+        taskActionsDiv.innerHTML = "";
+        taskDetailsDiv.innerHTML = "";
         Controller.submitTaskForm(e, mode, currentProject);
+        const taskCard = getTaskCard(task);
+        taskCard.classList.add("active");
       });
 
       const cancelBtn = document.querySelector(
@@ -236,6 +242,19 @@ const DomUI = () => {
       });
     });
 
+    moveTaskBtn.addEventListener("click", () => {
+      // Get the current project
+      const currentProject = getCurrentProject().getAttribute("data-name");
+
+      // Create the task form
+      const moveForm = createMoveTaskForm(
+        Controller.getProjectsList(),
+        currentProject
+      );
+      formModal.appendChild(moveForm);
+      formModal.style.display = "block";
+    });
+
     // Add event listener to delete task btn
     deleteTaskBtn.addEventListener("click", (e) => {
       // We use the attribute of the deletetaskBtn in the Controller deleteTask function
@@ -246,7 +265,7 @@ const DomUI = () => {
       taskDetailsDiv.innerHTML = "";
     });
 
-    taskActionsDiv.append(editTaskBtn, deleteTaskBtn, addItemBtn);
+    taskActionsDiv.append(editTaskBtn, moveTaskBtn, deleteTaskBtn, addItemBtn);
     taskDetailsDiv.append(checkmark, taskTitle, taskDescription, taskItems);
   };
 
@@ -258,6 +277,12 @@ const DomUI = () => {
 
   const _getTaskCards = () => {
     return document.querySelectorAll(".task");
+  };
+
+  const getTaskCard = (task) => {
+    return [..._getTaskCards()].find(
+      (taskCard) => taskCard.getAttribute("data-title") == task.title
+    );
   };
 
   const getProjectsBtns = () => {

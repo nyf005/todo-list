@@ -8,9 +8,10 @@ import initializeTodo from "./initialize";
 const Controller = (() => {
   const projectsList = ProjectList();
   const defaultProject = Project("Inbox");
-  const testProject = Project("Adwords");
   projectsList.add(defaultProject);
-  projectsList.add(testProject);
+
+  // const testProject = Project("Adwords");
+  // projectsList.add(testProject);
 
   initializeTodo(projectsList);
   const DOM = DomUI();
@@ -37,6 +38,7 @@ const Controller = (() => {
         project
           .getTask(title)
           .updateTask(title, description, dueDate, priority);
+        DOM.showTaskDetails(project.getTask(title).getTaskInfos());
       } else {
         const newTask = Task(title, description, dueDate, priority);
         project.addTask(newTask);
