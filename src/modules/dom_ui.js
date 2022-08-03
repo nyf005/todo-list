@@ -14,15 +14,12 @@ const DomUI = () => {
 
   const taskCardsDiv = document.getElementById("task-cards");
   const addTaskBtn = document.getElementById("addTaskBtn");
+
   const formModal = document.getElementById("form-modal");
 
   const taskActionsDiv = document.getElementById("task-actions");
   const taskDetailsDiv = document.getElementById("task-details");
   const taskItemsDiv = document.getElementById("task-items");
-
-  const deleteTaskBtn = document.getElementById("deleteTaskBtn");
-  const editTaskBtn = document.getElementById("editTaskBtn");
-  const addItemBtn = document.getElementById("addItemBtn");
 
   // PROJECT
   const createAddProjectButton = () => {
@@ -119,11 +116,11 @@ const DomUI = () => {
     }
     if (tasks) {
       tasks.forEach((task) => {
-        const taskCard = TaskCard(task.getTask());
+        const taskCard = TaskCard(task.getTaskInfos());
         // Add click event to individual tasks
         taskCard.addEventListener("click", () => {
           setActiveTask(taskCard);
-          showTaskDetails(task.getTask());
+          showTaskDetails(task.getTaskInfos());
         });
 
         // Append only if we are current in the same project
@@ -166,7 +163,10 @@ const DomUI = () => {
 
   const displayTaskForm = (projectsList) => {
     addTaskBtn.addEventListener("click", () => {
+      // Get the current project
       const currentProject = getCurrentProject().getAttribute("data-name");
+
+      // Create the task form
       const taskForm = createtaskForm(projectsList, currentProject);
       formModal.appendChild(taskForm);
       formModal.style.display = "block";
@@ -205,6 +205,36 @@ const DomUI = () => {
       editTaskBtn,
       addItemBtn,
     } = createTaskDetails(task);
+
+    editTaskBtn.addEventListener("click", () => {
+      const mode = "edit";
+      // Get the current project
+      const currentProject = getCurrentProject().getAttribute("data-name");
+
+      // Create the task form
+      const taskForm = createtaskForm(
+        Controller.getProjectsList(),
+        currentProject,
+        task
+      );
+      formModal.appendChild(taskForm);
+      formModal.style.display = "block";
+
+      taskForm.addEventListener("submit", (e) => {
+        Controller.submitTaskForm(e, mode, currentProject);
+      });
+
+      const cancelBtn = document.querySelector(
+        "#task-form-actions button:last-child"
+      );
+
+      cancelBtn.addEventListener("click", hideTaskForm);
+      formModal.addEventListener("click", (e) => {
+        if (e.target.id == "form-modal") {
+          hideTaskForm();
+        }
+      });
+    });
 
     // Add event listener to delete task btn
     deleteTaskBtn.addEventListener("click", (e) => {

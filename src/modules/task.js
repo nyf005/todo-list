@@ -6,14 +6,14 @@ const Task = (taskTitle, taskDescription, taskDueDate, taskPriority) => {
   let completed = false;
   let items = [];
 
-  const setTask = (title, description, dueDate, priority) => {
+  const updateTask = (title, taskDescription, taskDueDate, taskPriority) => {
     title = title;
-    description = description;
-    dueDate = dueDate;
-    priority = priority;
+    description = taskDescription;
+    dueDate = taskDueDate;
+    priority = taskPriority;
   };
 
-  const getTask = () => {
+  const getTaskInfos = () => {
     return { title, description, dueDate, priority, completed, items };
   };
 
@@ -21,11 +21,11 @@ const Task = (taskTitle, taskDescription, taskDueDate, taskPriority) => {
     items.push(item);
   };
 
-  const setStatus = () => {
+  const updateStatus = () => {
     completed = !completed;
   };
 
-  return { setTask, setStatus, addItem, getTask };
+  return { updateTask, updateStatus, addItem, getTaskInfos };
 };
 
 export default Task;

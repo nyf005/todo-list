@@ -1,4 +1,4 @@
-export default function createtaskForm(projectsList, currentProject) {
+export default function createtaskForm(projectsList, currentProject, task) {
   const form = document.createElement("form");
   form.setAttribute("id", "task-form");
   form.setAttribute("action", "");
@@ -16,7 +16,6 @@ export default function createtaskForm(projectsList, currentProject) {
 
   const projectSelect = document.createElement("select");
   projectSelect.setAttribute("id", "project");
-  const indexOption = document.createElement("option");
 
   projectsList.forEach((project) => {
     let option = document.createElement("option");
@@ -95,12 +94,23 @@ export default function createtaskForm(projectsList, currentProject) {
 
   priorityFormElement.append(priorityLabel, prioritySelect);
 
+  if (task) {
+    header.textContent = `Update ${task.title} ${task.title ? "'s" : ""} task`;
+    projectSelect.value = currentProject;
+    projectSelect.setAttribute("disabled", "disabled");
+    titleInput.value = task.title;
+    titleInput.setAttribute("disabled", "disabled");
+    descriptionTextarea.value = task.description;
+    dueDateInput.value = task.dueDate;
+    prioritySelect.value = task.priority;
+  }
+
   const formActionBtns = document.createElement("div");
   formActionBtns.setAttribute("id", "task-form-actions");
 
   const submitBtn = document.createElement("button");
   submitBtn.setAttribute("type", "submit");
-  submitBtn.textContent = "Create task";
+  submitBtn.textContent = task ? "Update task" : "Create task";
 
   const cancelBtn = document.createElement("button");
   cancelBtn.setAttribute("type", "button");

@@ -6,26 +6,25 @@ const Project = (pName) => {
     name = newName;
   };
 
-  const getProjectName = () => {
-    return name;
-  };
+  const getProjectName = () => name;
 
   const addTask = (task) => {
     tasks.push(task);
   };
 
   const getTask = (title) => {
-    return tasks.find((task) => task.title == title);
+    return tasks.find((task) => task.getTaskInfos().title == title);
   };
 
-  const getTasks = () => {
-    return tasks;
-  };
+  const getTasks = () => tasks;
 
   const removeTask = (title) => {
-    const taskIndex = tasks.findIndex((task) => task.getTask().title == title);
+    const taskIndex = tasks.findIndex(
+      (task) => task.getTaskInfos().title == title
+    );
     tasks.splice(taskIndex, 1);
   };
+
   return {
     setProjectName,
     getProjectName,
