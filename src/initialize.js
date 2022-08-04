@@ -1,10 +1,9 @@
-import DomUI from "./modules/dom_ui";
+import DomUI from "./dom_ui";
 
 const initializeTodo = (projectList) => {
-  const DOM = DomUI();
-  const projectBtns = DOM.getProjectsBtns();
+  const projectBtns = DomUI.getProjectsBtns();
   // Set default Selected Project
-  DOM.setActiveProject(projectBtns[0]);
+  DomUI.setActiveProject(projectBtns[0]);
 
   const defaultProject = projectList
     .getAll()
@@ -12,17 +11,17 @@ const initializeTodo = (projectList) => {
 
   if (defaultProject) {
     // Load all tasks related to default project
-    DOM.showTaskCards(defaultProject);
+    DomUI.showTaskCards(defaultProject);
   }
 
-  DOM.createAddProjectButton();
-  DOM.setProjectsBtns(projectList);
-  DOM.displayTaskForm(projectList.getAll());
+  DomUI.createAddProjectButton();
+  DomUI.setProjectsBtns(projectList);
+  DomUI.displayTaskForm(projectList.getAll());
 
   // Load all projects
   projectList.getAll().forEach((project) => {
     if (project.getProjectName() != "Inbox") {
-      DOM.createProjectButton(project);
+      DomUI.createProjectButton(project);
     }
   });
 };

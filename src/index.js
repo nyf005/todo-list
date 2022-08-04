@@ -1,8 +1,8 @@
 import "./css/style.css";
-import DomUI from "./modules/dom_ui";
-import ProjectList from "./modules/project_list";
-import Project from "./modules/project";
-import Task from "./modules/task";
+import DomUI from "./dom_ui";
+import ProjectList from "./models/project_list";
+import Project from "./models/project";
+import Task from "./models/task";
 import initializeTodo from "./initialize";
 
 const Controller = (() => {
@@ -10,17 +10,15 @@ const Controller = (() => {
   const defaultProject = Project("Inbox");
   projectsList.add(defaultProject);
 
-  // const testProject = Project("Adwords");
-  // projectsList.add(testProject);
+  const testProject = Project("Adwords");
+  projectsList.add(testProject);
 
   initializeTodo(projectsList);
-  const DOM = DomUI();
 
-  const submitProjectForm = (e) => {
-    e.preventDefault();
-    const newProject = Project(e.target.elements[0].value);
+  const submitProjectForm = (projectEntry) => {
+    const newProject = Project(projectEntry);
     projectsList.add(newProject);
-    DOM.createProjectButton(newProject);
+    DomUI.createProjectButton(newProject);
   };
 
   const submitTaskForm = (e, mode) => {
@@ -37,14 +35,14 @@ const Controller = (() => {
         project
           .getTask(title)
           .updateTask(title, description, dueDate, priority);
-        DOM.showTaskDetails(project.getTask(title).getTaskInfos());
+        DomUI.showTaskDetails(project.getTask(title).getTaskInfos());
       } else {
         const newTask = Task(title, description, dueDate, priority);
         project.addTask(newTask);
       }
     }
 
-    DOM.showTaskCards(project);
+    DomUI.showTaskCards(project);
   };
 
   const submitMoveTaskForm = (e, currentProjectName, taskName) => {
@@ -57,16 +55,16 @@ const Controller = (() => {
 
     newProject.addTask(task);
     currentProject.removeTask(taskName);
-    DOM.showTaskCards(currentProject);
+    DomUI.showTaskCards(currentProject);
   };
 
   const deleteTask = (taskTitle) => {
     const project = projectsList.getProject(
-      DOM.getCurrentProject().getAttribute("data-name")
+      DomUI.getCurrentProject().getAttribute("data-name")
     );
 
     project.removeTask(taskTitle);
-    DOM.showTaskCards(project);
+    DomUI.showTaskCards(project);
   };
 
   const getProjectsList = () => projectsList.getAll();

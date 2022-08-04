@@ -1,20 +1,26 @@
-import Controller from "../index";
-import ProjectButton from "../ui_components/project_name_button";
-import TaskCard from "../ui_components/task_card";
-import TaskItem from "../ui_components/task-item";
-import createTaskDetails from "../ui_components/task-details";
-import createProjectForm from "../ui_components/project_form";
-import addNewProjectBtn from "../ui_components/new_project_button";
-import createTaskForm from "../ui_components/task_form";
-import createMoveTaskForm from "../ui_components/move_task_form";
+import Controller from "./index";
+import ProjectButton from "./ui_components/project_name_button";
+import TaskCard from "./ui_components/task_card";
+import TaskItem from "./ui_components/task-item";
+import createTaskDetails from "./ui_components/task-details";
+import createProjectForm from "./ui_components/project_form";
+import addNewProjectBtn from "./ui_components/new_project_button";
+import createTaskForm from "./ui_components/task_form";
+import createMoveTaskForm from "./ui_components/move_task_form";
 
-const DomUI = () => {
+import plus from "./assets/icons/plus.svg";
+
+const DomUI = (() => {
   const projectsDiv = document.getElementById("projects");
   const projectTitle = document.getElementById("project-title");
   const projectName = document.querySelector("#project-title h3");
 
   const taskCardsDiv = document.getElementById("task-cards");
+
   const addTaskBtn = document.getElementById("addTaskBtn");
+  const addIcon = document.createElement("img");
+  addIcon.src = plus;
+  addTaskBtn.appendChild(addIcon);
 
   const formModal = document.getElementById("form-modal");
 
@@ -28,12 +34,7 @@ const DomUI = () => {
     const addProjectBtn = document.getElementById("addProject");
 
     addProjectBtn.addEventListener("click", () => {
-      const projectForm = createProjectForm();
       displayProjectForm();
-
-      projectForm.addEventListener("submit", (e) =>
-        Controller.submitProjectForm(e)
-      );
     });
   };
 
@@ -72,15 +73,16 @@ const DomUI = () => {
     addProjectBtn.parentNode.replaceChild(projectForm, addProjectBtn);
 
     projectForm.addEventListener("submit", (e) => {
-      Controller.submitProjectForm(e);
-      hideProjectForm();
+      const projectEntry = e.target.elements[0].value;
+      Controller.submitProjectForm(projectEntry);
+      _hideProjectForm();
     });
 
     const cancelBtn = document.getElementById("cancelBtn");
-    cancelBtn.addEventListener("click", hideProjectForm);
+    cancelBtn.addEventListener("click", _hideProjectForm);
   };
 
-  const hideProjectForm = () => {
+  const _hideProjectForm = () => {
     const projectForm = document.getElementById("project-form");
     projectForm.parentNode.replaceChild(addNewProjectBtn(), projectForm);
 
@@ -153,6 +155,9 @@ const DomUI = () => {
     } else {
       projectTitle.style.borderLeftColor = "#fff";
     }
+
+    const addTBtn = document.createElement("button");
+    addTBtn.add;
   };
 
   const setActiveTask = (selectedTask) => {
@@ -179,23 +184,23 @@ const DomUI = () => {
 
       taskForm.addEventListener("submit", (e) => {
         Controller.submitTaskForm(e);
-        hideTaskForm();
+        _hideTaskForm();
       });
 
       const cancelBtn = document.querySelector(
         "#task-form-actions button:last-child"
       );
 
-      cancelBtn.addEventListener("click", hideTaskForm);
+      cancelBtn.addEventListener("click", _hideTaskForm);
       formModal.addEventListener("click", (e) => {
         if (e.target.id == "form-modal") {
-          hideTaskForm();
+          _hideTaskForm();
         }
       });
     });
   };
 
-  const hideTaskForm = () => {
+  const _hideTaskForm = () => {
     formModal.style.display = "none";
     formModal.innerHTML = "";
   };
@@ -232,20 +237,21 @@ const DomUI = () => {
         taskActionsDiv.innerHTML = "";
         taskDetailsDiv.innerHTML = "";
         Controller.submitTaskForm(e, mode);
+
         const taskCard = getTaskCard(task);
         taskCard.classList.add("active");
 
-        hideTaskForm();
+        _hideTaskForm();
       });
 
       const cancelBtn = document.querySelector(
         "#task-form-actions button:last-child"
       );
 
-      cancelBtn.addEventListener("click", hideTaskForm);
+      cancelBtn.addEventListener("click", _hideTaskForm);
       formModal.addEventListener("click", (e) => {
         if (e.target.id == "form-modal") {
-          hideTaskForm();
+          _hideTaskForm();
         }
       });
     });
@@ -267,7 +273,7 @@ const DomUI = () => {
         // TODO: Actual move of the object
 
         Controller.submitMoveTaskForm(e, currentProjectName, taskName);
-        hideTaskForm();
+        _hideTaskForm();
         taskActionsDiv.innerHTML = "";
         taskDetailsDiv.innerHTML = "";
       });
@@ -276,10 +282,10 @@ const DomUI = () => {
         "#task-form-actions button:last-child"
       );
 
-      cancelBtn.addEventListener("click", hideTaskForm);
+      cancelBtn.addEventListener("click", _hideTaskForm);
       formModal.addEventListener("click", (e) => {
         if (e.target.id == "form-modal") {
-          hideTaskForm();
+          _hideTaskForm();
         }
       });
     });
@@ -331,9 +337,7 @@ const DomUI = () => {
     setActiveTask,
     showTaskDetails,
     displayProjectForm,
-    hideProjectForm,
-    hideTaskForm,
   };
-};
+})();
 
 export default DomUI;

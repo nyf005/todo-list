@@ -178,7 +178,6 @@ main {
   place-content: center;
 }
 
-.addBtn,
 .actionBtn {
   background-color: #fff;
   box-shadow: 0 0.1rem rgba(10, 141, 249, 0.2);
@@ -188,16 +187,6 @@ main {
   outline: none;
 }
 
-.addBtn {
-  position: absolute;
-  bottom: 0.5rem;
-  align-self: center;
-  width: 8rem;
-  height: 2.5rem;
-  border-radius: 25px;
-}
-
-.addBtn:hover,
 .actionBtn:hover {
   background-color: #000;
   color: #fff;
@@ -214,6 +203,10 @@ main {
 
 .actionBtn:nth-child(3):hover {
   background-color: red;
+}
+
+#addTaskBtn {
+  margin-right: 0;
 }
 
 #project-form {
