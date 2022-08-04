@@ -58,6 +58,14 @@ const Controller = (() => {
     DomUI.showTaskCards(currentProject);
   };
 
+  const updateTaskStatus = (taskTitle) => {
+    const currentProject = projectsList.getProject(
+      DomUI.getCurrentProject().getAttribute("data-name")
+    );
+
+    currentProject.getTask(taskTitle).updateStatus();
+  };
+
   const deleteTask = (taskTitle) => {
     const project = projectsList.getProject(
       DomUI.getCurrentProject().getAttribute("data-name")
@@ -74,6 +82,7 @@ const Controller = (() => {
     submitProjectForm,
     submitTaskForm,
     submitMoveTaskForm,
+    updateTaskStatus,
     deleteTask,
   };
 })();

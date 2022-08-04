@@ -121,12 +121,20 @@ const DomUI = (() => {
     if (tasks) {
       tasks.forEach((task) => {
         const taskCard = TaskCard(task.getTaskInfos());
+
         // Add click event to individual tasks
         taskCard.addEventListener("click", () => {
           taskActionsDiv.innerHTML = "";
           taskDetailsDiv.innerHTML = "";
+
           setActiveTask(taskCard);
           showTaskDetails(task.getTaskInfos());
+        });
+
+        // Add click event to corresponding checkbox
+        const checkboxInput = taskCard.childNodes[0].childNodes[0];
+        checkboxInput.addEventListener("click", (e) => {
+          Controller.updateTaskStatus(e.target.getAttribute("id"));
         });
 
         // Append only if we are current in the same project
@@ -293,7 +301,7 @@ const DomUI = (() => {
     // Add event listener to delete task btn
     deleteTaskBtn.addEventListener("click", (e) => {
       // We use the attribute of the deletetaskBtn in the Controller deleteTask function
-      Controller.deleteTask(e.currentTarget.getAttribute("data-name"));
+      Controller.deleteTask(e.currentTarget.getAttribute("data-title"));
 
       // Clear the details section as the task no longer exists
       taskActionsDiv.innerHTML = "";
