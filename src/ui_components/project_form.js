@@ -1,7 +1,7 @@
 import check from "../assets/icons/check.svg";
 import cross from "../assets/icons/cross.svg";
 
-export default function createProjectForm() {
+export default function ProjectFormComponent() {
   const form = document.createElement("form");
   form.setAttribute("id", "project-form");
   form.setAttribute("action", "");

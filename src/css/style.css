@@ -170,18 +170,12 @@ main {
 .actionBtn {
   aspect-ratio: 1/1;
   width: 2.5rem;
-  border: none;
-  border-radius: 50%;
-  background-color: #eee;
-
   display: grid;
   place-content: center;
-}
-
-.actionBtn {
   background-color: #fff;
   box-shadow: 0 0.1rem rgba(10, 141, 249, 0.2);
   border: 0.5px solid #ccc;
+  border-radius: 50%;
   font-weight: bold;
   cursor: pointer;
   outline: none;
@@ -209,7 +203,8 @@ main {
   margin-right: 0;
 }
 
-#project-form {
+#project-form,
+#task-item-form {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5rem;
@@ -234,11 +229,13 @@ input[type="date"] {
   padding-left: 0.25rem;
 }
 
-#project-form input {
+#project-form input,
+#task-item-form input {
   width: 75%;
 }
 
 #project-form input:focus,
+#task-item-form input:focus,
 .form-element input:focus,
 .form-element select:focus,
 .form-element textarea:focus {
@@ -246,22 +243,33 @@ input[type="date"] {
   border-bottom: 2px solid #000;
 }
 
-#project-form-actions {
+#project-form-actions,
+#task-item-form-actions {
   display: flex;
+  align-items: center;
   gap: 0.2rem;
 }
 
-#project-form-actions .actionBtn {
+#project-form-actions .actionBtn,
+#task-item-form-actions .actionBtn {
   width: 1.5rem;
+  height: 1.5rem;
   border: 1.5px solid green;
 }
 
-#project-form-actions .actionBtn:first-child:hover {
+#project-form-actions .actionBtn:nth-child(2),
+#task-item-form-actions .actionBtn:nth-child(2) {
+  border: 1.5px solid red;
+}
+
+#project-form-actions .actionBtn:first-child:hover,
+#task-item-form-actions .actionBtn:first-child:hover {
   background-color: green;
 }
 
-#project-form-actions .actionBtn:nth-child(2) {
-  border: 1.5px solid red;
+#project-form-actions .actionBtn:nth-child(2):hover,
+#task-item-form-actions .actionBtn:nth-child(2):hover {
+  background-color: red;
 }
 
 #form-modal {
@@ -421,12 +429,12 @@ form h3 {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .item-content {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.5rem;
 }
 
@@ -443,7 +451,7 @@ form h3 {
   outline: none;
 }
 
-#task-items .actionBtn:hover img {
+/* #task-items .actionBtn:hover img {
   filter: invert(56%) sepia(96%) saturate(4219%) hue-rotate(188deg)
     brightness(97%) contrast(105%);
 }
@@ -451,7 +459,7 @@ form h3 {
 #task-items .actionBtn:last-child:hover img {
   filter: invert(20%) sepia(44%) saturate(4278%) hue-rotate(346deg)
     brightness(116%) contrast(144%);
-}
+} */
 
 header,
 aside,

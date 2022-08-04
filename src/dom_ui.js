@@ -1,12 +1,13 @@
 import Controller from "./index";
-import ProjectButton from "./ui_components/project_name_button";
-import TaskCard from "./ui_components/task_card";
-import TaskItem from "./ui_components/task-item";
-import createTaskDetails from "./ui_components/task-details";
-import createProjectForm from "./ui_components/project_form";
-import addNewProjectBtn from "./ui_components/new_project_button";
-import createTaskForm from "./ui_components/task_form";
-import createMoveTaskForm from "./ui_components/move_task_form";
+import ProjectButtonComponent from "./ui_components/project_name_button";
+import TaskCardComponent from "./ui_components/task_card";
+import TaskItemComponent from "./ui_components/task-item";
+import TaskDetailsComponent from "./ui_components/task-details";
+import ProjectFormComponent from "./ui_components/project_form";
+import NewProjectBtnComponent from "./ui_components/new_project_button";
+import TaskFormComponent from "./ui_components/task_form";
+import MoveTaskFormComponent from "./ui_components/move_task_form";
+import TaskItemFormComponent from "./ui_components/item_form";
 
 import plus from "./assets/icons/plus.svg";
 
@@ -26,11 +27,10 @@ const DomUI = (() => {
 
   const taskActionsDiv = document.getElementById("task-actions");
   const taskDetailsDiv = document.getElementById("task-details");
-  const taskItemsDiv = document.getElementById("task-items");
 
   // PROJECT
   const createAddProjectButton = () => {
-    projectsDiv.parentNode.insertBefore(addNewProjectBtn(), projectsDiv);
+    projectsDiv.parentNode.insertBefore(NewProjectBtnComponent(), projectsDiv);
     const addProjectBtn = document.getElementById("addProject");
 
     addProjectBtn.addEventListener("click", () => {
@@ -40,7 +40,7 @@ const DomUI = (() => {
 
   const createProjectButton = (project) => {
     // We create a project button
-    let projectBtn = ProjectButton(project.getProjectName());
+    let projectBtn = ProjectButtonComponent(project.getProjectName());
 
     // Append the project button to projects div
     projectsDiv.append(projectBtn);
@@ -69,7 +69,7 @@ const DomUI = (() => {
 
   const displayProjectForm = () => {
     const addProjectBtn = document.getElementById("addProject");
-    const projectForm = createProjectForm();
+    const projectForm = ProjectFormComponent();
     addProjectBtn.parentNode.replaceChild(projectForm, addProjectBtn);
 
     projectForm.addEventListener("submit", (e) => {
@@ -84,7 +84,7 @@ const DomUI = (() => {
 
   const _hideProjectForm = () => {
     const projectForm = document.getElementById("project-form");
-    projectForm.parentNode.replaceChild(addNewProjectBtn(), projectForm);
+    projectForm.parentNode.replaceChild(NewProjectBtnComponent(), projectForm);
 
     const addProjectBtn = document.getElementById("addProject");
     addProjectBtn.addEventListener("click", displayProjectForm);
@@ -120,7 +120,7 @@ const DomUI = (() => {
     }
     if (tasks) {
       tasks.forEach((task) => {
-        const taskCard = TaskCard(task.getTaskInfos());
+        const taskCard = TaskCardComponent(task.getTaskInfos());
 
         // Add click event to individual tasks
         taskCard.addEventListener("click", () => {
@@ -129,6 +129,9 @@ const DomUI = (() => {
 
           setActiveTask(taskCard);
           showTaskDetails(task.getTaskInfos());
+          task.getTaskInfos().items.forEach((item) => {
+            createTaskItem(item);
+          });
         });
 
         // Add click event to corresponding checkbox
@@ -186,12 +189,13 @@ const DomUI = (() => {
       const currentProject = getCurrentProject().getAttribute("data-name");
 
       // Create the task form
-      const taskForm = createTaskForm(projectsList, currentProject);
+      const taskForm = TaskFormComponent(projectsList, currentProject);
       formModal.appendChild(taskForm);
       formModal.style.display = "block";
 
       taskForm.addEventListener("submit", (e) => {
-        Controller.submitTaskForm(e);
+        e.preventDefault();
+        Controller.submitTaskForm(e.target.elements);
         _hideTaskForm();
       });
 
@@ -225,7 +229,7 @@ const DomUI = (() => {
       moveTaskBtn,
       editTaskBtn,
       addItemBtn,
-    } = createTaskDetails(task);
+    } = TaskDetailsComponent(task);
 
     editTaskBtn.addEventListener("click", () => {
       const mode = "edit";
@@ -233,7 +237,7 @@ const DomUI = (() => {
       const currentProject = getCurrentProject().getAttribute("data-name");
 
       // Create the task form
-      const taskForm = createTaskForm(
+      const taskForm = TaskFormComponent(
         Controller.getProjectsList(),
         currentProject,
         task
@@ -242,9 +246,11 @@ const DomUI = (() => {
       formModal.style.display = "block";
 
       taskForm.addEventListener("submit", (e) => {
+        e.preventDefault();
         taskActionsDiv.innerHTML = "";
         taskDetailsDiv.innerHTML = "";
-        Controller.submitTaskForm(e, mode);
+
+        Controller.submitTaskForm(e.target.elements, mode);
 
         const taskCard = getTaskCard(task);
         taskCard.classList.add("active");
@@ -270,7 +276,7 @@ const DomUI = (() => {
       const taskName = getCurrentTask().getAttribute("data-title");
 
       // Create the move form
-      const moveForm = createMoveTaskForm(
+      const moveForm = MoveTaskFormComponent(
         Controller.getProjectsList(),
         currentProjectName
       );
@@ -278,9 +284,13 @@ const DomUI = (() => {
       formModal.style.display = "block";
 
       moveForm.addEventListener("submit", (e) => {
-        // TODO: Actual move of the object
+        e.preventDefault();
 
-        Controller.submitMoveTaskForm(e, currentProjectName, taskName);
+        Controller.submitMoveTaskForm(
+          e.target.elements[0].value,
+          currentProjectName,
+          taskName
+        );
         _hideTaskForm();
         taskActionsDiv.innerHTML = "";
         taskDetailsDiv.innerHTML = "";
@@ -308,14 +318,57 @@ const DomUI = (() => {
       taskDetailsDiv.innerHTML = "";
     });
 
+    addItemBtn.addEventListener("click", (e) => {
+      const addProjectBtn = document.getElementById("addProject");
+
+      addProjectBtn.disabled = true;
+      addTaskBtn.disabled = true;
+      addItemBtn.disabled = true;
+      displayTaskItemForm();
+    });
+
     taskActionsDiv.append(editTaskBtn, moveTaskBtn, deleteTaskBtn, addItemBtn);
     taskDetailsDiv.append(checkmark, taskTitle, taskDescription, taskItems);
   };
 
+  const displayTaskItemForm = () => {
+    const taskItemsDiv = document.getElementById("task-items");
+    const addTaskItemForm = TaskItemFormComponent();
+    // Get the current task;
+    const taskTitle = getCurrentTask().getAttribute("data-title");
+
+    taskItemsDiv.appendChild(addTaskItemForm);
+
+    addTaskItemForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const taskItemEntry = e.target.elements[0].value;
+      Controller.submitTaskItemForm(taskTitle, taskItemEntry);
+      _hideTaskItemForm();
+    });
+
+    const cancelBtn = document.getElementById("cancelBtn");
+    cancelBtn.addEventListener("click", _hideTaskItemForm);
+  };
+
+  const _hideTaskItemForm = () => {
+    const addProjectBtn = document.getElementById("addProject");
+    const taskItemsDiv = document.getElementById("task-items");
+    const taskItemForm = document.getElementById("task-item-form");
+
+    addProjectBtn.disabled = false;
+    addTaskBtn.disabled = false;
+    addItemBtn.disabled = false;
+
+    taskItemsDiv.removeChild(taskItemForm);
+  };
+
   const createTaskItem = (taskItem) => {
-    const item = TaskItem(taskItem);
+    const taskItemsDiv = document.getElementById("task-items");
+
+    console.log(taskItem);
+
+    const item = TaskItemComponent(taskItem);
     taskItemsDiv.appendChild(item);
-    taskDetailsDiv.appendChild(taskItemsDiv);
   };
 
   const _getTaskCards = () => {

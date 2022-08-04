@@ -3,6 +3,7 @@ import DomUI from "./dom_ui";
 import ProjectList from "./models/project_list";
 import Project from "./models/project";
 import Task from "./models/task";
+import TaskItem from "./models/task_item";
 import initializeTodo from "./initialize";
 
 const Controller = (() => {
@@ -21,13 +22,12 @@ const Controller = (() => {
     DomUI.createProjectButton(newProject);
   };
 
-  const submitTaskForm = (e, mode) => {
-    e.preventDefault();
-    const projectName = e.target.elements[0].value;
-    const title = e.target.elements[1].value;
-    const description = e.target.elements[2].value;
-    const dueDate = e.target.elements[3].value;
-    const priority = e.target.elements[4].value;
+  const submitTaskForm = (formEntries, mode) => {
+    const projectName = formEntries[0].value;
+    const title = formEntries[1].value;
+    const description = formEntries[2].value;
+    const dueDate = formEntries[3].value;
+    const priority = formEntries[4].value;
 
     const project = projectsList.getProject(projectName);
     if (project) {
@@ -45,10 +45,7 @@ const Controller = (() => {
     DomUI.showTaskCards(project);
   };
 
-  const submitMoveTaskForm = (e, currentProjectName, taskName) => {
-    e.preventDefault();
-    const newProjectName = e.target.elements[0].value;
-
+  const submitMoveTaskForm = (newProjectName, currentProjectName, taskName) => {
     const currentProject = projectsList.getProject(currentProjectName);
     const task = currentProject.getTask(taskName);
     const newProject = projectsList.getProject(newProjectName);
@@ -77,11 +74,28 @@ const Controller = (() => {
 
   const getProjectsList = () => projectsList.getAll();
 
+  const submitTaskItemForm = (taskTitle, taskItemEntry) => {
+    const newTaskItem = TaskItem(taskItemEntry);
+
+    // TODO: Get current task
+    const currentProject = projectsList.getProject(
+      DomUI.getCurrentProject().getAttribute("data-name")
+    );
+    const currentTask = currentProject.getTask(taskTitle);
+
+    // TODO: Add current taskItem to task
+    currentTask.addItem(taskItemEntry);
+
+    // TODO: Call the DOMUI function to display taskItem
+    DomUI.createTaskItem(newTaskItem.getTaskItemInfos().title);
+  };
+
   return {
     getProjectsList,
     submitProjectForm,
     submitTaskForm,
     submitMoveTaskForm,
+    submitTaskItemForm,
     updateTaskStatus,
     deleteTask,
   };

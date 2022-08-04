@@ -4,7 +4,7 @@ import pen from "../assets/icons/pen.svg";
 import move from "../assets/icons/move.svg";
 import checkboxChecked from "../assets/icons/checkbox-checked.svg";
 
-export default function createTaskDetails(task) {
+export default function TaskDetailsComponent(task) {
   const checkmark = document.createElement("div");
   checkmark.setAttribute("id", "checkmark");
 

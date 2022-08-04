@@ -1,4 +1,4 @@
-export default function TaskCard(task) {
+export default function TaskCardComponent(task) {
   const card = document.createElement("div");
   card.className = "task";
   card.setAttribute("data-title", task.title);

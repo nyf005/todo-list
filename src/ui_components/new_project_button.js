@@ -1,6 +1,6 @@
 import plus from "../assets/icons/plus.svg";
 
-export default function addNewProjectBtn() {
+export default function NewProjectBtnComponent() {
   const button = document.createElement("button");
   button.setAttribute("id", "addProject");
 

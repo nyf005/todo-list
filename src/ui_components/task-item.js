@@ -1,7 +1,7 @@
 import create from "../assets/icons/create.svg";
 import trash from "../assets/icons/trash.svg";
 
-export default function TaskItem(taskItem) {
+export default function TaskItemComponent(taskItem) {
   const item = document.createElement("div");
   item.className = "item";
 
@@ -10,11 +10,9 @@ export default function TaskItem(taskItem) {
 
   const checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
-  // checkbox.setAttribute("id", taskItem);
 
   const label = document.createElement("label");
-  // label.setAttribute("for", taskItem);
-  label.textContent = taskItem.value;
+  label.textContent = taskItem;
 
   itemContent.append(checkbox, label);
 

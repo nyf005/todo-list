@@ -1,4 +1,7 @@
-export default function createMoveTaskForm(projectsList, currentProjectName) {
+export default function MoveTaskFormComponent(
+  projectsList,
+  currentProjectName
+) {
   const form = document.createElement("form");
   form.setAttribute("id", "move_task-form");
   form.setAttribute("action", "");
