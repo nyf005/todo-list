@@ -390,6 +390,7 @@ const DomUI = (() => {
         currentTaskTitle,
         deleteItemBtn.getAttribute("id")
       );
+      taskItemsDiv.removeChild(item);
     });
 
     taskItemsDiv.appendChild(item);
