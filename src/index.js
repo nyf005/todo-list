@@ -84,10 +84,28 @@ const Controller = (() => {
     const currentTask = currentProject.getTask(taskTitle);
 
     // TODO: Add current taskItem to task
-    currentTask.addItem(taskItemEntry);
+    currentTask.addItem(newTaskItem);
 
     // TODO: Call the DOMUI function to display taskItem
-    DomUI.createTaskItem(newTaskItem.getTaskItemInfos().title);
+    DomUI.createTaskItem(newTaskItem.getTaskItemInfos());
+  };
+
+  const updateTaskItemStatus = (taskTitle, taskItemTitle) => {
+    const currentProject = projectsList.getProject(
+      DomUI.getCurrentProject().getAttribute("data-name")
+    );
+
+    const currentTask = currentProject.getTask(taskTitle);
+    currentTask.getTaskItem(taskItemTitle).updateStatus();
+  };
+
+  const deleteTaskItem = (taskTitle, taskItemTitle) => {
+    const currentProject = projectsList.getProject(
+      DomUI.getCurrentProject().getAttribute("data-name")
+    );
+
+    const currentTask = currentProject.getTask(taskTitle);
+    currentTask.removeItem(taskItemTitle);
   };
 
   return {
@@ -97,7 +115,9 @@ const Controller = (() => {
     submitMoveTaskForm,
     submitTaskItemForm,
     updateTaskStatus,
+    updateTaskItemStatus,
     deleteTask,
+    deleteTaskItem,
   };
 })();
 

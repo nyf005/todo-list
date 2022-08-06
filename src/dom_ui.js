@@ -34,7 +34,7 @@ const DomUI = (() => {
     const addProjectBtn = document.getElementById("addProject");
 
     addProjectBtn.addEventListener("click", () => {
-      displayProjectForm();
+      _displayProjectForm();
     });
   };
 
@@ -67,10 +67,12 @@ const DomUI = (() => {
     taskDetailsDiv.innerHTML = "";
   };
 
-  const displayProjectForm = () => {
+  const _displayProjectForm = () => {
     const addProjectBtn = document.getElementById("addProject");
     const projectForm = ProjectFormComponent();
     addProjectBtn.parentNode.replaceChild(projectForm, addProjectBtn);
+
+    addTaskBtn.disabled = true;
 
     projectForm.addEventListener("submit", (e) => {
       const projectEntry = e.target.elements[0].value;
@@ -87,7 +89,9 @@ const DomUI = (() => {
     projectForm.parentNode.replaceChild(NewProjectBtnComponent(), projectForm);
 
     const addProjectBtn = document.getElementById("addProject");
-    addProjectBtn.addEventListener("click", displayProjectForm);
+    addProjectBtn.addEventListener("click", _displayProjectForm);
+
+    addTaskBtn.disabled = false;
   };
 
   const setProjectsBtns = (projectsList) => {
@@ -127,10 +131,10 @@ const DomUI = (() => {
           taskActionsDiv.innerHTML = "";
           taskDetailsDiv.innerHTML = "";
 
-          setActiveTask(taskCard);
+          _setActiveTask(taskCard);
           showTaskDetails(task.getTaskInfos());
           task.getTaskInfos().items.forEach((item) => {
-            createTaskItem(item);
+            createTaskItem(item.getTaskItemInfos());
           });
         });
 
@@ -171,7 +175,7 @@ const DomUI = (() => {
     addTBtn.add;
   };
 
-  const setActiveTask = (selectedTask) => {
+  const _setActiveTask = (selectedTask) => {
     _getTaskCards().forEach((taskCard) => {
       taskCard.classList.remove("active");
     });
@@ -337,7 +341,7 @@ const DomUI = (() => {
     // Get the current task;
     const taskTitle = getCurrentTask().getAttribute("data-title");
 
-    taskItemsDiv.appendChild(addTaskItemForm);
+    taskItemsDiv.insertBefore(addTaskItemForm, taskItemsDiv.firstChild);
 
     addTaskItemForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -364,10 +368,30 @@ const DomUI = (() => {
 
   const createTaskItem = (taskItem) => {
     const taskItemsDiv = document.getElementById("task-items");
-
-    console.log(taskItem);
-
     const item = TaskItemComponent(taskItem);
+    const currentTaskTitle = getCurrentTask().getAttribute("data-title");
+
+    const itemCheckbox = item.childNodes[0].childNodes[0];
+    itemCheckbox.addEventListener("click", () => {
+      Controller.updateTaskItemStatus(
+        currentTaskTitle,
+        itemCheckbox.getAttribute("id")
+      );
+    });
+
+    const editItemBtn = item.childNodes[1].childNodes[0];
+    editItemBtn.addEventListener("click", () => {
+      console.log("Edit");
+    });
+
+    const deleteItemBtn = item.childNodes[1].childNodes[1];
+    deleteItemBtn.addEventListener("click", () => {
+      Controller.deleteTaskItem(
+        currentTaskTitle,
+        deleteItemBtn.getAttribute("id")
+      );
+    });
+
     taskItemsDiv.appendChild(item);
   };
 
@@ -395,9 +419,7 @@ const DomUI = (() => {
     getProjectsBtns,
     showTaskCards,
     setActiveProject,
-    setActiveTask,
     showTaskDetails,
-    displayProjectForm,
   };
 })();
 
