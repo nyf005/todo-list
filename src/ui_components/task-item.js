@@ -20,26 +20,14 @@ export default function TaskItemComponent(taskItem) {
 
   itemContent.append(checkbox, label);
 
-  const itemActions = document.createElement("div");
-  itemActions.className = "item-actions";
-
-  const editBtn = document.createElement("button");
-  editBtn.setAttribute("data-title", taskItem.title);
-  editBtn.className = "actionBtn";
-  const createIcon = document.createElement("img");
-  createIcon.setAttribute("src", create);
-  editBtn.appendChild(createIcon);
-
   const deleteBtn = document.createElement("button");
   deleteBtn.setAttribute("data-title", taskItem.title);
-  deleteBtn.className = "actionBtn";
+  // deleteBtn.className = "actionBtn";
   const trashIcon = document.createElement("img");
   trashIcon.setAttribute("src", trash);
   deleteBtn.appendChild(trashIcon);
 
-  itemActions.append(editBtn, deleteBtn);
-
-  item.append(itemContent, itemActions);
+  item.append(itemContent, deleteBtn);
 
   return item;
 }

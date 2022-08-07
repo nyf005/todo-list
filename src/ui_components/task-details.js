@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 import clock from "../assets/icons/clock.svg";
 import trash from "../assets/icons/trash.svg";
 import pen from "../assets/icons/pen.svg";
@@ -37,7 +39,7 @@ export default function TaskDetailsComponent(task) {
   clockIcon.setAttribute("alt", "clock");
 
   const date = document.createElement("p");
-  date.textContent = task.dueDate;
+  date.textContent = format(new Date(task.dueDate), "MMMM do, yyyy");
 
   detailsDueDate.append(clockIcon, date);
 

@@ -142,7 +142,18 @@ const DomUI = (() => {
         const checkboxInput = taskCard.childNodes[0].childNodes[0];
         checkboxInput.addEventListener("click", (e) => {
           Controller.updateTaskStatus(e.target.getAttribute("id"));
+          if (checkboxInput.checked) {
+            taskCard.classList.add("checked");
+          } else {
+            taskCard.classList.remove("checked");
+          }
         });
+
+        if (checkboxInput.checked) {
+          taskCard.classList.add("checked");
+        } else {
+          taskCard.classList.remove("checked");
+        }
 
         // Append only if we are current in the same project
         if (
@@ -379,12 +390,7 @@ const DomUI = (() => {
       );
     });
 
-    const editItemBtn = item.childNodes[1].childNodes[0];
-    editItemBtn.addEventListener("click", () => {
-      console.log("Edit");
-    });
-
-    const deleteItemBtn = item.childNodes[1].childNodes[1];
+    const deleteItemBtn = item.childNodes[1];
     deleteItemBtn.addEventListener("click", () => {
       Controller.deleteTaskItem(
         currentTaskTitle,

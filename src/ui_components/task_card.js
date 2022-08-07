@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export default function TaskCardComponent(task) {
   const card = document.createElement("div");
   card.className = "task";
@@ -27,7 +29,8 @@ export default function TaskCardComponent(task) {
 
   const dueDate = document.createElement("p");
   dueDate.className = "task-due-date";
-  dueDate.textContent = task.dueDate;
+  console.log(task.dueDate);
+  dueDate.textContent = format(new Date(task.dueDate), "MMMM do, yyyy");
 
   const priority = document.createElement("p");
   priority.className = "priority";

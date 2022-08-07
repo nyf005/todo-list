@@ -428,7 +428,7 @@ form h3 {
 .item {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 0.5rem;
 }
 
@@ -438,28 +438,27 @@ form h3 {
   gap: 0.5rem;
 }
 
-.item-actions {
-  display: flex;
-  gap: 0.25rem;
-}
-
-#task-items .actionBtn {
+.item button {
   width: 1.5rem;
+  display: grid;
+  place-content: center;
   background-color: transparent;
-  box-shadow: none;
+  border: none;
   cursor: pointer;
   outline: none;
 }
 
-/* #task-items .actionBtn:hover img {
-  filter: invert(56%) sepia(96%) saturate(4219%) hue-rotate(188deg)
-    brightness(97%) contrast(105%);
-}
-
-#task-items .actionBtn:last-child:hover img {
+.item button:hover img {
   filter: invert(20%) sepia(44%) saturate(4278%) hue-rotate(346deg)
     brightness(116%) contrast(144%);
-} */
+}
+
+input[type="checkbox"]:checked + label,
+.checked .task-infos h4 {
+  text-decoration: line-through;
+  text-decoration-color: red;
+  text-decoration-thickness: 2px;
+}
 
 header,
 aside,
