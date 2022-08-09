@@ -11,9 +11,6 @@ const Controller = (() => {
   const defaultProject = Project("Inbox");
   projectsList.add(defaultProject);
 
-  const testProject = Project("Adwords");
-  projectsList.add(testProject);
-
   initializeTodo(projectsList);
 
   const submitProjectForm = (projectEntry) => {
