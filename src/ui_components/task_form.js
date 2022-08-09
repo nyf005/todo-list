@@ -16,6 +16,7 @@ export default function TaskFormComponent(projectsList, currentProject, task) {
 
   const projectSelect = document.createElement("select");
   projectSelect.setAttribute("id", "project");
+  projectSelect.setAttribute("name", "project");
 
   projectsList.forEach((project) => {
     let option = document.createElement("option");
@@ -39,6 +40,7 @@ export default function TaskFormComponent(projectsList, currentProject, task) {
   const titleInput = document.createElement("input");
   titleInput.setAttribute("id", "title");
   titleInput.setAttribute("type", "text");
+  titleInput.setAttribute("name", "title");
 
   titleFormElement.append(titleLabel, titleInput);
 
@@ -51,6 +53,8 @@ export default function TaskFormComponent(projectsList, currentProject, task) {
 
   const descriptionTextarea = document.createElement("textarea");
   descriptionTextarea.setAttribute("id", "description");
+  descriptionTextarea.setAttribute("name", "description");
+
   descriptionTextarea.setAttribute("cols", "30");
   descriptionTextarea.setAttribute("rows", "10");
 
@@ -65,6 +69,7 @@ export default function TaskFormComponent(projectsList, currentProject, task) {
 
   const dueDateInput = document.createElement("input");
   dueDateInput.setAttribute("id", "due-date");
+  dueDateInput.setAttribute("name", "due-date");
   dueDateInput.setAttribute("type", "date");
 
   dueDateFormElement.append(dueDateLabel, dueDateInput);
@@ -78,6 +83,8 @@ export default function TaskFormComponent(projectsList, currentProject, task) {
 
   const prioritySelect = document.createElement("select");
   prioritySelect.setAttribute("id", "priority");
+  prioritySelect.setAttribute("name", "priority");
+
   const highOption = document.createElement("option");
   highOption.value = "high";
   highOption.textContent = "High";

@@ -9,6 +9,7 @@ export default function TaskItemFormComponent() {
 
   const titleInput = document.createElement("input");
   titleInput.setAttribute("id", "task-item-title");
+  titleInput.setAttribute("name", "task-item-title");
   titleInput.setAttribute("type", "text");
   titleInput.setAttribute("placeholder", "Enter a subtask");
   titleInput.setAttribute("required", "required");

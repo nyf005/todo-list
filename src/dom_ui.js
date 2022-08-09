@@ -35,6 +35,7 @@ const DomUI = (() => {
 
     addProjectBtn.addEventListener("click", () => {
       _displayProjectForm();
+      document.getElementById("project-form")["projectName"].focus();
     });
   };
 
@@ -70,12 +71,13 @@ const DomUI = (() => {
   const _displayProjectForm = () => {
     const addProjectBtn = document.getElementById("addProject");
     const projectForm = ProjectFormComponent();
+
     addProjectBtn.parentNode.replaceChild(projectForm, addProjectBtn);
 
     addTaskBtn.disabled = true;
 
     projectForm.addEventListener("submit", (e) => {
-      const projectEntry = e.target.elements[0].value;
+      const projectEntry = projectForm["projectName"].value;
       Controller.submitProjectForm(projectEntry);
       _hideProjectForm();
     });
@@ -181,9 +183,6 @@ const DomUI = (() => {
     } else {
       projectTitle.style.borderLeftColor = "#fff";
     }
-
-    const addTBtn = document.createElement("button");
-    addTBtn.add;
   };
 
   const _setActiveTask = (selectedTask) => {
@@ -207,10 +206,11 @@ const DomUI = (() => {
       const taskForm = TaskFormComponent(projectsList, currentProject);
       formModal.appendChild(taskForm);
       formModal.style.display = "block";
+      document.getElementById("task-form")["title"].focus();
 
       taskForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        Controller.submitTaskForm(e.target.elements);
+        Controller.submitTaskForm(taskForm);
         _hideTaskForm();
       });
 
@@ -340,6 +340,7 @@ const DomUI = (() => {
       addTaskBtn.disabled = true;
       addItemBtn.disabled = true;
       displayTaskItemForm();
+      document.getElementById("task-item-form")["task-item-title"].focus();
     });
 
     taskActionsDiv.append(editTaskBtn, moveTaskBtn, deleteTaskBtn, addItemBtn);
@@ -356,7 +357,7 @@ const DomUI = (() => {
 
     addTaskItemForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const taskItemEntry = e.target.elements[0].value;
+      const taskItemEntry = addTaskItemForm["task-item-title"].value;
       Controller.submitTaskItemForm(taskTitle, taskItemEntry);
       _hideTaskItemForm();
     });

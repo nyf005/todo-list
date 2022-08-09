@@ -9,6 +9,7 @@ export default function ProjectFormComponent() {
 
   const nameInput = document.createElement("input");
   nameInput.setAttribute("id", "projectName");
+  nameInput.setAttribute("name", "projectName");
   nameInput.setAttribute("type", "text");
   nameInput.setAttribute("placeholder", "Project name");
   nameInput.setAttribute("required", "required");

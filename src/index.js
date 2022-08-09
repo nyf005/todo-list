@@ -8,23 +8,27 @@ import initializeTodo from "./initialize";
 
 const Controller = (() => {
   const projectsList = ProjectList();
+
   const defaultProject = Project("Inbox");
   projectsList.add(defaultProject);
+
+  localStorage.setItem("inbox", JSON.stringify([]));
 
   initializeTodo(projectsList);
 
   const submitProjectForm = (projectEntry) => {
     const newProject = Project(projectEntry);
     projectsList.add(newProject);
+
     DomUI.createProjectButton(newProject);
   };
 
-  const submitTaskForm = (formEntries, mode) => {
-    const projectName = formEntries[0].value;
-    const title = formEntries[1].value;
-    const description = formEntries[2].value;
-    const dueDate = formEntries[3].value;
-    const priority = formEntries[4].value;
+  const submitTaskForm = (taskForm, mode) => {
+    const projectName = taskForm["project"].value;
+    const title = taskForm["title"].value;
+    const description = taskForm["description"].value;
+    const dueDate = taskForm["due-date"].value;
+    const priority = taskForm["priority"].value;
 
     const project = projectsList.getProject(projectName);
     if (project) {
