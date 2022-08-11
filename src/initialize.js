@@ -1,6 +1,6 @@
 import DomUI from "./dom_ui";
 
-const initializeTodo = (projectList) => {
+const initializeDOM = (projectList) => {
   const projectBtns = DomUI.getProjectsBtns();
   // Set default Selected Project
   DomUI.setActiveProject(projectBtns[0]);
@@ -26,4 +26,4 @@ const initializeTodo = (projectList) => {
   });
 };
 
-export default initializeTodo;
+export default initializeDOM;

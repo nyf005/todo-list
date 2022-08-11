@@ -41,6 +41,7 @@ export default function TaskFormComponent(projectsList, currentProject, task) {
   titleInput.setAttribute("id", "title");
   titleInput.setAttribute("type", "text");
   titleInput.setAttribute("name", "title");
+  titleInput.setAttribute("required", "required");
 
   titleFormElement.append(titleLabel, titleInput);
 
@@ -71,6 +72,7 @@ export default function TaskFormComponent(projectsList, currentProject, task) {
   dueDateInput.setAttribute("id", "due-date");
   dueDateInput.setAttribute("name", "due-date");
   dueDateInput.setAttribute("type", "date");
+  dueDateInput.setAttribute("required", "required");
 
   dueDateFormElement.append(dueDateLabel, dueDateInput);
 

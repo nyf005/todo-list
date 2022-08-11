@@ -4,21 +4,24 @@ import ProjectList from "./models/project_list";
 import Project from "./models/project";
 import Task from "./models/task";
 import TaskItem from "./models/task_item";
-import initializeTodo from "./initialize";
+import initializeDOM from "./initialize";
+
+import Storage from "./storage";
 
 const Controller = (() => {
   const projectsList = ProjectList();
+  Storage.init();
 
   const defaultProject = Project("Inbox");
   projectsList.add(defaultProject);
+  Storage.saveProject(defaultProject.getProjectInfos());
 
-  localStorage.setItem("inbox", JSON.stringify([]));
-
-  initializeTodo(projectsList);
+  initializeDOM(projectsList);
 
   const submitProjectForm = (projectEntry) => {
     const newProject = Project(projectEntry);
     projectsList.add(newProject);
+    Storage.saveProject(newProject.getProjectInfos());
 
     DomUI.createProjectButton(newProject);
   };
@@ -37,9 +40,14 @@ const Controller = (() => {
           .getTask(title)
           .updateTask(title, description, dueDate, priority);
         DomUI.showTaskDetails(project.getTask(title).getTaskInfos());
+        Storage.saveTask(
+          project.getProjectInfos(),
+          project.getTask(title).getTaskInfos()
+        );
       } else {
         const newTask = Task(title, description, dueDate, priority);
         project.addTask(newTask);
+        Storage.saveTask(project.getProjectInfos(), newTask.getTaskInfos());
       }
     }
 

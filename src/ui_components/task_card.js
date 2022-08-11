@@ -29,7 +29,6 @@ export default function TaskCardComponent(task) {
 
   const dueDate = document.createElement("p");
   dueDate.className = "task-due-date";
-  console.log(task.dueDate);
   dueDate.textContent = format(new Date(task.dueDate), "MMMM do, yyyy");
 
   const priority = document.createElement("p");

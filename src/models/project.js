@@ -8,6 +8,10 @@ const Project = (pName) => {
 
   const getProjectName = () => name;
 
+  const getProjectInfos = () => {
+    return { name, tasks };
+  };
+
   const addTask = (task) => {
     tasks.push(task);
   };
@@ -28,6 +32,7 @@ const Project = (pName) => {
   return {
     setProjectName,
     getProjectName,
+    getProjectInfos,
     addTask,
     getTask,
     getTasks,
