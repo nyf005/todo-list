@@ -37,28 +37,17 @@ const Storage = (() => {
     }
   };
 
-  // Save Task Items
-  const saveTaskItem = (project, task, taskItem) => {
-    const saved_project = JSON.parse(localStorage.getItem(project.name));
-    const saved_task = saved_project.tasks.find((t) => t.title == task.title);
-    const saved_task_item = saved_task.items.find(
-      (t_item) => t_item.title == taskItem.title
-    );
-
-    if (saved_task_item == undefined) {
-      saved_task.items.push(taskItem);
-      localStorage.setItem(project.name, JSON.stringify(saved_project));
-    } else {
-      const itemIndex = saved_task.items.findIndex(
-        (t_item) => t_item.title == taskItem.title
-      );
-      saved_task.items.splice(itemIndex, 1, taskItem);
-      localStorage.setItem(project.name, JSON.stringify(saved_project));
-    }
-  };
-
   // Move Task
-  const moveTask = () => {};
+  const moveTask = (fromProject, toProject, task) => {
+    const from = JSON.parse(localStorage.getItem(fromProject.name));
+    const index = from.tasks.findIndex((t) => t.title == task.title);
+    const to = JSON.parse(localStorage.getItem(toProject.name));
+    to.tasks.push(task);
+    from.tasks.splice(index, 1);
+
+    localStorage.setItem(fromProject.name, JSON.stringify(from));
+    localStorage.setItem(toProject.name, JSON.stringify(to));
+  };
 
   // Remove Project
   const removeProject = (project) => {
@@ -73,7 +62,7 @@ const Storage = (() => {
     init,
     saveProject,
     saveTask,
-    saveTaskItem,
+    moveTask,
   };
 })();
 

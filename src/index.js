@@ -61,6 +61,13 @@ const Controller = (() => {
 
     newProject.addTask(task);
     currentProject.removeTask(taskName);
+
+    Storage.moveTask(
+      currentProject.getProjectInfos(),
+      newProject.getProjectInfos(),
+      task.getTaskInfos()
+    );
+
     DomUI.showTaskCards(currentProject);
   };
 
@@ -99,11 +106,12 @@ const Controller = (() => {
     // TODO: Add current taskItem to task
     currentTask.addItem(newTaskItem);
 
-    Storage.saveTaskItem(
+    currentProject.getTask(taskTitle).updateStatus();
+    Storage.saveTask(
       currentProject.getProjectInfos(),
-      currentTask.getTaskInfos(),
-      newTaskItem.getTaskItemInfos()
+      currentProject.getTask(taskTitle).getTaskInfos()
     );
+
     // TODO: Call the DOMUI function to display taskItem
     DomUI.createTaskItem(newTaskItem.getTaskItemInfos());
   };
@@ -116,10 +124,9 @@ const Controller = (() => {
     const currentTask = currentProject.getTask(taskTitle);
     currentTask.getTaskItem(taskItemTitle).updateStatus();
 
-    Storage.saveTaskItem(
+    Storage.saveTask(
       currentProject.getProjectInfos(),
-      currentTask.getTaskInfos(),
-      currentTask.getTaskItem(taskItemTitle).getTaskItemInfos()
+      currentProject.getTask(taskTitle).getTaskInfos()
     );
   };
 
@@ -130,6 +137,11 @@ const Controller = (() => {
 
     const currentTask = currentProject.getTask(taskTitle);
     currentTask.removeItem(taskItemTitle);
+
+    Storage.saveTask(
+      currentProject.getProjectInfos(),
+      currentProject.getTask(taskTitle).getTaskInfos()
+    );
   };
 
   return {
