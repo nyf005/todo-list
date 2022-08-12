@@ -70,6 +70,10 @@ const Controller = (() => {
     );
 
     currentProject.getTask(taskTitle).updateStatus();
+    Storage.saveTask(
+      currentProject.getProjectInfos(),
+      currentProject.getTask(taskTitle).getTaskInfos()
+    );
   };
 
   const deleteTask = (taskTitle) => {
@@ -95,6 +99,11 @@ const Controller = (() => {
     // TODO: Add current taskItem to task
     currentTask.addItem(newTaskItem);
 
+    Storage.saveTaskItem(
+      currentProject.getProjectInfos(),
+      currentTask.getTaskInfos(),
+      newTaskItem.getTaskItemInfos()
+    );
     // TODO: Call the DOMUI function to display taskItem
     DomUI.createTaskItem(newTaskItem.getTaskItemInfos());
   };
@@ -106,6 +115,12 @@ const Controller = (() => {
 
     const currentTask = currentProject.getTask(taskTitle);
     currentTask.getTaskItem(taskItemTitle).updateStatus();
+
+    Storage.saveTaskItem(
+      currentProject.getProjectInfos(),
+      currentTask.getTaskInfos(),
+      currentTask.getTaskItem(taskItemTitle).getTaskItemInfos()
+    );
   };
 
   const deleteTaskItem = (taskTitle, taskItemTitle) => {
