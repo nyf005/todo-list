@@ -89,6 +89,7 @@ const Controller = (() => {
     );
 
     project.removeTask(taskTitle);
+    Storage.removeTask(project.getProjectInfos(), taskTitle);
     DomUI.showTaskCards(project);
   };
 
@@ -106,7 +107,8 @@ const Controller = (() => {
     // TODO: Add current taskItem to task
     currentTask.addItem(newTaskItem);
 
-    currentProject.getTask(taskTitle).updateStatus();
+    // currentProject.getTask(taskTitle).updateStatus();
+
     Storage.saveTask(
       currentProject.getProjectInfos(),
       currentProject.getTask(taskTitle).getTaskInfos()

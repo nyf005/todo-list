@@ -49,20 +49,24 @@ const Storage = (() => {
     localStorage.setItem(toProject.name, JSON.stringify(to));
   };
 
-  // Remove Project
-  const removeProject = (project) => {
-    let projectsList = JSON.parse(localStorage.getItem("projects"));
+  // Remove Task
+  const removeTask = (project, taskTitle) => {
+    const saved_project = JSON.parse(localStorage.getItem(project.name));
+    const index = saved_project.tasks.findIndex(
+      (task) => task.title == taskTitle
+    );
+    saved_project.tasks.splice(index, 1);
+    localStorage.setItem(project.name, JSON.stringify(saved_project));
   };
 
-  // Remove Task
-
-  // Remove Task Item
+  // Remove Project
 
   return {
     init,
     saveProject,
     saveTask,
     moveTask,
+    removeTask,
   };
 })();
 
