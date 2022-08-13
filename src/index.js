@@ -9,8 +9,8 @@ import initializeDOM from "./initialize";
 import Storage from "./storage";
 
 const Controller = (() => {
-  const projectsList = ProjectList();
   Storage.init();
+  const projectsList = Storage.getProjects();
 
   const defaultProject = Project("Inbox");
   projectsList.add(defaultProject);
@@ -106,8 +106,6 @@ const Controller = (() => {
 
     // TODO: Add current taskItem to task
     currentTask.addItem(newTaskItem);
-
-    // currentProject.getTask(taskTitle).updateStatus();
 
     Storage.saveTask(
       currentProject.getProjectInfos(),

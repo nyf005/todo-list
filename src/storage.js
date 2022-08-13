@@ -1,3 +1,8 @@
+import ProjectList from "./models/project_list";
+import Project from "./models/project";
+import Task from "./models/task";
+import TaskItem from "./models/task_item";
+
 const Storage = (() => {
   const init = () => {
     if (localStorage.length == 0) {
@@ -59,7 +64,43 @@ const Storage = (() => {
     localStorage.setItem(project.name, JSON.stringify(saved_project));
   };
 
-  // Remove Project
+  const getProjects = () => {
+    const projectsList = Object.assign(ProjectList(), {});
+    const projects = JSON.parse(localStorage.getItem("projects"));
+
+    projects.forEach((projectName) => {
+      let newProject = Project(projectName);
+      let project = Object.assign(
+        newProject,
+        JSON.parse(localStorage.getItem(projectName))
+      );
+
+      project.tasks.forEach((taskObj) => {
+        let newTask = Task(
+          taskObj.title,
+          taskObj.description,
+          taskObj.dueDate,
+          taskObj.priority,
+          taskObj.completed
+        );
+
+        let task = Object.assign(newTask, taskObj);
+
+        taskObj.items.forEach((itemObj) => {
+          let newItem = TaskItem(itemObj.title, itemObj.completed);
+
+          let item = Object.assign(newItem, itemObj);
+
+          task.addItem(item);
+        });
+
+        project.addTask(task);
+      });
+      projectsList.add(project);
+    });
+
+    return projectsList;
+  };
 
   return {
     init,
@@ -67,6 +108,7 @@ const Storage = (() => {
     saveTask,
     moveTask,
     removeTask,
+    getProjects,
   };
 })();
 
