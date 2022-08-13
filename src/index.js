@@ -11,9 +11,9 @@ const Controller = (() => {
   Storage.init();
   const projectsList = Storage.getProjects();
 
-  const defaultProject = Project("Inbox");
-  projectsList.add(defaultProject);
-  Storage.saveProject(defaultProject.getProjectInfos());
+  const indexProject = Project("Inbox");
+  projectsList.add(indexProject);
+  Storage.saveProject(indexProject.getProjectInfos());
 
   initializeDOM(projectsList);
 

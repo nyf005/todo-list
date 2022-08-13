@@ -16,6 +16,7 @@ const initializeDOM = (projectList) => {
 
   DomUI.createAddProjectButton();
   DomUI.setProjectsBtns(projectList);
+  // We add the projectList as array to populate the select input in the task form
   DomUI.displayTaskForm(projectList.getAll());
 
   // Load all projects

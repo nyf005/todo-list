@@ -56,13 +56,27 @@ const DomUI = (() => {
   };
 
   const setActiveProject = (selectedProject) => {
+    // Remove active class for all projects buttons
     getProjectsBtns().forEach((projectBtn) => {
       projectBtn.classList.remove("active");
     });
 
+    // Add active class to selected project
     selectedProject.classList.add("active");
-    _setTasksHeader(selectedProject);
 
+    // Get selected project name
+    const name = selectedProject.getAttribute("data-name");
+
+    // Change tasks div header and name
+    projectName.textContent = `${name} Tasks`;
+    if (selectedProject.firstChild.style) {
+      projectTitle.style.borderLeftColor =
+        selectedProject.firstChild.style.borderColor;
+    } else {
+      projectTitle.style.borderLeftColor = "#fff";
+    }
+
+    // Empty tasks card, actions and details div
     taskCardsDiv.innerHTML = "";
     taskActionsDiv.innerHTML = "";
     taskDetailsDiv.innerHTML = "";
@@ -72,8 +86,10 @@ const DomUI = (() => {
     const addProjectBtn = document.getElementById("addProject");
     const projectForm = ProjectFormComponent();
 
+    // Replace the addProject button by the project form
     addProjectBtn.parentNode.replaceChild(projectForm, addProjectBtn);
 
+    // Disable add task button while project form is displayed
     addTaskBtn.disabled = true;
 
     projectForm.addEventListener("submit", (e) => {
@@ -88,16 +104,18 @@ const DomUI = (() => {
 
   const _hideProjectForm = () => {
     const projectForm = document.getElementById("project-form");
+    // Replace project form by addProject button
     projectForm.parentNode.replaceChild(NewProjectBtnComponent(), projectForm);
 
     const addProjectBtn = document.getElementById("addProject");
     addProjectBtn.addEventListener("click", _displayProjectForm);
 
+    // Enable add task button
     addTaskBtn.disabled = false;
   };
 
   const setProjectsBtns = (projectsList) => {
-    // Add click event to default projectBtns
+    // Add click event to existing projectBtns
     getProjectsBtns().forEach((projectBtn) => {
       projectBtn.addEventListener("click", () => {
         setActiveProject(projectBtn);
@@ -107,7 +125,7 @@ const DomUI = (() => {
         );
 
         if (project) {
-          // Load tasks related to clicked project
+          // Load tasks related to selected project
           showTaskCards(project);
         }
       });
@@ -116,14 +134,15 @@ const DomUI = (() => {
 
   const showTaskCards = (project) => {
     // Get all the task related to project
-
     const tasks = project.getTasks();
-    // Empty div only if we are current in the same project
+
+    // Empty tasks div if we are in the same project to avoid fetching old projects again
     if (
       project.getProjectName() == getCurrentProject().getAttribute("data-name")
     ) {
       taskCardsDiv.innerHTML = "";
     }
+
     if (tasks) {
       tasks.forEach((task) => {
         const taskCard = TaskCardComponent(task.getTaskInfos());
@@ -133,7 +152,14 @@ const DomUI = (() => {
           taskActionsDiv.innerHTML = "";
           taskDetailsDiv.innerHTML = "";
 
-          _setActiveTask(taskCard);
+          // Remove active class to all task cards
+          _getTaskCards().forEach((tc) => {
+            tc.classList.remove("active");
+          });
+
+          // Add active class to selected card
+          taskCard.classList.add("active");
+
           showTaskDetails(task.getTaskInfos());
           task.getTaskInfos().items.forEach((item) => {
             createTaskItem(item.getTaskItemInfos());
@@ -173,25 +199,6 @@ const DomUI = (() => {
   };
 
   // TASKS
-
-  const _setTasksHeader = (projectBtn) => {
-    const name = projectBtn.getAttribute("data-name");
-    projectName.textContent = `${name} Tasks`;
-    if (projectBtn.firstChild.style) {
-      projectTitle.style.borderLeftColor =
-        projectBtn.firstChild.style.borderColor;
-    } else {
-      projectTitle.style.borderLeftColor = "#fff";
-    }
-  };
-
-  const _setActiveTask = (selectedTask) => {
-    _getTaskCards().forEach((taskCard) => {
-      taskCard.classList.remove("active");
-    });
-
-    selectedTask.classList.add("active");
-  };
 
   const getCurrentTask = () => {
     return document.getElementsByClassName("task active")[0];
@@ -257,6 +264,8 @@ const DomUI = (() => {
         currentProject,
         task
       );
+
+      // Show the task form
       formModal.appendChild(taskForm);
       formModal.style.display = "block";
 
@@ -350,7 +359,8 @@ const DomUI = (() => {
   const displayTaskItemForm = () => {
     const taskItemsDiv = document.getElementById("task-items");
     const addTaskItemForm = TaskItemFormComponent();
-    // Get the current task;
+
+    // Get the current task title;
     const taskTitle = getCurrentTask().getAttribute("data-title");
 
     taskItemsDiv.insertBefore(addTaskItemForm, taskItemsDiv.firstChild);
@@ -405,12 +415,6 @@ const DomUI = (() => {
 
   const _getTaskCards = () => {
     return document.querySelectorAll(".task");
-  };
-
-  const getTaskCard = (task) => {
-    return [..._getTaskCards()].find(
-      (taskCard) => taskCard.getAttribute("data-title") == task.title
-    );
   };
 
   const getProjectsBtns = () => {
