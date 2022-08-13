@@ -1,6 +1,6 @@
-const TaskItem = (taskItemTitle) => {
+const TaskItem = (taskItemTitle, taskItemStatus) => {
   let title = taskItemTitle;
-  let completed = false;
+  let completed = taskItemStatus ?? false;
 
   const updateTaskItem = (taskItemTitle) => {
     title = taskItemTitle;

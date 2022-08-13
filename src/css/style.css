@@ -1,3 +1,13 @@
+:root {
+  --primary-color: #14213d;
+  --secondary-color: #fca311;
+  --accent-color: #e5e5e5;
+  --white-color: #ffffff;
+  --black-color: #000000;
+  --red-color: #d83121;
+  --gren-color: #009163;
+}
+
 @font-face {
   font-family: "The Brooklyn Smooth Bold";
   src: url(../assets/fonts/The\ Brooklyn\ Smooth\ Bold.ttf);
@@ -35,7 +45,9 @@ header {
   display: grid;
   place-content: center;
   text-transform: uppercase;
-  background-color: #e7ecef;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  font-family: "The Brooklyn Smooth Bold";
 }
 
 aside {
@@ -62,12 +74,12 @@ aside {
   width: 100%;
   height: 2rem;
   padding: 0 1rem;
-  background-color: #fff;
+  background-color: var(--white-color);
   border: none;
 }
 
 #addProject:hover {
-  background-color: #eee;
+  background-color: var(--accent-color);
 }
 
 .project-name {
@@ -77,7 +89,7 @@ aside {
   width: 100%;
   height: 3rem;
   padding: 0.5rem 2.5rem;
-  background-color: #fff;
+  background-color: var(--white-color);
   border: none;
 }
 
@@ -85,7 +97,6 @@ aside {
   width: 0.75rem;
   aspect-ratio: 1/1;
   border: 4px solid;
-  /* border-color: #e00c52; */
   border-radius: 50%;
 }
 
@@ -110,7 +121,7 @@ main {
 #project-title {
   grid-area: project-title;
   border-left: 0.5rem solid;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #e5e5e5;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -129,7 +140,7 @@ main {
   grid-area: tasks;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: var(--white-color);
 
   position: relative;
 }
@@ -141,8 +152,8 @@ main {
   gap: 1rem;
   min-height: 4rem;
   box-shadow: 0 0.1rem 0.1rem 0 rgba(233, 233, 233, 0.3);
-  background-color: #e9e9e9;
-  border: 1px solid #ccc;
+  background-color: var(--accent-color);
+  border-bottom: 1px solid var(--primary-color);
 }
 
 .task-infos {
@@ -161,8 +172,8 @@ main {
 }
 
 .active {
-  background-color: #22333b;
-  color: #fff;
+  background-color: var(--secondary-color);
+  color: var(--white-color);
 }
 
 .actionBtn {
@@ -170,9 +181,9 @@ main {
   width: 2.5rem;
   display: grid;
   place-content: center;
-  background-color: #fff;
+  background-color: var(--white-color);
   box-shadow: 0 0.1rem rgba(10, 141, 249, 0.2);
-  border: 0.5px solid #ccc;
+  border: 0.5px solid var(--accent-color);
   border-radius: 50%;
   font-weight: bold;
   cursor: pointer;
@@ -180,8 +191,8 @@ main {
 }
 
 .actionBtn:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--black-color);
+  color: var(--white-color);
 }
 
 .actionBtn:hover img {
@@ -194,7 +205,7 @@ main {
 }
 
 .actionBtn:nth-child(3):hover {
-  background-color: red;
+  background-color: var(--red-color);
 }
 
 #addTaskBtn {
@@ -213,8 +224,8 @@ select,
 textarea {
   font-family: "The Brooklyn Smooth Bold";
   font-size: 1rem;
-  background-color: #eee;
-  border: 1px solid #ccc;
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
   padding: 0.2rem 0.5rem;
 }
 
@@ -238,7 +249,7 @@ input[type="date"] {
 .form-element select:focus,
 .form-element textarea:focus {
   outline: none;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--black-color);
 }
 
 #project-form-actions,
@@ -252,22 +263,22 @@ input[type="date"] {
 #task-item-form-actions .actionBtn {
   width: 1.5rem;
   height: 1.5rem;
-  border: 1.5px solid green;
+  border: 1.5px solid var(--gren-color);
 }
 
 #project-form-actions .actionBtn:nth-child(2),
 #task-item-form-actions .actionBtn:nth-child(2) {
-  border: 1.5px solid red;
+  border: 1.5px solid var(--red-color);
 }
 
 #project-form-actions .actionBtn:first-child:hover,
 #task-item-form-actions .actionBtn:first-child:hover {
-  background-color: green;
+  background-color: var(--gren-color);
 }
 
 #project-form-actions .actionBtn:nth-child(2):hover,
 #task-item-form-actions .actionBtn:nth-child(2):hover {
-  background-color: red;
+  background-color: var(--red-color);
 }
 
 #form-modal {
@@ -286,9 +297,9 @@ input[type="date"] {
 #form-modal form {
   width: 25rem;
   margin: auto;
-  background-color: #fff;
+  background-color: var(--white-color);
   padding: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--accent-color);
   display: grid;
   place-content: center;
   gap: 0.5rem;
@@ -342,35 +353,35 @@ form h3 {
   width: 7.25rem;
   height: 2rem;
   padding: 0.25rem 1rem;
-  background-color: #fff;
+  background-color: var(--white-color);
   outline: none;
   border: 1.5px solid;
   border-radius: 0.3rem;
 }
 
 #task-form-actions button:hover {
-  color: #fff;
+  color: var(--white-color);
 }
 
 #task-form-actions button:first-child {
-  border-color: green;
+  border-color: var(--gren-color);
 }
 
 #task-form-actions button:last-child {
-  border-color: red;
+  border-color: var(--red-color);
 }
 
 #task-form-actions button:first-child:hover {
-  background-color: green;
+  background-color: var(--gren-color);
 }
 
 #task-form-actions button:last-child:hover {
-  background-color: red;
+  background-color: var(--red-color);
 }
 
 #task-form-actions button[disabled="disabled"] {
-  border-color: #ccc;
-  color: #ccc;
+  border-color: var(--accent-color);
+  color: var(--accent-color);
   pointer-events: none; /* disable all effects */
 }
 
@@ -454,7 +465,7 @@ form h3 {
 input[type="checkbox"]:checked + label,
 .checked .task-infos h4 {
   text-decoration: line-through;
-  text-decoration-color: red;
+  text-decoration-color: var(--red-color);
   text-decoration-thickness: 2px;
 }
 #projects {
@@ -467,10 +478,9 @@ input[type="checkbox"]:checked + label,
   overflow-y: scroll;
 }
 
-header,
 aside,
 #tasks,
 #task-details,
 #task-actions {
-  border: 1px solid #ccc;
+  border: 1px solid var(--accent-color);
 }

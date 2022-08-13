@@ -1,6 +1,5 @@
 import "./css/style.css";
 import DomUI from "./dom_ui";
-import ProjectList from "./models/project_list";
 import Project from "./models/project";
 import Task from "./models/task";
 import TaskItem from "./models/task_item";
@@ -20,10 +19,19 @@ const Controller = (() => {
 
   const submitProjectForm = (projectEntry) => {
     const newProject = Project(projectEntry);
-    projectsList.add(newProject);
-    Storage.saveProject(newProject.getProjectInfos());
 
-    DomUI.createProjectButton(newProject);
+    const projectExists = projectsList
+      .getAll()
+      .find((project) => project.getProjectInfos().name == projectEntry);
+
+    if (projectExists == undefined) {
+      projectsList.add(newProject);
+      Storage.saveProject(newProject.getProjectInfos());
+
+      DomUI.createProjectButton(newProject);
+    } else {
+      alert("Project " + projectEntry + " already exists");
+    }
   };
 
   const submitTaskForm = (taskForm, mode) => {
@@ -46,27 +54,44 @@ const Controller = (() => {
         );
       } else {
         const newTask = Task(title, description, dueDate, priority);
-        project.addTask(newTask);
-        Storage.saveTask(project.getProjectInfos(), newTask.getTaskInfos());
+
+        const taskExists = project
+          .getTasks()
+          .find((task) => task.getTaskInfos().title == title);
+
+        if (taskExists == undefined) {
+          project.addTask(newTask);
+          Storage.saveTask(project.getProjectInfos(), newTask.getTaskInfos());
+        }
       }
     }
 
     DomUI.showTaskCards(project);
   };
 
-  const submitMoveTaskForm = (newProjectName, currentProjectName, taskName) => {
+  const submitMoveTaskForm = (
+    newProjectName,
+    currentProjectName,
+    taskTitle
+  ) => {
     const currentProject = projectsList.getProject(currentProjectName);
-    const task = currentProject.getTask(taskName);
+    const task = currentProject.getTask(taskTitle);
     const newProject = projectsList.getProject(newProjectName);
 
-    newProject.addTask(task);
-    currentProject.removeTask(taskName);
+    const taskExists = newProject
+      .getTasks()
+      .find((task) => task.getTaskInfos().title == taskTitle);
 
-    Storage.moveTask(
-      currentProject.getProjectInfos(),
-      newProject.getProjectInfos(),
-      task.getTaskInfos()
-    );
+    if (taskExists == undefined) {
+      newProject.addTask(task);
+      currentProject.removeTask(taskTitle);
+
+      Storage.moveTask(
+        currentProject.getProjectInfos(),
+        newProject.getProjectInfos(),
+        task.getTaskInfos()
+      );
+    }
 
     DomUI.showTaskCards(currentProject);
   };
@@ -104,16 +129,20 @@ const Controller = (() => {
     );
     const currentTask = currentProject.getTask(taskTitle);
 
-    // TODO: Add current taskItem to task
-    currentTask.addItem(newTaskItem);
+    const taskItemExists = currentTask.getTaskItem(taskItemEntry);
 
-    Storage.saveTask(
-      currentProject.getProjectInfos(),
-      currentProject.getTask(taskTitle).getTaskInfos()
-    );
+    if (taskItemExists == undefined) {
+      // TODO: Add current taskItem to task
+      currentTask.addItem(newTaskItem);
 
-    // TODO: Call the DOMUI function to display taskItem
-    DomUI.createTaskItem(newTaskItem.getTaskItemInfos());
+      Storage.saveTask(
+        currentProject.getProjectInfos(),
+        currentProject.getTask(taskTitle).getTaskInfos()
+      );
+
+      // TODO: Call the DOMUI function to display taskItem
+      DomUI.createTaskItem(newTaskItem.getTaskItemInfos());
+    }
   };
 
   const updateTaskItemStatus = (taskTitle, taskItemTitle) => {

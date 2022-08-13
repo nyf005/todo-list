@@ -1,9 +1,15 @@
-const Task = (taskTitle, taskDescription, taskDueDate, taskPriority) => {
+const Task = (
+  taskTitle,
+  taskDescription,
+  taskDueDate,
+  taskPriority,
+  taskStatus
+) => {
   let title = taskTitle;
   let description = taskDescription;
   let dueDate = taskDueDate;
   let priority = taskPriority;
-  let completed = false;
+  let completed = taskStatus ?? false;
   let items = [];
 
   const updateTask = (title, taskDescription, taskDueDate, taskPriority) => {
