@@ -56,6 +56,10 @@ const DomUI = (() => {
   };
 
   const setActiveProject = (selectedProject) => {
+    if (document.getElementById("project-form")) {
+      _hideProjectForm();
+    }
+
     // Remove active class for all projects buttons
     getProjectsBtns().forEach((projectBtn) => {
       projectBtn.classList.remove("active");
@@ -83,14 +87,16 @@ const DomUI = (() => {
   };
 
   const _displayProjectForm = () => {
+    // Hide task item form if displayed before we click on new project button
+    if (document.getElementById("task-item-form")) {
+      _hideTaskItemForm();
+    }
+
     const addProjectBtn = document.getElementById("addProject");
     const projectForm = ProjectFormComponent();
 
     // Replace the addProject button by the project form
     addProjectBtn.parentNode.replaceChild(projectForm, addProjectBtn);
-
-    // Disable add task button while project form is displayed
-    addTaskBtn.disabled = true;
 
     projectForm.addEventListener("submit", (e) => {
       const projectEntry = projectForm["projectName"].value;
@@ -164,6 +170,10 @@ const DomUI = (() => {
           task.getTaskInfos().items.forEach((item) => {
             createTaskItem(item.getTaskItemInfos());
           });
+
+          if (document.getElementById("project-form")) {
+            _hideProjectForm();
+          }
         });
 
         // Add click event to corresponding checkbox
@@ -206,6 +216,15 @@ const DomUI = (() => {
 
   const displayTaskForm = (projectsList) => {
     addTaskBtn.addEventListener("click", () => {
+      // Hide Project form if clicked before add task button
+      if (document.getElementById("project-form")) {
+        _hideProjectForm();
+      }
+
+      if (document.getElementById("task-item-form")) {
+        _hideTaskItemForm();
+      }
+
       // Get the current project
       const currentProject = getCurrentProject().getAttribute("data-name");
 
@@ -258,6 +277,14 @@ const DomUI = (() => {
       // Get the current project
       const currentProject = getCurrentProject().getAttribute("data-name");
 
+      if (document.getElementById("project-form")) {
+        _hideProjectForm();
+      }
+
+      if (document.getElementById("task-item-form")) {
+        _hideTaskItemForm();
+      }
+
       // Create the task form
       const taskForm = TaskFormComponent(
         Controller.getProjectsList(),
@@ -299,6 +326,14 @@ const DomUI = (() => {
       const currentProjectName = getCurrentProject().getAttribute("data-name");
       const taskName = getCurrentTask().getAttribute("data-title");
 
+      if (document.getElementById("project-form")) {
+        _hideProjectForm();
+      }
+
+      if (document.getElementById("task-item-form")) {
+        _hideTaskItemForm();
+      }
+
       // Create the move form
       const moveForm = MoveTaskFormComponent(
         Controller.getProjectsList(),
@@ -337,17 +372,30 @@ const DomUI = (() => {
       // We use the attribute of the deletetaskBtn in the Controller deleteTask function
       Controller.deleteTask(e.currentTarget.getAttribute("data-title"));
 
+      if (document.getElementById("project-form")) {
+        _hideProjectForm();
+      }
+
+      if (document.getElementById("task-item-form")) {
+        _hideTaskItemForm();
+      }
+
       // Clear the details section as the task no longer exists
       taskActionsDiv.innerHTML = "";
       taskDetailsDiv.innerHTML = "";
     });
 
     addItemBtn.addEventListener("click", (e) => {
-      const addProjectBtn = document.getElementById("addProject");
+      if (document.getElementById("project-form")) {
+        _hideProjectForm();
+      }
 
-      addProjectBtn.disabled = true;
-      addTaskBtn.disabled = true;
-      addItemBtn.disabled = true;
+      if (document.getElementById("task-item-form")) {
+        _hideTaskItemForm();
+      }
+
+      // addItemBtn.disabled = true;
+
       displayTaskItemForm();
       document.getElementById("task-item-form")["task-item-title"].focus();
     });
@@ -377,14 +425,10 @@ const DomUI = (() => {
   };
 
   const _hideTaskItemForm = () => {
-    const addProjectBtn = document.getElementById("addProject");
     const taskItemsDiv = document.getElementById("task-items");
     const taskItemForm = document.getElementById("task-item-form");
 
-    addProjectBtn.disabled = false;
-    addTaskBtn.disabled = false;
     addItemBtn.disabled = false;
-
     taskItemsDiv.removeChild(taskItemForm);
   };
 
