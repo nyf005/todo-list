@@ -9,11 +9,11 @@ import Storage from "./storage";
 
 const Controller = (() => {
   Storage.init();
-  const projectsList = Storage.getProjects();
+  let projectsList = Storage.getProjects();
 
-  const indexProject = Project("Inbox");
-  projectsList.add(indexProject);
-  Storage.saveProject(indexProject.getProjectInfos());
+  let inboxProject = Project("Inbox");
+  projectsList.add(inboxProject);
+  Storage.saveProject(inboxProject.getProjectInfos());
 
   initializeDOM(projectsList);
 
@@ -32,6 +32,22 @@ const Controller = (() => {
     } else {
       alert("Project " + projectEntry + " already exists");
     }
+  };
+
+  const deleteProject = (projectName) => {
+    projectsList.remove(projectName);
+    Storage.removeProject(projectName);
+
+    projectsList = Storage.getProjects();
+    projectsList.getAll().forEach((project) => {
+      if (project.getProjectName() != "Inbox") {
+        DomUI.createProjectButton(project);
+      }
+    });
+
+    // Display Inbox project after a project is deleted
+    DomUI.setActiveProject(DomUI.getInboxProjectBtn());
+    DomUI.showTaskCards(projectsList.getProject("Inbox"));
   };
 
   const submitTaskForm = (taskForm, mode) => {
@@ -176,6 +192,7 @@ const Controller = (() => {
   return {
     getProjectsList,
     submitProjectForm,
+    deleteProject,
     submitTaskForm,
     submitMoveTaskForm,
     submitTaskItemForm,

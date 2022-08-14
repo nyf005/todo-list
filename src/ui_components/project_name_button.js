@@ -1,7 +1,12 @@
+import trash from "../assets/icons/trash.svg";
+
 export default function ProjectButtonComponent(projectName) {
-  const button = document.createElement("button");
-  button.className = "project-name";
-  button.setAttribute("data-name", projectName);
+  const projectBtnDiv = document.createElement("div");
+  projectBtnDiv.className = "project-div";
+
+  const nameDiv = document.createElement("div");
+  nameDiv.className = "project-name";
+  nameDiv.setAttribute("data-name", projectName);
 
   const dot = document.createElement("div");
   dot.className = "dot";
@@ -11,7 +16,13 @@ export default function ProjectButtonComponent(projectName) {
   const span = document.createElement("span");
   span.textContent = projectName;
 
-  button.append(dot, span);
+  nameDiv.append(dot, span);
 
-  return button;
+  const deleteBtn = document.createElement("button");
+  deleteBtn.setAttribute("id", projectName);
+  const trashIcon = document.createElement("img");
+  trashIcon.setAttribute("src", trash);
+  deleteBtn.appendChild(trashIcon);
+
+  return { nameDiv, deleteBtn };
 }

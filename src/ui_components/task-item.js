@@ -1,4 +1,3 @@
-import create from "../assets/icons/create.svg";
 import trash from "../assets/icons/trash.svg";
 
 export default function TaskItemComponent(taskItem) {
@@ -22,7 +21,6 @@ export default function TaskItemComponent(taskItem) {
 
   const deleteBtn = document.createElement("button");
   deleteBtn.setAttribute("data-title", taskItem.title);
-  // deleteBtn.className = "actionBtn";
   const trashIcon = document.createElement("img");
   trashIcon.setAttribute("src", trash);
   deleteBtn.appendChild(trashIcon);

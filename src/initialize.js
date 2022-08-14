@@ -1,11 +1,11 @@
 import DomUI from "./dom_ui";
 
-const initializeDOM = (projectList) => {
+const initializeDOM = (projectsList) => {
   const projectBtns = DomUI.getProjectsBtns();
   // Set default Selected Project
   DomUI.setActiveProject(projectBtns[0]);
 
-  const defaultProject = projectList
+  const defaultProject = projectsList
     .getAll()
     .find((project) => project.getProjectName() == "Inbox");
 
@@ -15,12 +15,12 @@ const initializeDOM = (projectList) => {
   }
 
   DomUI.createAddProjectButton();
-  DomUI.setProjectsBtns(projectList);
-  // We add the projectList as array to populate the select input in the task form
-  DomUI.displayTaskForm(projectList.getAll());
+  DomUI.setProjectsBtns(projectsList);
+  // We add the projectsList as array to populate the select input in the task form
+  DomUI.displayTaskForm(projectsList.getAll());
 
   // Load all projects
-  projectList.getAll().forEach((project) => {
+  projectsList.getAll().forEach((project) => {
     if (project.getProjectName() != "Inbox") {
       DomUI.createProjectButton(project);
     }

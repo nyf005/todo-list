@@ -19,6 +19,16 @@ const Storage = (() => {
     }
   };
 
+  const removeProject = (projectName) => {
+    const projectsList = JSON.parse(localStorage.getItem("projects"));
+
+    const index = projectsList.findIndex((project) => project == projectName);
+    projectsList.splice(index, 1);
+
+    localStorage.removeItem(projectName);
+    localStorage.setItem("projects", JSON.stringify(projectsList));
+  };
+
   const saveTask = (project, task) => {
     const saved_project = JSON.parse(localStorage.getItem(project.name));
     const saved_task = saved_project.tasks.find((t) => t.title == task.title);
@@ -65,7 +75,8 @@ const Storage = (() => {
   };
 
   const getProjects = () => {
-    const projectsList = Object.assign(ProjectList(), {});
+    let list = ProjectList();
+    const projectsList = Object.assign(list, {});
     const projects = JSON.parse(localStorage.getItem("projects"));
 
     projects.forEach((projectName) => {
@@ -105,6 +116,7 @@ const Storage = (() => {
   return {
     init,
     saveProject,
+    removeProject,
     saveTask,
     moveTask,
     removeTask,

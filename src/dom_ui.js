@@ -43,16 +43,24 @@ const DomUI = (() => {
     // We create a project button
     let projectBtn = ProjectButtonComponent(project.getProjectName());
 
+    const projectDiv = document.createElement("div");
+    projectDiv.className = "project-div";
+
+    projectDiv.append(projectBtn.nameDiv, projectBtn.deleteBtn);
     // Append the project button to projects div
-    projectsDiv.append(projectBtn);
+    projectsDiv.append(projectDiv);
 
     // Add click event to individual projects
-    projectBtn.addEventListener("click", () => {
-      setActiveProject(projectBtn);
+    projectBtn.nameDiv.addEventListener("click", () => {
+      setActiveProject(projectBtn.nameDiv);
       showTaskCards(project);
     });
 
-    return projectBtn;
+    const deleteProjectBtn = document.getElementById(project.getProjectName());
+    deleteProjectBtn.addEventListener("click", () => {
+      projectsDiv.innerHTML = "";
+      Controller.deleteProject(deleteProjectBtn.id);
+    });
   };
 
   const setActiveProject = (selectedProject) => {
@@ -143,8 +151,10 @@ const DomUI = (() => {
     const tasks = project.getTasks();
 
     // Empty tasks div if we are in the same project to avoid fetching old projects again
+    const activeProject = getCurrentProject();
     if (
-      project.getProjectName() == getCurrentProject().getAttribute("data-name")
+      activeProject &&
+      project.getProjectName() == activeProject.getAttribute("data-name")
     ) {
       taskCardsDiv.innerHTML = "";
     }
@@ -206,6 +216,10 @@ const DomUI = (() => {
 
   const getCurrentProject = () => {
     return document.getElementsByClassName("project-name active")[0];
+  };
+
+  const getInboxProjectBtn = () => {
+    return document.getElementsByClassName("project-name")[0];
   };
 
   // TASKS
@@ -476,6 +490,7 @@ const DomUI = (() => {
     showTaskCards,
     setActiveProject,
     showTaskDetails,
+    getInboxProjectBtn,
   };
 })();
 
