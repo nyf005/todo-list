@@ -56,6 +56,7 @@ const DomUI = (() => {
       showTaskCards(project);
     });
 
+    // Add event to delete project
     const deleteProjectBtn = document.getElementById(project.getProjectName());
     deleteProjectBtn.addEventListener("click", () => {
       projectsDiv.innerHTML = "";

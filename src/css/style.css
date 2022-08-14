@@ -50,11 +50,17 @@ header {
   font-family: "The Brooklyn Smooth Bold";
 }
 
+/* PROJECTS SECTION */
+
 aside {
   grid-area: aside;
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+#projects {
+  height: calc(90vh - 14.5rem);
 }
 
 #bottom-section {
@@ -64,6 +70,23 @@ aside {
 #bottom-section h3 {
   margin: 0.5rem 1rem;
   font-family: "The Brooklyn Smooth Bold";
+}
+
+#addProject {
+  font-family: "The Brooklyn Smooth Bold";
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.project-name {
+  font-family: "The Brooklyn Smooth Regular";
+  font-size: 1rem;
+}
+
+#addProject img {
+  filter: invert(76%) sepia(31%) saturate(4849%) hue-rotate(351deg)
+    brightness(101%) contrast(98%);
 }
 
 #addProject,
@@ -89,6 +112,12 @@ aside {
   align-items: center;
 }
 
+.project-div .active {
+  width: auto;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
 .project-name {
   display: flex;
   align-items: center;
@@ -107,6 +136,7 @@ aside {
   border-radius: 50%;
 }
 
+/* MAIN SECTION */
 main {
   grid-area: main;
   display: grid;
@@ -118,6 +148,40 @@ main {
 
   position: relative;
 }
+
+.actionBtn {
+  aspect-ratio: 1/1;
+  width: 2.5rem;
+  display: grid;
+  place-content: center;
+  background-color: var(--white-color);
+  box-shadow: 0 0.1rem rgba(10, 141, 249, 0.2);
+  border: 0.5px solid var(--accent-color);
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+.actionBtn:hover {
+  background-color: var(--black-color);
+  color: var(--white-color);
+}
+
+.actionBtn:hover img {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(36deg) brightness(103%)
+    contrast(103%);
+}
+
+.actionBtn:nth-child(2) {
+  margin-right: auto;
+}
+
+.actionBtn:nth-child(3):hover {
+  background-color: var(--red-color);
+}
+
+/* TASKS SECTION */
 
 #project-title,
 .task,
@@ -178,57 +242,8 @@ main {
   font-family: "The Brooklyn Smooth Regular";
 }
 
-.active {
-  background-color: var(--secondary-color);
-  color: var(--white-color);
-}
-
-.project-div .active {
-  width: auto;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-}
-
-.actionBtn {
-  aspect-ratio: 1/1;
-  width: 2.5rem;
-  display: grid;
-  place-content: center;
-  background-color: var(--white-color);
-  box-shadow: 0 0.1rem rgba(10, 141, 249, 0.2);
-  border: 0.5px solid var(--accent-color);
-  border-radius: 50%;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-}
-
-.actionBtn:hover {
-  background-color: var(--black-color);
-  color: var(--white-color);
-}
-
-.actionBtn:hover img {
-  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(36deg) brightness(103%)
-    contrast(103%);
-}
-
-.actionBtn:nth-child(2) {
-  margin-right: auto;
-}
-
-.actionBtn:nth-child(3):hover {
-  background-color: var(--red-color);
-}
-
 #addTaskBtn {
   margin-right: 0;
-}
-
-#task-item-form {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
 }
 
 input,
@@ -248,49 +263,6 @@ select {
 
 input[type="date"] {
   padding-left: 0.25rem;
-}
-
-#project-form input,
-#task-item-form input {
-  width: 75%;
-}
-
-#project-form input:focus,
-#task-item-form input:focus,
-.form-element input:focus,
-.form-element select:focus,
-.form-element textarea:focus {
-  outline: none;
-  border-bottom: 2px solid var(--black-color);
-}
-
-#project-form-actions,
-#task-item-form-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.2rem;
-  margin-left: auto;
-}
-
-#project-form-actions .actionBtn,
-#task-item-form-actions .actionBtn {
-  width: 1.5rem;
-  border: 1.5px solid var(--gren-color);
-}
-
-#project-form-actions .actionBtn:nth-child(2),
-#task-item-form-actions .actionBtn:nth-child(2) {
-  border: 1.5px solid var(--red-color);
-}
-
-#project-form-actions .actionBtn:first-child:hover,
-#task-item-form-actions .actionBtn:first-child:hover {
-  background-color: var(--gren-color);
-}
-
-#project-form-actions .actionBtn:nth-child(2):hover,
-#task-item-form-actions .actionBtn:nth-child(2):hover {
-  background-color: var(--red-color);
 }
 
 #form-modal {
@@ -397,6 +369,8 @@ form h3 {
   pointer-events: none; /* disable all effects */
 }
 
+/* TASK DETAILS SECTION */
+
 #task-details {
   grid-area: task-details;
   padding: 2rem 1rem;
@@ -472,6 +446,61 @@ form h3 {
   margin-right: 1.5rem;
 }
 
+#task-item-form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+/* GENERAL SECTION */
+.active {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+#project-form input,
+#task-item-form input {
+  width: 75%;
+}
+
+#project-form input:focus,
+#task-item-form input:focus,
+.form-element input:focus,
+.form-element select:focus,
+.form-element textarea:focus {
+  outline: none;
+  border-bottom: 2px solid var(--black-color);
+}
+
+#project-form-actions,
+#task-item-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin-left: auto;
+}
+
+#project-form-actions .actionBtn,
+#task-item-form-actions .actionBtn {
+  width: 1.5rem;
+  border: 1.5px solid var(--gren-color);
+}
+
+#project-form-actions .actionBtn:nth-child(2),
+#task-item-form-actions .actionBtn:nth-child(2) {
+  border: 1.5px solid var(--red-color);
+}
+
+#project-form-actions .actionBtn:first-child:hover,
+#task-item-form-actions .actionBtn:first-child:hover {
+  background-color: var(--gren-color);
+}
+
+#project-form-actions .actionBtn:nth-child(2):hover,
+#task-item-form-actions .actionBtn:nth-child(2):hover {
+  background-color: var(--red-color);
+}
+
 .project-div button {
   display: none;
 }
@@ -491,9 +520,6 @@ input[type="checkbox"]:checked + label,
   text-decoration: line-through;
   text-decoration-color: var(--red-color);
   text-decoration-thickness: 2px;
-}
-#projects {
-  height: calc(90vh - 14.5rem);
 }
 
 #projects,

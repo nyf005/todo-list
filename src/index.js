@@ -10,10 +10,16 @@ import Storage from "./storage";
 const Controller = (() => {
   Storage.init();
   let projectsList = Storage.getProjects();
+  let inbox = Project("Inbox");
+  let today = Project("Today");
+  let upcoming = Project("Upcoming");
+  projectsList.add(inbox);
+  projectsList.add(today);
+  projectsList.add(upcoming);
 
-  let inboxProject = Project("Inbox");
-  projectsList.add(inboxProject);
-  Storage.saveProject(inboxProject.getProjectInfos());
+  Storage.saveProject(inbox.getProjectInfos());
+  Storage.saveProject(today.getProjectInfos());
+  Storage.saveProject(upcoming.getProjectInfos());
 
   initializeDOM(projectsList);
 
@@ -40,7 +46,11 @@ const Controller = (() => {
 
     projectsList = Storage.getProjects();
     projectsList.getAll().forEach((project) => {
-      if (project.getProjectName() != "Inbox") {
+      if (
+        project.getProjectName() != "Inbox" &&
+        project.getProjectName() != "Today" &&
+        project.getProjectName() != "Upcoming"
+      ) {
         DomUI.createProjectButton(project);
       }
     });

@@ -20,7 +20,13 @@ const Project = (pName) => {
     return tasks.find((task) => task.getTaskInfos().title == title);
   };
 
-  const getTasks = () => tasks;
+  const getTasks = () => {
+    const ordered = tasks.sort(
+      (a, b) =>
+        new Date(a.getTaskInfos().dueDate) - new Date(b.getTaskInfos().dueDate)
+    );
+    return ordered;
+  };
 
   const removeTask = (title) => {
     const taskIndex = tasks.findIndex(

@@ -21,7 +21,11 @@ const initializeDOM = (projectsList) => {
 
   // Load all projects
   projectsList.getAll().forEach((project) => {
-    if (project.getProjectName() != "Inbox") {
+    if (
+      project.getProjectName() != "Inbox" &&
+      project.getProjectName() != "Today" &&
+      project.getProjectName() != "Upcoming"
+    ) {
       DomUI.createProjectButton(project);
     }
   });
