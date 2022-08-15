@@ -11,38 +11,9 @@ import { isToday, isAfter } from "date-fns";
 const Controller = (() => {
   Storage.init();
   let projectsList = Storage.getProjects();
-
-  let inbox = Project("Inbox");
-  projectsList.add(inbox);
-  Storage.saveProject(inbox.getProjectInfos());
-
   initializeDOM(projectsList);
 
   const getProjectsList = () => projectsList.getAll();
-
-  const getTodayTasks = () => {
-    let todayTasks = [];
-    projectsList.getAll().forEach((project) => {
-      project.getTasks().forEach((task) => {
-        if (isToday(new Date(task.getTaskInfos().dueDate))) {
-          todayTasks.push(task);
-        }
-      });
-    });
-    return todayTasks;
-  };
-
-  const getUpcomingTasks = () => {
-    let upcomingTasks = [];
-    projectsList.getAll().forEach((project) => {
-      project.getTasks().forEach((task) => {
-        if (isAfter(new Date(task.getTaskInfos().dueDate), new Date())) {
-          upcomingTasks.push(task);
-        }
-      });
-    });
-    return upcomingTasks;
-  };
 
   const submitProjectForm = (projectEntry) => {
     const newProject = Project(projectEntry);
@@ -216,8 +187,6 @@ const Controller = (() => {
 
   return {
     getProjectsList,
-    getTodayTasks,
-    getUpcomingTasks,
     submitProjectForm,
     deleteProject,
     submitTaskForm,

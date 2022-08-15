@@ -7,6 +7,8 @@ const Storage = (() => {
   const init = () => {
     if (localStorage.length == 0) {
       localStorage.setItem("projects", JSON.stringify([]));
+      let inbox = Project("Inbox");
+      saveProject(inbox.getProjectInfos());
     }
   };
 
@@ -75,8 +77,7 @@ const Storage = (() => {
   };
 
   const getProjects = () => {
-    let list = ProjectList();
-    const projectsList = Object.assign(list, {});
+    const projectsList = Object.assign(ProjectList(), {});
     const projects = JSON.parse(localStorage.getItem("projects"));
 
     projects.forEach((projectName) => {
