@@ -5,7 +5,7 @@ A simple todo list app
 
 ## Links
 
-- [Try Task Manager here!](https://github.com/nyf005/todo-list)
+- [Try Task Manager here!](https://nyf005.github.io/todo-list/)
 - [Link to the Assignment](https://www.theodinproject.com/lessons/node-path-javascript-todo-list)
 
 ## Things I practiced
