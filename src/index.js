@@ -13,6 +13,7 @@ const Controller = (() => {
   let projectsList = Storage.getProjects();
 
   let inbox = Project("Inbox");
+  projectsList.add(inbox);
   Storage.saveProject(inbox.getProjectInfos());
 
   initializeDOM(projectsList);

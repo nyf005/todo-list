@@ -33,6 +33,7 @@ A simple todo list app
 
 - Display today projects
 - Display upcoming projects
+- Make app responsive
 
 ## Screenshots
 
