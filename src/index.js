@@ -6,22 +6,42 @@ import TaskItem from "./models/task_item";
 import initializeDOM from "./initialize";
 
 import Storage from "./storage";
+import { isToday, isAfter } from "date-fns";
 
 const Controller = (() => {
   Storage.init();
   let projectsList = Storage.getProjects();
-  let inbox = Project("Inbox");
-  let today = Project("Today");
-  let upcoming = Project("Upcoming");
-  projectsList.add(inbox);
-  projectsList.add(today);
-  projectsList.add(upcoming);
 
+  let inbox = Project("Inbox");
   Storage.saveProject(inbox.getProjectInfos());
-  Storage.saveProject(today.getProjectInfos());
-  Storage.saveProject(upcoming.getProjectInfos());
 
   initializeDOM(projectsList);
+
+  const getProjectsList = () => projectsList.getAll();
+
+  const getTodayTasks = () => {
+    let todayTasks = [];
+    projectsList.getAll().forEach((project) => {
+      project.getTasks().forEach((task) => {
+        if (isToday(new Date(task.getTaskInfos().dueDate))) {
+          todayTasks.push(task);
+        }
+      });
+    });
+    return todayTasks;
+  };
+
+  const getUpcomingTasks = () => {
+    let upcomingTasks = [];
+    projectsList.getAll().forEach((project) => {
+      project.getTasks().forEach((task) => {
+        if (isAfter(new Date(task.getTaskInfos().dueDate), new Date())) {
+          upcomingTasks.push(task);
+        }
+      });
+    });
+    return upcomingTasks;
+  };
 
   const submitProjectForm = (projectEntry) => {
     const newProject = Project(projectEntry);
@@ -46,11 +66,7 @@ const Controller = (() => {
 
     projectsList = Storage.getProjects();
     projectsList.getAll().forEach((project) => {
-      if (
-        project.getProjectName() != "Inbox" &&
-        project.getProjectName() != "Today" &&
-        project.getProjectName() != "Upcoming"
-      ) {
+      if (project.getProjectName() != "Inbox") {
         DomUI.createProjectButton(project);
       }
     });
@@ -144,8 +160,6 @@ const Controller = (() => {
     DomUI.showTaskCards(project);
   };
 
-  const getProjectsList = () => projectsList.getAll();
-
   const submitTaskItemForm = (taskTitle, taskItemEntry) => {
     const newTaskItem = TaskItem(taskItemEntry);
 
@@ -201,6 +215,8 @@ const Controller = (() => {
 
   return {
     getProjectsList,
+    getTodayTasks,
+    getUpcomingTasks,
     submitProjectForm,
     deleteProject,
     submitTaskForm,

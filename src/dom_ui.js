@@ -90,7 +90,7 @@ const DomUI = (() => {
     }
 
     // Empty tasks card, actions and details div
-    taskCardsDiv.innerHTML = "";
+    // taskCardsDiv.innerHTML = "";
     taskActionsDiv.innerHTML = "";
     taskDetailsDiv.innerHTML = "";
   };
@@ -147,15 +147,27 @@ const DomUI = (() => {
     });
   };
 
+  const getCurrentProject = () => {
+    return document.getElementsByClassName("project-name active")[0];
+  };
+
+  const getInboxProjectBtn = () => {
+    return document.getElementsByClassName("project-name")[0];
+  };
+
+  const getProjectsBtns = () => {
+    return document.querySelectorAll(".project-name");
+  };
+
+  // TASKS
   const showTaskCards = (project) => {
     // Get all the task related to project
     const tasks = project.getTasks();
 
     // Empty tasks div if we are in the same project to avoid fetching old projects again
-    const activeProject = getCurrentProject();
     if (
-      activeProject &&
-      project.getProjectName() == activeProject.getAttribute("data-name")
+      getCurrentProject() &&
+      project.getProjectName() == getCurrentProject().getAttribute("data-name")
     ) {
       taskCardsDiv.innerHTML = "";
     }
@@ -204,7 +216,7 @@ const DomUI = (() => {
           taskCard.classList.remove("checked");
         }
 
-        // Append only if we are current in the same project
+        // Append only if we are current in the same project when creating a task
         if (
           project.getProjectName() ==
           getCurrentProject().getAttribute("data-name")
@@ -214,16 +226,6 @@ const DomUI = (() => {
       });
     }
   };
-
-  const getCurrentProject = () => {
-    return document.getElementsByClassName("project-name active")[0];
-  };
-
-  const getInboxProjectBtn = () => {
-    return document.getElementsByClassName("project-name")[0];
-  };
-
-  // TASKS
 
   const getCurrentTask = () => {
     return document.getElementsByClassName("task active")[0];
@@ -273,6 +275,16 @@ const DomUI = (() => {
     formModal.innerHTML = "";
   };
 
+  const _getTaskCards = () => {
+    return document.querySelectorAll(".task");
+  };
+
+  const _getTaskCard = (task) => {
+    return [..._getTaskCards()].find(
+      (taskCard) => taskCard.getAttribute("data-title") == task.title
+    );
+  };
+
   // TASK DETAILS
 
   const showTaskDetails = (task) => {
@@ -318,7 +330,7 @@ const DomUI = (() => {
 
         Controller.submitTaskForm(e.target.elements, mode);
 
-        const taskCard = getTaskCard(task);
+        const taskCard = _getTaskCard(task);
         taskCard.classList.add("active");
 
         _hideTaskForm();
@@ -470,14 +482,6 @@ const DomUI = (() => {
     });
 
     taskItemsDiv.appendChild(item);
-  };
-
-  const _getTaskCards = () => {
-    return document.querySelectorAll(".task");
-  };
-
-  const getProjectsBtns = () => {
-    return document.querySelectorAll(".project-name");
   };
 
   return {
